@@ -41,12 +41,12 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * Format TimeStamp to String
+	 * Format TimeStamp to String 20190924
 	 * @param ts
 	 * @return
 	 */
 	 public static String formatToString( Timestamp ts) {
-		  String formattedDate = new SimpleDateFormat("yyyyMMdd").format(ts);
+		  String formattedDate = new SimpleDateFormat("yyyymmdd").format(ts);
 		  return formattedDate;
 	  }
 	

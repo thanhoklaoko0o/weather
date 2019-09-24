@@ -1,4 +1,4 @@
-package com.program.weather.security;
+package com.program.weather.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -7,8 +7,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
-import com.program.weather.service.impl.CustomUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +34,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
 	        http.authorizeRequests().antMatchers("/","/login", "/logout").permitAll();
 	        http.authorizeRequests().antMatchers("/home-weather", "/home-weather/**").access("hasAnyRole('USER', 'ADMIN')");
 	        http.authorizeRequests().antMatchers("/home-admin", "/home-admin/**").access("hasRole('ADMIN')");
-	        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/403");
+	        http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");
 	 
 	        // Cấu hình cho Login Form.
 	        http.authorizeRequests().and().formLogin()//

@@ -1,4 +1,4 @@
-package com.program.weather.service.impl;
+package com.program.weather.config;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -97,23 +97,13 @@ public class RestController {
 		weatherApi.deleteWeather(id);
 	}
 	
-	
-	//update weather
-	@GetMapping("/update-weather")
-	public void updateWeather(@PathVariable String name) {
-		 CurrentWeatherDTO currentWeather = weatherApi.searchWeather(name);
-		 CurrentWeatherEntity weatherEntity = converterEntity.convertToEntity(currentWeather);
-		 
-	}
-	
-	//findAll by idUser
-	
 	@Autowired
 	CurrentWeatherRepository a;
 	
-	@GetMapping("/findAllByUserId/{id}")
-	public List<CurrentWeatherEntity> getallbyuserid(@PathVariable Long id){
-		return a.findAllByCreateBy(id);
+	@GetMapping("/findAllWeatherByUserId")
+	public List<CurrentWeatherEntity> getallbyuserid(){
+		UserEntity entity = userRepository.findByUserName("usernamead");
+		return a.findAllByUserEntities(entity);
 	}
 	
 	@GetMapping("/checkExistsCity/{name}")
@@ -125,6 +115,12 @@ public class RestController {
 	public List<CurrentWeatherEntity> getallbyuserid(@PathVariable Timestamp ts){
 		return a.findAllByDate(ts);
 	}
+	
+	@GetMapping("/countWeather/{name}")
+	public Long coutWeatherByName(@PathVariable String name) {
+		return a.countAllByNameCity(name);
+	}
+	
 	
 	
 	

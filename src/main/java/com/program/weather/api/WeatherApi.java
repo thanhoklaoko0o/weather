@@ -1,10 +1,14 @@
 package com.program.weather.api;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import com.program.weather.dto.CurrentWeatherDTO;
+import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.entity.UserEntity;
 import com.program.weather.service.impl.CurrentWeatherServiceImpl;
 import com.program.weather.utils.CommonUtil;
 import com.program.weather.utils.Constants;
@@ -24,8 +28,13 @@ public class WeatherApi {
 		return currentWeather;
 	}
 	
+	
 	public void deleteWeather(Long id) {
 		weatherService.deleteWeather(id);
+	}
+	
+	public List<CurrentWeatherEntity> findAllByUserEntities(UserEntity userEntity){
+		return weatherService.findAllByUserEntities(userEntity);
 	}
 	
 	

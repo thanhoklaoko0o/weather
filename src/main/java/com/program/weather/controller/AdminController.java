@@ -28,6 +28,7 @@ public class AdminController {
 		public String homeAdmin(Model model , Principal principal) {
 	    	List<UserEntity> dsUser = adminApi.findAll();
 	    	List<RoleEntity> dsRole = adminApi.findAllRole();
+	    	
 	    	model.addAttribute("dsUser",dsUser);
 	    	model.addAttribute("dsRole", dsRole);
 			return "pageAdmin";

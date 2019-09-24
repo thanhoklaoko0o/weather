@@ -87,12 +87,12 @@
 
 												</td>
 											</tr>
-											<tr id="hideshowless">
+											<tr id="hideshowless" th:each="we : ${lstWeather}">
 												<td><img
-													src="http://openweathermap.org/img/wn/04d@2x.png"
+													th:src="'http://openweathermap.org/img/wn/'+${we.icon}+'.png'"
 													width="50" height="50"></td>
-												<td><b><a href="#"> London</a></b>
-													<p>April 20 , 2015</p></td>
+												<td><b><a href="#" th:text="${we.nameCity}"></a></b> 
+													<p><span th:text="${#calendars.format(we.date,'MMMM dd, yyyy')}"></span></p></td>
 												<td><span class="badge badge-info">13.2°С </span> <b><i>
 															broken clouds</i></b>
 													<p>2.1 m/s. 66 %, 1032 hpa</p></td>
