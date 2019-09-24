@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+	<link th:href="@{/css/style.css}" rel="stylesheet">
+	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+	
+</head>
+<body>
+
+	<nav class="navbar navbar-default">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/home-weather}">HOME</a>
+			</div>
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/home-admin}">MANAGEMENT</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#">Hi, <span
+							th:utext="${#request.userPrincipal.name}"></span></a></li>
+					<li><a th:if="${#request.userPrincipal != null}"
+						th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br>
+	<br>
+	<section id="main">
+		<div class="container">
+			<div class="row">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="panel-heading">
+							<!-- <div class="duoi" style="margin-left: 520px;"> -->
+							<form class="form-inline"
+								th:action="@{/home-weather/search-city}">
+								<input type="text" class="form-control mb-2 mr-sm-2" id=""
+									name="name">
+								<button type="submit" class="btn btn-primary mb-2">Search</button>
+							</form>
+							<!-- </div> -->
+						</div>
+					</div>
+					<div class="panel-body">
+						<div class="col-sm-12">
+
+							<div class="tab-pane active" id="forecast-list">
+								<div id="forecast_list_ul">
+									<table class="table">
+										<tbody>
+											<tr th:each="currentWeather : ${currentWeather}" th:data-name="${currentWeather.name}">
+												<td><img
+													th:src="${urlIMG}"
+														width="65" height="65"></td>
+												<td><b><a href="#"> <p th:text="${currentWeather.name}"/></a></b>
+													<p th:text="${curDate}" /></td>
+												<td><span class="badge badge-info"  th:text="${C}+'°С'"></span> <b><i th:text="${info}">
+														</i></b>
+													<p th:text="${mota}"></p></td>
+												<td>
+												<a class="add-user btn btn-primary" href="#">Add</a>
+												<!-- <a class="update-user btn btn-primary" href="#">update</a> -->
+												</td>
+											</tr>
+											<tr>
+												<td><img
+													src="http://openweathermap.org/img/wn/04d@2x.png"
+													width="50" height="50"></td>
+												<td><b><a href="#"> London</a></b>
+													<p>April 20 , 2015</p></td>
+												<td><span class="badge badge-info">13.2°С </span> <b><i>
+															broken clouds</i></b>
+													<p>2.1 m/s. 66 %, 1032 hpa</p></td>
+												<td><a class="btn btn-danger" href="#">Delete</a></td>
+											</tr>
+											<tr class="trshowmore">
+												<td colspan="4">
+													<p onclick="showlist()" class="showmorestyle">Show More</p>
+
+												</td>
+											</tr>
+											<tr id="hideshowless">
+												<td><img
+													src="http://openweathermap.org/img/wn/04d@2x.png"
+													width="50" height="50"></td>
+												<td><b><a href="#"> London</a></b>
+													<p>April 20 , 2015</p></td>
+												<td><span class="badge badge-info">13.2°С </span> <b><i>
+															broken clouds</i></b>
+													<p>2.1 m/s. 66 %, 1032 hpa</p></td>
+												<td><a class="btn btn-danger" href="#">Delete</a></td>
+											</tr>
+											
+											
+											<tr class="trshowmore1 " id="showless" onclick="hidelist()">
+												<td colspan="4">
+													<p class="showmorestyle">Show Less</p>
+
+												</td>
+											</tr>
+
+
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- Footer -->
+	<footer class="page-footer font-small blue">
+
+		<!-- Copyright -->
+		<div class="footer-copyright text-center py-3" style="color: red;">
+			© 2019 Copyright: <a href="" style="color: red;"> FbNgocHung.com</a>
+		</div>
+		<!-- Copyright -->
+
+	</footer>
+	<!-- Footer -->
+	<script type="text/javascript">
+	$(".add-user").click(function(){  
+		var name = $(this).closest("tr").attr("data-name");
+		$.ajax({
+			url:"http://localhost:8080/home-weather/save-weather",
+		    type:"GET",
+		    data:{
+		    	name:name
+		    },
+			success: function(value){
+			//	window.location.href = "http://localhost:8080/home-weather/search-city?id="+value.id+"&message=insert_success";
+				
+			}
+		})
+	})
+	
+	function showlist(){
+		document.getElementById("hideshowless").style.display = "table-row";
+		document.getElementById("showless").style.display = "table-row";
+	}
+	
+	function hidelist(){
+		document.getElementById("hideshowless").style.display = "none";
+		document.getElementById("showless").style.display = "none";
+	}
+	
+	
+</script>
+
+</body>
+</html>
