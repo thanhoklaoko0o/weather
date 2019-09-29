@@ -13,13 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.program.weather.api.AdminApi;
 import com.program.weather.api.UserApi;
 import com.program.weather.api.WeatherApi;
-import com.program.weather.converter.CurrentWeatherConverter;
-import com.program.weather.dto.CurrentWeatherDTO;
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.entity.WeatherEntity;
 import com.program.weather.entity.RoleEntity;
 import com.program.weather.entity.UserEntity;
-import com.program.weather.repository.CurrentWeatherRepository;
+import com.program.weather.repository.WeatherRepository;
 import com.program.weather.repository.UserRepository;
+import com.program.weather.utils.CommonUtil;
 
 @org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api")
@@ -34,16 +33,13 @@ public class RestController {
 	@Autowired
 	private AdminApi adminApi;
 	
-	@Autowired
-	private CurrentWeatherConverter converterEntity;
 	
 	
-	@GetMapping("/search-city/{name}")
-	public CurrentWeatherDTO home(@PathVariable String name) {
-	   CurrentWeatherDTO currentWeather = weatherApi.searchWeather(name);
-	return currentWeather;
-	}
-	
+	/*
+	 * @GetMapping("/search-city/{name}") public CurrentWeatherDTO
+	 * home(@PathVariable String name) { CurrentWeatherDTO currentWeather =
+	 * weatherApi.searchWeather(name); return currentWeather; }
+	 */
 	
 	
 	@PostMapping("/save-user")
@@ -98,29 +94,58 @@ public class RestController {
 	}
 	
 	@Autowired
-	CurrentWeatherRepository a;
+	WeatherRepository currentWeatherRepository;
 	
 	@GetMapping("/findAllWeatherByUserId")
-	public List<CurrentWeatherEntity> getallbyuserid(){
+	public List<WeatherEntity> getallbyuserid(){
 		UserEntity entity = userRepository.findByUserName("usernamead");
-		return a.findAllByUserEntities(entity);
+		return currentWeatherRepository.findAllByUserEntities(entity);
 	}
 	
 	@GetMapping("/checkExistsCity/{name}")
 	public Boolean checkExistsCity(@PathVariable String name) {
-		return a.existsByNameCity(name);
+		return currentWeatherRepository.existsByNameCity(name);
 	}
 	
 	@GetMapping("/findAllByDate/{ts}")
-	public List<CurrentWeatherEntity> getallbyuserid(@PathVariable Timestamp ts){
-		return a.findAllByDate(ts);
+	public List<WeatherEntity> getallbyuserid(@PathVariable Timestamp ts){
+		return currentWeatherRepository.findAllByDate(ts);
 	}
 	
 	@GetMapping("/countWeather/{name}")
 	public Long coutWeatherByName(@PathVariable String name) {
-		return a.countAllByNameCity(name);
+		return currentWeatherRepository.countAllByNameCity(name);
 	}
 	
+	@GetMapping("/deleteWeather/{id}")
+	public void deleteWeather(@PathVariable long id) {
+		weatherApi.deleteWeather(id);
+	}
+	
+	@GetMapping("/updateWeather/{name}")
+	public void updateWeather(@PathVariable String name) {
+		
+		UserEntity userEntity = userRepository.findByUserName("usernamead");
+		List<WeatherEntity> listByUser=currentWeatherRepository.findAllByUserEntities(userEntity);
+//		List<CurrentWeatherEntity> listByNameCity = new ArrayList<CurrentWeatherEntity>();
+		
+		for(WeatherEntity entity :listByUser) {
+			if(entity.getNameCity().equals(name)) {
+				String d= CommonUtil.formatToString(entity.getDate());
+				if(d.equals(CommonUtil.curTimeToString())) {
+					entity.setCreateBy("Ngoc Hung");
+					entity.setPressure("abcdefgh");
+					currentWeatherRepository.save(entity);
+				}
+			}
+				
+		}
+		
+		
+		
+		
+		
+	}
 	
 	
 	

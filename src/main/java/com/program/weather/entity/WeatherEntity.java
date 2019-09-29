@@ -23,7 +23,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @Table(name="weatherinfo")
-public class CurrentWeatherEntity {
+public class WeatherEntity {
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -60,8 +60,12 @@ public class CurrentWeatherEntity {
 	@Column(name = "create_by")
 	private String      createBy;
 	
+	
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_weather", joinColumns = @JoinColumn(name = "weather_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private Set<UserEntity> userEntities;
 
+	
+	
+	
 }

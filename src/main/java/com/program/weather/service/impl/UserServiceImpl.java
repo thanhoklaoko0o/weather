@@ -13,6 +13,7 @@ import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.RoleRepository;
 import com.program.weather.repository.UserRepository;
 import com.program.weather.service.UserService;
+import com.program.weather.utils.Constants;
 import com.program.weather.utils.EncrytedPasswordUtils;
 
 @Service
@@ -20,7 +21,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	UserRepository userRepository;
-
 
 	@Autowired
 	RoleRepository roleRepository;
@@ -46,7 +46,6 @@ public class UserServiceImpl implements UserService {
 		userEntity.getRoles().removeAll(userEntity.getRoles());
 		
 		userRepository.delete(userEntity);
-		
 	}
 
 	@Override
@@ -58,9 +57,9 @@ public class UserServiceImpl implements UserService {
 	public void editActiveUser(Long id) {
 		UserEntity userEntity = userRepository.findByUserId(id);
 		if(userEntity.isEnabled()) {
-			userEntity.setEnabled(false);
+			userEntity.setEnabled(Constants.UN_ACTIVE);
 		}else {
-			userEntity.setEnabled(true);
+			userEntity.setEnabled(Constants.ACTIVE);
 		}
 		userRepository.save(userEntity);
 	}

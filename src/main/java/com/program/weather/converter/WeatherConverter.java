@@ -6,14 +6,14 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 import com.program.weather.dto.CurrentWeatherDTO;
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.entity.WeatherEntity;
 
 @Component
-public class CurrentWeatherConverter {
+public class WeatherConverter {
 	
-	public CurrentWeatherEntity convertToEntity(CurrentWeatherDTO weatherDTO) {
+	public WeatherEntity convertToEntity(CurrentWeatherDTO weatherDTO) {
 		ModelMapper modelMapper = new ModelMapper();
-		CurrentWeatherEntity result = modelMapper.map(weatherDTO, CurrentWeatherEntity.class);
+		WeatherEntity result = modelMapper.map(weatherDTO, WeatherEntity.class);
 		result.setIcon(weatherDTO.getWeather().get(0).getIcon());
 		result.setNameCity(weatherDTO.getName());
 		result.setIdCity(weatherDTO.getId());

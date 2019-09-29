@@ -50,13 +50,13 @@
 								<div id="forecast_list_ul">
 									<table class="table">
 										<tbody>
-											<tr>						    				
+											<tr th:each="fore : ${lstForeCast}">						    				
 						    				<td>
 						    					Mon 23 Sep<img src="http://openweathermap.org/img/wn/04d@2x.png" width="50" height="50"><div class="weather-forecast-list__today-label">Today</div>
 						    					
 						    				</td>
 						    				<td>
-						    					<span id="cam" class="badge badge-info">13.2°С </span><span id="den" class="badge badge-info">13.2°С </span> <i> broken clouds</i>
+						    					<span id="cam" class="badge badge-info">13.2°С </span><span id="den" class="badge badge-info">13.2°С </span> <i th:text="${fore.description}"> </i>
 						    					<p class="weather-forecast-list__card">1.79 m/s&nbsp;<br>clouds: 71 %,&nbsp;&nbsp;1013.78 hpa</p>						    					
 						    				</td>						    				
 						    			</tr>

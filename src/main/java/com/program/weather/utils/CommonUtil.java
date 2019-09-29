@@ -5,17 +5,20 @@ import java.text.DecimalFormat;
 import java.text.Normalizer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Pattern;
+
 
 public class CommonUtil {
 	
 	/**
-	 * Convert F --> C
+	 * Convert temp F --> C
 	 * @param Fah
 	 * @return
 	 */
-	public static String toCelsius(double Fah) {
+	public static  String toCelsius(double Fah) {
 		NumberFormat formatter =new DecimalFormat("#0.00");
 	    return  formatter.format((Fah - 32) * 5/9);
 	    }
@@ -41,14 +44,38 @@ public class CommonUtil {
 	}
 	
 	/**
-	 * Format TimeStamp to String 20190924
+	 * Format TimeStamp to String yyyymmdd
 	 * @param ts
 	 * @return
 	 */
 	 public static String formatToString( Timestamp ts) {
-		  String formattedDate = new SimpleDateFormat("yyyymmdd").format(ts);
+		  String formattedDate = new SimpleDateFormat("yyyyMMdd").format(ts);
 		  return formattedDate;
 	  }
+	 
+	 /**
+	  * Parse curTime to String 
+	  * @return
+	  */
+	 public static String curTimeToString() {
+		  Timestamp  ts= new Timestamp(System.currentTimeMillis());
+		  String formattedDate = new SimpleDateFormat("yyyyMMdd").format(ts);
+		  return formattedDate;
+	  }
+	 
+	 /**
+	  * convert localdate to timestamp
+	  * @param ldt
+	  * @return
+	  */
+	 public static Timestamp getDate(LocalDateTime ldt) {
+	    	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+	    	String str = ldt.format(dtf);
+	    	Timestamp ts = Timestamp.valueOf(str);
+	        return ts;
+	    }
+	 
+	 
 	
 	
 }
