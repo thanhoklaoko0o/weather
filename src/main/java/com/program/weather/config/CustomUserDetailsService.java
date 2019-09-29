@@ -29,7 +29,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 		if(user == null) {
 			throw new UsernameNotFoundException("Nguoi dung khong ton tai voi ten : " + userName);
 		}
-		 Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
+			Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
 	        Set<RoleEntity> roles = user.getRoles();
 	        for (RoleEntity role : roles) {
 	            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRole()));

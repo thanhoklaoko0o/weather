@@ -37,9 +37,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		// Cấu hình cho Login Form.
 		http.authorizeRequests().and().formLogin()//
 				// Submit URL của trang login
-			//	.loginPage("/login")//
+				.loginPage("/login")//
 				.loginProcessingUrl("/form-login") 
-				.defaultSuccessUrl("/home-weather")//
+				.defaultSuccessUrl("/processURL")//
 				.failureUrl("/login?error=true")//
 				.usernameParameter("username")//
 				.passwordParameter("password")

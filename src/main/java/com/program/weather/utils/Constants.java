@@ -10,5 +10,7 @@ public class Constants {
 	public static final String 	PNG          = ".png";
 	public static final Boolean ACTIVE 		 = true;
 	public static final Boolean UN_ACTIVE	 = false;
+	public static final String  ADMIN		 = "ROLE_ADMIN"; 
+	public static final String  USER		 = "ROLE_USER"; 
 	
 }
