@@ -3,10 +3,16 @@ package com.program.weather.controller;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,22 +52,37 @@ public class HomeController {
 	 * 
 	 * @param model
 	 * @param principal
-	 * @return
+	 * @return view pageHome
 	 */
 	@GetMapping
 	public String homeDefault(Model model, Principal principal) {
+		
 		UserEntity userEntity = userServiceImpl.findByUserName(principal.getName());
+	//	List<WeatherEntity>lstFilter;
 		List<WeatherEntity> lstWeather = weatherApi.findAllByUserEntities(userEntity);
-		lstWeather.sort((WeatherEntity we1, WeatherEntity we2) -> we2.getDate().compareTo(we1.getDate()));
-		model.addAttribute("lstWeather", lstWeather);
+	
+		lstWeather.sort((WeatherEntity we1 , WeatherEntity we2 )-> we2.getDate().compareTo(we1.getDate()));	
+		
+		Map<WeatherEntity, Integer> mapWeather = new HashMap<WeatherEntity, Integer>();
+		for(WeatherEntity item : lstWeather) {
+			if (mapWeather.containsKey(item))
+				mapWeather.put(item, mapWeather.get(item) + 1);
+		      else
+		    	  mapWeather.put(item, 1);
+		}
+		
+		model.addAttribute("lstWeather", mapWeather);
+		
 		return "pageHome";
 	}
+	
+	
 
 	/**
 	 * Error when user have role to access page
 	 * @param model
 	 * @param principal
-	 * @return
+	 * @return view : 403
 	 */
 	@GetMapping("/403")
 	public String accessDenied(Model model, Principal principal) {
@@ -78,7 +99,7 @@ public class HomeController {
 	 * ForeCast 5 day of City
 	 * @param name
 	 * @param model
-	 * @return
+	 * @return view : foreCast
 	 */
 	@GetMapping("/foreCast")
 	public String foreCast5Day(@RequestParam String name, Model model) {
@@ -107,20 +128,20 @@ public class HomeController {
 	 * @param name
 	 * @param modelMap
 	 * @param principal
-	 * @return
+	 * @return view Home
 	 */
 	@GetMapping("/search-city")
 	public String searchWeather(@RequestParam String name, ModelMap modelMap, Principal principal) {
+		
 		// list theo ten serach
 		UserEntity userEntity = userServiceImpl.findByUserName(principal.getName());
 		List<WeatherEntity> lstWeatherByName;
 		// list weather by user
 		List<WeatherEntity> lstWeather = weatherApi.findAllByUserEntities(userEntity);
 		lstWeatherByName = lstWeather.stream()
-				.filter(curweather -> name.trim().toLowerCase().equals(curweather.getNameCity().trim().toLowerCase()))
+				.filter(curweather -> name.equalsIgnoreCase(curweather.getNameCity()))
 				.collect(Collectors.toList());
 
-		modelMap.addAttribute("lstWeather", lstWeatherByName);
 		WeatherEntity weatherEntity = weatherApi.restJsonData(name);
 		// lay thoi tiet hien tai cung ten Search trong db , Xy ly nut add va update
 		WeatherEntity curWeather = lstWeatherByName.stream()
@@ -131,17 +152,21 @@ public class HomeController {
 		} else {
 			modelMap.addAttribute("flag", "add");
 		}
-
-		String urlIMG = Constants.IMG_URL + weatherEntity.getIcon() + Constants.PNG;
-		String curDate = CommonUtil.fomatDate();
-		String C = CommonUtil.toCelsius(Double.parseDouble(weatherEntity.getTemp()));
-		String mota = weatherEntity.getWind() + " m/s. " + weatherEntity.getHumidity() + "%, "
-				+ weatherEntity.getPressure() + " hpa";
-		modelMap.addAttribute("currentWeather", weatherEntity);
-		modelMap.addAttribute("urlIMG", urlIMG);
-		modelMap.addAttribute("curDate", curDate);
-		modelMap.addAttribute("C", C);
-		modelMap.addAttribute("mota", mota);
+		
+		modelMap.addAttribute("lstWeatherByUser", lstWeatherByName);
+		modelMap.addAttribute("weatherSearch", weatherEntity);
+		
+		/*
+		 * String urlIMG = Constants.IMG_URL + weatherEntity.getIcon() + Constants.PNG;
+		 * String curDate = CommonUtil.fomatDate(); String C =
+		 * CommonUtil.toCelsius(Double.parseDouble(weatherEntity.getTemp())); String
+		 * mota = weatherEntity.getWind() + " m/s. " + weatherEntity.getHumidity() +
+		 * "%, " + weatherEntity.getPressure() + " hpa";
+		 * modelMap.addAttribute("currentWeather", weatherEntity);
+		 * modelMap.addAttribute("urlIMG", urlIMG); modelMap.addAttribute("curDate",
+		 * curDate); modelMap.addAttribute("C", C); modelMap.addAttribute("mota", mota);
+		 */
+		 
 		return "pageHome";
 	}
 
@@ -162,7 +187,7 @@ public class HomeController {
 	 * @param action
 	 * @param name
 	 * @param principal
-	 * @return
+	 * @return view home + message add successful
 	 */
 	@GetMapping("/save-weather")
 	public String saveWeather(@RequestParam String action, @RequestParam String name, Principal principal) {

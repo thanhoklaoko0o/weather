@@ -3,6 +3,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.program.weather.entity.WeatherEntity;
@@ -16,7 +17,4 @@ public interface WeatherRepository extends JpaRepository<WeatherEntity, Long>{
 	List<WeatherEntity> findAllByUserEntities(UserEntity userEntity);
 	List<WeatherEntity> findAllByDate(Timestamp ts);
 	Long countAllByNameCity(String nameCity);
-	
-	
-	
 }

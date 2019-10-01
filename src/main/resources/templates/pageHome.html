@@ -49,8 +49,6 @@
 									id="nameSearch" name="name">
 								<button type="submit" class=" btn btn-primary mb-2">Search</button>
 							</form>
-							<!-- <button  class="search-weather btn btn-primary mb-2">Search</button> -->
-							<!-- </div> -->
 						</div>
 					</div>
 					<div class="panel-body">
@@ -60,34 +58,165 @@
 								<div id="forecast_list_ul">
 									<table class="table">
 										<tbody>
-											<tr th:if="${currentWeather != null}"
-												th:data-name="${currentWeather.nameCity}">
-												<td><img th:src="${urlIMG}" width="65" height="65"></td>
-												<td><b><a th:href="@{/home-weather/foreCast?name={name}(name=${currentWeather.nameCity})}">
-															<p th:text="${currentWeather.nameCity}" />
-													</a></b>
-													<p th:text="${curDate}" /></td>
-												<td><span class="badge badge-info" th:text="${C}+'°С'"></span>
-													<b><i th:text="${info}"> </i></b>
-													<p th:text="${mota}"></p></td>
+										
+											<!-- Show result search weather city -->
+											<th:block th:if="${weatherSearch != null}">
+												
+												<tr  th:object="${weatherSearch}">
+											
+												<td>
+												
+												<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'"width="50" height="50">
+												
+												</td>
+													
+												<td>
+												
+												<b><a href="#" th:text="*{nameCity}">NameCity</a></b>
+												<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+												
+												</td>	
+															
+												<td>
+												
+												<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+												<b><i th:text="*{description}"></i></b>
+												<p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>	
+												
+												</td>
+												
 												<td th:switch="${flag}">
+												
 												<a class="add-user btn btn-primary" th:case="'add'"
-													th:href="@{/home-weather/save-weather?action=Add&name={name}(name=${currentWeather.nameCity})}" >Add</a>
+													th:href="@{/home-weather/save-weather?action=Add&(name=*{nameCity})}" >Add</a>
 												<a class="update-user btn btn-warning" th:case="'update'"  
-													th:href="@{/home-weather/save-weather?action=Update&name={name}(name=${currentWeather.nameCity})}">Update</a>
-												</td>
-											</tr>
-
-											<tr class="trshowmore" >
-												<td colspan="4" th:if="${not #lists.isEmpty(lstWeather) }" >
-													<p onclick="showlist()" class="showmorestyle">Show More</p>
-												</td>
-												<td colspan="4" th:unless="${not #lists.isEmpty(lstWeather)}  " >
-													<p >No city had been choosen</p>
+													th:href="@{/home-weather/save-weather?action=Update&(name=*{nameCity})}">Update</a>
+												
 												</td>
 											</tr>
 											
-											<tr  class="hideshowless" th:data-id="${we.weatherId}"
+											<tr>
+											<td colspan="4"></td>
+											</tr>
+											<tr>
+											<td colspan="4"></td>
+											</tr>
+												
+											</th:block>
+											
+										<!-- Show  weather city in DB same nameSearch  th:if="${#lists.isEmpty(lstWeather)}"-->
+											<th:block th:if="${not #lists.isEmpty(lstWeatherByUser)}"  th:each="we : ${lstWeatherByUser}">
+												
+												<tr  th:object="${we}">
+											
+												<td>
+												
+												<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'"width="50" height="50">
+												
+												</td>
+												
+													
+												<td>
+												
+												<b><a href="#" th:text="*{nameCity}">NameCity</a></b>
+												<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+												
+												</td>	
+															
+												<td>
+												
+												<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+												<b><i th:text="*{description}"></i></b>
+												<p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>	
+												
+												</td>
+												
+												<td>
+												
+												<a class="xoa-weather btn btn-danger" href="#">Delete</a>
+												
+												</td>
+											</tr>
+											
+											</th:block>
+
+											
+											<!-- Show list weather by user -->
+											<th:block th:if="${not #lists.isEmpty(lstWeather)}" th:each="we : ${lstWeather}">
+											
+											<tr th:object="${we}" th:data-id="*{key.weatherId}">
+											
+												<td>
+												<img th:src="'http://openweathermap.org/img/wn/'+*{key.icon}+'.png'"width="50" height="50">
+												</td>
+													
+												<td>
+												<b><a href="#" th:text="*{key.nameCity}">NameCity</a></b>
+												<p><span th:text="*{#calendars.format(key.date,'MMMM dd, yyyy')}">Date</span></p>
+												</td>	
+															
+												<td>
+												<span class="badge badge-info" th:text="*{key.temp}+'°С'">Temperature</span>
+												<b><i th:text="*{key.description}"></i></b>
+												<p th:text="*{key.wind}+' m/s. '+*{key.humidity}+' %, '+*{key.pressure}+' hpa'">win humidity</p>	
+												</td>
+												
+												<td>
+												<button class="xoa-weather btn btn-danger" >Delete</button>
+												</td>
+												
+											</tr>
+											
+											<tr class="trshowmore" th:if=${we.value!=1}>
+											
+												<td colspan="4">
+													<p onclick="showlist()" class="showmorestyle">Show More</p>
+												</td>
+												
+											</tr>
+											
+											<!-- If have showmore - Load data  -->
+											<th:block>
+											
+											<tr th:object="${we}" th:data-id="*{key.weatherId}" class="hideshowless" style="display: none">
+											
+												<td>
+												<img th:src="'http://openweathermap.org/img/wn/'+*{key.icon}+'.png'"width="50" height="50">
+												</td>
+													
+												<td>
+												<b><a href="#" th:text="*{key.nameCity}">NameCity</a></b>
+												<p><span th:text="*{#calendars.format(key.date,'MMMM dd, yyyy')}">Date</span></p>
+												</td>	
+															
+												<td>
+												<span class="badge badge-info" th:text="*{key.temp}+'°С'">Temperature</span>
+												<b><i th:text="*{key.description}"></i></b>
+												<p th:text="*{key.wind}+' m/s. '+*{key.humidity}+' %, '+*{key.pressure}+' hpa'">win humidity</p>	
+												</td>
+												
+												<td>
+												<button class="xoa-weather btn btn-danger" >Delete</button>
+												</td>
+											</tr>
+											
+											<!-- <tr class="trshowmore1 " id="showless" onclick="hidelist()">
+												<td colspan="4">
+													<p class="showmorestyle">Show Less</p>
+												</td>
+											</tr> -->
+											
+											</th:block>
+											
+											
+											
+											
+											
+											</th:block>
+											
+											
+											
+										<!-- 	<tr  class="hideshowless" th:data-id="${we.weatherId}"
 												th:each="we : ${lstWeather}" style="display: none" >
 												<td><img
 													th:src="'http://openweathermap.org/img/wn/'+${we.icon}+'.png'"
@@ -104,7 +233,7 @@
 														th:text="${we.wind}+' m/s. '+${we.humidity}+' %, '+${we.pressure}+' hpa'"></p></td>
 												<td><a class="xoa-weather btn btn-danger" href="#">Delete</a></td>
 											</tr>
-
+ -->
 											
 											<tr class="trshowmore1 " id="showless" onclick="hidelist()">
 												<td colspan="4">
@@ -132,6 +261,9 @@
 		<div class="footer-copyright text-center py-3" style="color: red;">
 			© 2019 Copyright: <a href="" style="color: red;"> FbNgocHung.com</a>
 		</div>
+		<div class="footer-copyright text-center py-3" style="color: red;">
+			Mentor : Anh Hạnh
+		</div>
 		<!-- Copyright -->
 
 	</footer>
@@ -151,20 +283,6 @@
 				}
 			})
 		})
-		//add weather
-		/* $(".add-user").click(function(){  
-			var name = $(this).closest("tr").attr("data-name");
-			$.ajax({
-				url:"http://localhost:8080/home-weather/save-weather",
-			    type:"GET",
-			    data:{
-			    	name:name
-			    },
-				success: function(value){
-					
-				}
-			})
-		}) */
 
 		//xoa weather
 		$(".xoa-weather")
@@ -191,7 +309,7 @@
 						})
 
 		//xu ly show
-		function showlist() {
+		/* function showlist() {
 			var showLessArray = Array.prototype.slice.call(document
 					.getElementsByClassName("hideshowless"));
 			showLessArray.forEach(itemShowLess);
@@ -209,7 +327,7 @@
 				item.style.display = "none";
 			}
 			document.getElementById("showless").style.display = "none";
-		}
+		} */
 	</script>
 
 </body>

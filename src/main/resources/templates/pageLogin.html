@@ -20,14 +20,14 @@
 					<h2 class="text-center">Login</h2>
 					<div class="form-group">
 						<input type="text" class="form-control" placeholder="Username"
-							required="required"  name="username">
+							required="required"  name="username" id="username">
 					</div>
 					<div class="form-group">
 						<input type="password" class="form-control" placeholder="Password"
-							required="required" name="password">
+							required="required" name="password" id=password>
 					</div>
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block">Sign
+						<button type="submit"  class="btn btn-primary btn-block">Sign
 							in</button>
 					</div>
 					<div class="clearfix">
@@ -114,8 +114,35 @@
 			</div>
 		</div>
 
-		</div>
+	
 	</section>
-
+<script type="text/javascript">
+$("#btnDangNhap").click(function(){
+	var username = $("#username").val();
+	var password = $("#password").val();
+	
+	$.ajax({
+		url:"/form-login",
+	    type:"GET",
+	    data:{
+	    	username:username,
+	    	password:password
+	    },
+		success: function(value){
+			if(value == "true"){
+				duongDanHienTai = window.location.href;
+				duongDan = duongDanHienTai.replace("dangnhap/","/processURL");
+				window.location = duongDan;
+				
+			}else{
+				$("#ketqua").text("dang nhap that bai !")
+			}
+			
+		}
+	})
+	
+	
+});
+</script>
 </body>
 </html>

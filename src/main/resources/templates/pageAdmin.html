@@ -6,11 +6,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Admin</title>
 <link th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
-	<link th:href="@{/css/style.css}" rel="stylesheet">
-	<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
-	<!-- <script type="text/javascript" th:src="@{/js/sweetalert2@8.js}"></script> -->
-	<script type="text/javascript" th:src="@{/js/sweetalert2.all.min.js}"></script>
-	<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<link th:href="@{/css/style.css}" rel="stylesheet">
+<script type="text/javascript" th:src="@{/js/jquery.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/sweetalert2.all.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/bootstrap.min.js}"></script>
+<script type="text/javascript" th:src="@{/js/multiselect.js}"></script>
+<link th:href="@{/css/multiselect.css}" rel="stylesheet"/>
 	
 </head>
 <body>
@@ -46,31 +47,35 @@
 							<div class="tab-pane active" id="forecast-list">
 								<div id="forecast_list_ul">
 									<table class="table">
-										<thead class="bg-primary">
-											<th>User</th>
-											<th>Email</th>
-											<th>Active</th>
-											<th>Role</th>
-											<th></th>
-
+										<thead>
+											<tr class="bg-primary">
+												<th>User</th>
+												<th>Email</th>
+												<th>Active</th>
+												<th>Role</th>
+											</tr>
 										</thead>
-										<tr th:each="dsUser : ${dsUser}" th:data-id="${dsUser.userId}">
-											<td th:text="${dsUser.userName}"></td>
-											<td th:text="${dsUser.email}"></td>
-											<td>
-												<input class="activeUser"  type="checkbox"  th:checked="${dsUser.enabled}"  />
-											</td>
-											<td><select id="idselect" class="form-control" >
-													<option th:each="item : ${dsUser.roles}" th:utext="${item.role}"></option>
-													<option th:each="role : ${dsRole}"
-													 th:value="${role.roleId}" th:utext="${role.role}"></option>
-													
-											</select></td>
-											<!-- <td><a class="btn btn-danger" th:href="@{/home-admin/delete-user?id={id}(id=${dsUser.userId})}">Delete</a></td>
- -->										<td class="xoa-user btn btn-danger">Delete</td>
-										</tr>
+										<th:block th:each="user : ${lstUser}">
+
+											<tr th:object="${user}" th:data-id="${user.userId}">
+												<td th:text="*{lastName}+' '+*{firstName}"></td>
+												<td th:text="*{email}"></td>
+												<td><input class="activeUser" type="checkbox"
+													th:checked="*{enabled}" /></td>
+												<td><select class="example-multiple-selected"
+													multiple="multiple">
+														<option th:each="role : ${lstRole}" th:value="${role.roleId}"
+															th:text="${role.role}" 
+															th:selected="${ role.roleId==1 }">
+														</option>
+												</select>
+												</td>
+												<td><button type="button"
+														class="xoa-user btn btn-danger">Delete</button></td>
+											</tr>
+										</th:block>
 									</table>
-								
+
 								</div>
 							</div>
 						</div>
@@ -96,8 +101,11 @@
 	$(document).ready(function() {
 
 	    $('.activeUser').change(function() {
-	        if(this.checked) {
-	        	// event tu uncheck -> check
+	    	
+	    	
+	    	let checkStatus = this.checked;
+	    	// event tu uncheck -> check
+	        if(checkStatus) {
 	      	  swal({
 	              title: 'Comfirm!',
 	              text: "Are you sure that you want to perform this action?",
@@ -121,14 +129,15 @@
 	            	  
 	              }
 	        	  //neu chon no
-	           //   $("#activeUser").prop('checked', false);
-	        	  
+	          $("#activeUser").prop('checked', true);
+	        		//  $(this).checked=false;
+	        	 
 	              	
 	          })
 	        	
 	        }
 	        //else      
-	        	   	  swal({
+	        	   	/*   swal({
 	              title: 'Comfirm!',
 	              text: "Are you sure that you want to perform this action?",
 	              showCancelButton: true,
@@ -151,15 +160,15 @@
 	            	  
 	              }
 	        	  //neu chon no
-	           //   $("#activeUser").prop('checked', false);
+	            $("#activeUser").prop('checked', false);
 	        	  
 	              	
-	          })
+	          }) */
 	    });
 	    
 	    /// change ROle Name
 	    
-	    $('select').on('change', function() {
+	    $('select').on('change', function(val) {
 	    	
 	  	  swal({
               title: 'Comfirm!',
@@ -170,9 +179,11 @@
               confirmButtonText: 'Yes, change it',
               cancelButtonText: 'No, cancel'
           }).then((result) => {
+        	  
         	  //comfirm tren form la yes
               if (result.value) {
             	  var id = $(this).closest("tr").attr("data-id");
+            	  console.log(id);
             	  var optionSelected = $(this).find("option:selected");;
             	  var role   = optionSelected.text();
             
@@ -194,6 +205,9 @@
 	    	});
 	    
 	});
-	</script>
+	
+    $('.example-multiple-selected').multiselect();
+</script>
+	
 </body>
 </html>

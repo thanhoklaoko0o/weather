@@ -1,6 +1,5 @@
 package com.program.weather.controller;
 
-import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +22,19 @@ public class AdminController {
 	private AdminApi adminApi;
 	
 	/**
-	 * Load pageAdmin when admin access to APP
+	 * Load pageAdmin show all USER when admin access to APP
 	 * @param model
 	 * @param principal
 	 * @return
 	 */
 	@GetMapping
-	public String homeAdmin(Model model, Principal principal) {
-		List<UserEntity> dsUser = adminApi.findAll();
-		List<RoleEntity> dsRole = adminApi.findAllRole();
+	public String homeAdmin(Model model) {
+		List<UserEntity> lstUser = adminApi.findAll();
+		List<RoleEntity> lstRole = adminApi.findAllRole();
 
-		model.addAttribute("dsUser", dsUser);
-		model.addAttribute("dsRole", dsRole);
+		model.addAttribute("lstUser", lstUser);
+		model.addAttribute("lstRole", lstRole);
+		
 		return "pageAdmin";
 	}
 

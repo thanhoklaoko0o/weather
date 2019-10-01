@@ -75,6 +75,7 @@ public class ForwardController {
 		
 		public List<GrantedAuthority> getListAuthority(Authentication authentication){
 			List<GrantedAuthority> userAuthority = new ArrayList<GrantedAuthority>();
+			@SuppressWarnings("unchecked")
 			Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
 		    userAuthority.addAll(authorities); 
 		    
