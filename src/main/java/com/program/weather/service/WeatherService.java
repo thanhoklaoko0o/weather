@@ -8,5 +8,8 @@ import com.program.weather.entity.UserEntity;
 public interface WeatherService {
 	void 					   saveWeather			 (WeatherEntity weatherEntity);
 	void            		   deleteWeather   		 (Long id);
-	List<WeatherEntity> findAllByUserEntities (UserEntity userEntity);
+	void            		   deleteWeather   		 (WeatherEntity weatherEntity);
+	List<WeatherEntity> 	   findAllByUserEntities (UserEntity userEntity);
+	List<WeatherEntity>findDateTimeByUserGroupbyDateTimeDest(long id);
+	List<WeatherEntity>findDateTimeByUserGroupbyDateTimeAcs (long id);
 }

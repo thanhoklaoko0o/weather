@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ForeCast Weather</title>
+<link 	th:href="@{/css/bootstrap.min.css}" 	 rel="stylesheet">
+<link 	th:href="@{/css/stylepage.css}" 	  	 rel="stylesheet">
+<script th:src ="@{/js/jquery.min.js}" 	  		 type="text/javascript"></script>
+<script th:src ="@{/js/sweetalert2.all.min.js}"  type="text/javascript"></script>
+<script th:src ="@{/js/bootstrap.min.js}" 		 type="text/javascript" ></script>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	  
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" th:href="@{/home-weather}">WEATHER FORECAST</a>
+	    </div>
+	    
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    
+	      <ul class="nav navbar-nav">
+					<li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/home-admin}">MANAGEMENT</a></li>
+		 </ul>
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#"><span th:utext="${'Hi : '+#request.userPrincipal.name}"></span></a></li>
+	        <li><a th:href="@{/logout}"> Logout</a></li>
+	      </ul>
+	      
+	    </div>
+	  </div>
+	</nav>
+  <br>
+  <br>
+  
+  	<div class="container">
+	 <div class="row ">
+	   <div class="col-sm-9" >
+	  	 <div class="panel panel-default">
+			<div class="panel-heading">
+			 <div class="panel-heading">
+               <h3 th:text="'5 Day Weather Forecast : '+ ${nameCity}"></h3>
+			 </div>
+			</div>
+			<div class="panel-body">
+						
+				<table class="table">
+				  <tbody>
+					<th:block th:each="fore : ${lstForeCast}">
+						<tr th:object="${fore}" th:id="'tr-today'+*{index}">
+																	    				
+	    				 <td>
+                           <p th:text="*{#dates.format(day,'EE dd MMM')}"></p>
+                           <div th:if="${#dates.format(fore.day,'MMM dd, yyyy') == #dates.format(timeToday,'MMM dd, yyyy')}" >Today</div>
+                         </td>
+					                                
+                         <td>
+                           <img th:src="*{image}" width="65" height="65">
+                         </td>
+					                                
+                         <td>
+                         	<span class="badge badge-info tempmax" th:text="*{tempMax}+'°С'" ></span>
+                        	 <span class="badge badge-info tempmin" th:text="*{tempMin}+'°С'"></span>
+                        	 <b><i th:text="*{description}"></i></b>
+                        	 <p style="margin-top: 10px" th:text="*{wind}+' m/s '"></p>
+                         	<p th:text="'clouds: '+*{clouds}+' %, '+*{pressure}+' hpa'"></p>
+                         </td>
+						    									    		 
+    				  </tr>
+					</th:block>
+				</tbody>
+			</table>
+								
+					</div>
+				</div>
+	  	
+	  </div>
+	 </div>
+	<hr>
+  </div>
+	<br>
+	<br>
+	<br>
+	<!-- Footer -->
+  <footer class="page-footer font-small blue">
+
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      © 2019 Copyright: <a href="" style="color: red;"> FB/Ngoc.Hung.USD</a>
+    </div>
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      Mentor : Anh Hạnh
+    </div>
+
+  </footer>
+  <!-- Footer -->
+</body>
+</html>
