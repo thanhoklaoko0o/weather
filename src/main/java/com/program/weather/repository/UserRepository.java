@@ -7,7 +7,10 @@ import com.program.weather.entity.UserEntity;
 
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-	UserEntity findByUserName(String userName);
-    UserEntity findByUserId(Long id);
-   
+	
+	UserEntity findByUserName   (String userName);
+    UserEntity findByUserId		(Long 	id);
+    Boolean    existsByUserName (String userName);
+    Boolean    existsByEmail	(String email);
+    
 }

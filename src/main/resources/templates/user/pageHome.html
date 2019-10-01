@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home</title>
+<link 	th:href="@{/css/bootstrap.min.css}" 	 rel="stylesheet">
+<link 	th:href="@{/css/stylepage.css}" 	  	 rel="stylesheet">
+<script th:src ="@{/js/jquery.min.js}" 	  		 type="text/javascript"></script>
+<script th:src ="@{/js/sweetalert2.all.min.js}"  type="text/javascript"></script>
+<script th:src ="@{/js/bootstrap.min.js}" 		 type="text/javascript" ></script>
+</head>
+<body>
+
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	  
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" th:href="@{/home-weather}">WEATHER FORECAST</a>
+	    </div>
+	    
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    
+	      <ul class="nav navbar-nav">
+					<li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/home-admin}">MANAGEMENT</a></li>
+		 </ul>
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#"><span th:utext="${'Hi : '+#request.userPrincipal.name}"></span></a></li>
+	        <li><a th:href="@{/logout}"> Logout</a></li>
+	      </ul>
+	      
+	    </div>
+	  </div>
+	</nav>
+  <br>
+  <br>
+  
+ <div class="container">
+	<div class="row ">
+	  <div class="col-sm-8 " >
+	    <div class="col-sm-12 ">
+	       <form  class="form-inline" th:action="@{/home-weather/search-city}" >
+	           <input  type="text" class="form-control w-50" placeholder="Type name city to watch infomation weather" name="name">
+	           <button type="submit"  class=" btn btn-primary" th:text="Search"></button>
+	       </form>
+	    </div>
+	   	<br>
+	   		<br>
+	   			<br>
+	    <table class="table">
+	    
+	    	<!-- Show result search weather city -->
+	      <thead id="showSearch">
+			  <th:block th:if="${weatherSearch != null}"> 
+				<tr th:object="${weatherSearch}">
+					
+	              <td>
+	              	<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'"width="50" height="50">
+	              </td>
+	                          
+	              <td>
+	              	<b><a th:href="@{/home-weather/foreCast(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
+	             	<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+	              </td> 
+	                              
+	              <td>
+	              	<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+	                <b><i th:text="*{description}"></i></b>
+	                <p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>  
+	              </td>
+	             
+	              <th:block th:each="wea : ${listWeatherDest}">
+	              	 <td th:if="${weatherSearch.nameCity == wea.nameCity && #calendars.format(weatherSearch.date,'MMMM dd, yyyy') !=  #calendars.format(wea.date,'MMMM dd, yyyy')}">
+	              		<a class="btn btn-primary" th:href="@{/home-weather/save-weather?(name=*{nameCity})}" >Add</a>
+	             	 </td>
+	              </th:block>
+	              <th:block th:each="wea : ${listWeatherDest}">
+	              	 <td th:if="${weatherSearch.nameCity == wea.nameCity && #calendars.format(weatherSearch.date,'MMMM dd, yyyy') ==  #calendars.format(wea.date,'MMMM dd, yyyy')}">
+	              		<a class="btn btn btn-warning" th:href="@{/home-weather/update-weather?(name=*{nameCity})}" >Update</a>
+	             	 </td>
+	              </th:block>
+	            </tr>
+	            
+	            <tr>
+					<td colspan="4"></td>
+				</tr>
+			  </th:block>  
+			  
+			 <!--  Message when Weather city is not found  -->
+			  <th:block th:if="${msgSearch != null}">
+			  	<tr>
+					<td colspan="4"><b><span th:text="${msgSearch}"></span></b></td>
+				</tr>
+			  </th:block>  
+			          
+	       </thead>
+	       
+	       <!-- Show data weather city in DB -->
+	       <th:block th:if="${not #lists.isEmpty(listWeatherDest)}" th:each="we : ${listWeatherDest}">
+	       
+	       	<tbody th:class="${we.nameCity}">
+		       	  <tr th:object="${we}" th:data-id="*{weatherId}">
+												
+					<td>	
+						<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'" width="50" height="50">
+					</td>
+														
+					<td>
+					<b><a href="#" th:text="*{nameCity}">NameCity</a></b>
+					<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+					</td>	
+																
+					<td>
+					<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+					<b><i th:text="*{description}"></i></b>
+					<p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>	
+					</td>
+													
+					<td>
+					<a class="btn btn-danger" th:href="@{/home-weather/deleteWeather(id=*{weatherId})}" >Delete</a>
+			 		</td>
+													
+			      </tr>
+			      
+			  <th:block th:each="item : ${listWeatherAsc}">
+				<tr th:id="${we.nameCity}+'showmore'" th:if="${item.nameCity == we.nameCity && item.date != we.date}">
+													
+					<td colspan="4" th:id="${we.nameCity}+'showmoretd'">
+						<p onclick="showlist(this)"  th:attr-name="${we.nameCity}"  class="showmorestyle">Show More</p>
+					</td>
+													
+				</tr>
+		    </th:block>
+			
+			
+		     </tbody>	
+	       </th:block>
+	    </table>
+	  </div>
+	  <div class="col-sm-4">
+	    
+	      <div class="widget__temperature">
+	      
+	          <div  class="weather-widget">
+	            <h2 class="weather-widget__city-name">Weather in Turan, VN</h2>
+	            <h3 class="weather-widget__temperature">
+	              <img class="weather-widget__img" src="https://openweathermap.org/img/wn/03n@2x.png" alt="Weather Turan , VN" width="50" height="50">25 °C
+	            </h3>
+	            <p class="weather-widget__main">scattered clouds</p>
+	            <p>22:40 Oct 9
+	            </p>
+	            <table class="weather-widget__items">
+	              <tbody>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Wind</td>
+	                  <td id="weather-widget-wind">Calm, 1.0 m/s</td>
+	       
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Cloudiness</td>
+	                  <td id="weather-widget-cloudiness">Scattered clouds</td>
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Pressure</td>
+	                  <td>1014 hpa</td>
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Humidity</td><td>94 %</td>
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Sunrise</td>
+	                  <td>05:37 </td>
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Sunset</td>
+	                  <td>17:30 </td>
+	                </tr>
+	
+	                <tr class="weather-widget__item">
+	                  <td>Geo coords</td>
+	                  <td>
+	                    <a href="/weathermap?zoom=8&amp;lat=16.07&amp;lon=108.22" class="weather-widget__link">[<span id="wrong-data-lat">16.07</span>,&nbsp;<span id="wrong-data-lon">108.22</span>]</a>
+	                  </td></tr></tbody></table>
+	      </div>
+	     
+	      <p class="text-muted widget__text-description">The weather forecast is displayed in accordance with your local time. Please pay attention to it when you will watch the weather in another time zone.</p>
+	      </div>  
+	    </div>
+	   
+	  
+	</div>
+	<hr>
+	</div>
+  
+	<br>
+	<br>
+	<br>
+	
+	<!-- Footer -->
+  <footer class="page-footer font-small blue">
+
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      © 2019 Copyright: <a href="" style="color: red;"> FB/Ngoc.Hung.USD</a>
+    </div>
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      Mentor : Anh Hạnh
+    </div>
+
+  </footer>
+  <!-- Footer -->
+  <script type="text/javascript" th:src="@{/js/jshome.js}"></script>
+</body>
+</html>

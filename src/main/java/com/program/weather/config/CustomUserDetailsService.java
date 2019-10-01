@@ -25,20 +25,27 @@ public class CustomUserDetailsService implements UserDetailsService {
 	
 	@Override
 	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+		
 		UserEntity user = userRepository.findByUserName(userName);
+		
 		if(user == null) {
+			
 			throw new UsernameNotFoundException("Nguoi dung khong ton tai voi ten : " + userName);
 		}
+		
 			Set<GrantedAuthority> grantedAuthorities = new HashSet<>();
-	        Set<RoleEntity> roles = user.getRoles();
+	        Set<RoleEntity> roles					 = user.getRoles();
+	        
 	        for (RoleEntity role : roles) {
-	            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRole()));
+	        	
+	            grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_" + role.getRole()));
 	        }
+	        
 	        UserDetails userDetails = (UserDetails) new User (user.getUserName(),user.getEncrytedPassword(),user.isEnabled(),
 	        		true,true,true,grantedAuthorities);
+	        
 	        return userDetails;
-		/*return new org.springframework.security.core.userdetails.User(
-				user.getUserName(),user.getEncrytedPassword(),grantedAuthorities);*/
+		
 	}
 
 }

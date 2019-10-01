@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin</title>
+<link 	th:href="@{/css/bootstrap.min.css}" 	 rel="stylesheet">
+<link 	th:href="@{/css/stylepage.css}" 	  		 rel="stylesheet">
+<script th:src ="@{/js/jquery.min.js}" 	  		 type="text/javascript"></script>
+<script th:src ="@{/js/sweetalert2.all.min.js}"  type="text/javascript"></script>
+<script th:src ="@{/js/bootstrap.min.js}" 		 type="text/javascript" ></script>
+</head>
+<body>
+	
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	  
+	    <div class="navbar-header">
+	      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>
+	        <span class="icon-bar"></span>                        
+	      </button>
+	      <a class="navbar-brand" th:href="@{/home-weather}">WEATHER FORECAST</a>
+	    </div>
+	    
+	    <div class="collapse navbar-collapse" id="myNavbar">
+	    
+	      <ul class="nav navbar-nav">
+					<li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/home-admin}">MANAGEMENT</a></li>
+		 </ul>
+	      
+	      <ul class="nav navbar-nav navbar-right">
+	        <li><a href="#"><span th:utext="${'Hi : '+#request.userPrincipal.name}"></span></a></li>
+	        <li><a th:href="@{/logout}"> Logout</a></li>
+	      </ul>
+	      
+	    </div>
+	  </div>
+	</nav>
+  <br>
+  <br>
+  
+  <div class="container">
+	<div class="row ">
+	  <div class="col-sm-12">
+   
+	    <table class="table">
+                  
+                    <thead >
+                      
+                        <tr>
+                        <th> USER  </th>
+                        <th> EMAIL </th> 
+                        <th> ACTIVE </th>
+                        <th> ROLE </th>
+                        <th></th>
+                      	</tr>
+                    
+                    </thead>
+                    
+                    <tbody>
+                    	<th:block th:each="user : ${lstUser}">
+                    	
+	                        <tr th:object="${user}" th:data-id="${user.userId}">
+	                        
+	                        <td><p th:text="*{lastName}+' '+*{firstName}">Last Name + First Name</p></td>
+	                        <td><p th:text="*{email}">                                     Email</p></td> 
+	                        <td><input class="activeUser" type="checkbox" th:checked="*{enabled}" /></td>
+	                        <td>
+		                        <select class="form-control">
+								  <option th:each="role : ${lstRole}" th:value="${role.roleId}" th:text="${role.role}"
+										  th:selected="${#lists.contains(user.roles, role.roleId)}">
+								  </option>
+								</select>
+							</td>
+	                        <td><button type="button" class="xoa-user btn btn-danger">Delete</button> </td>
+	                        	
+	                      	</tr>
+	                      	
+                       </th:block>
+                    </tbody>
+                    
+                    
+                  </table>
+  			</div>
+		</div>
+	 <hr>
+ </div>
+	<br>
+	<br>
+	<br>
+	<!-- Footer -->
+  <footer class="page-footer font-small blue">
+
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      © 2019 Copyright: <a href="" style="color: red;"> FB/Ngoc.Hung.USD</a>
+    </div>
+    <div class="footer-copyright text-center py-3" style="color: red;">
+      Mentor : Anh Hạnh
+    </div>
+
+  </footer>
+  <!-- Footer -->
+  <script type="text/javascript" th:src="@{/js/jsadmin.js}"></script>
+</body>
+</html>

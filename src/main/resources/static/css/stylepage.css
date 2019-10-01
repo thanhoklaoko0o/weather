@@ -1,0 +1,226 @@
+	body {
+	
+		background: #f4f4f4;
+		background-image: url(https://www.accuweather.com/images/hero/6/1440x450.jpg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		
+	}
+	
+	/* Add a gray background color and some padding to the footer */
+	footer {
+	
+		background-color: #000000b8;
+		padding: 25px;
+	}
+	
+	.carousel-inner img {
+	
+		width: 100%; /* Set width to 100% */
+		min-height: 200px;
+	}
+	
+	/* Hide the carousel text when the screen is less than 600 pixels wide */
+	@media ( max-width : 600px) {
+	
+		.carousel-caption {
+			display: none;
+		}
+	}
+	
+<<<<<<< HEAD
+	.w-50{
+		width: 86% !important; 
+	}
+=======
+>>>>>>> c8ba72f0d214a3da1b2e79a2515f4003c0f4e15e
+	.col-sm-8 {
+		overflow: hidden;
+		height: 400px;
+	}
+
+	.col-sm-8:hover {
+	
+		overflow: auto !important;
+	}
+	
+	
+	.col-sm-12 {
+	
+		overflow: hidden;
+		/* height: 400px; */
+	}
+	
+	.navbar-inverse {
+	
+		background-color: #222222bf;
+		border-color: #0a0a0a59;
+	}
+	
+	/* Css weather current location */
+	
+	.weather-widget {
+	
+		min-width: 250px;
+		font: 400 14px/1.4 Roboto, Arial, sans-serif;
+		margin-bottom: 30px;
+	}
+	
+	.weather-widget__city-name {
+	
+		font: 600 24px/1.4 Oswald, Arial, sans-serif;
+		margin-top: 0;
+	}
+	
+	.weather-widget__temperature {
+	
+		font: 600 30px/1.4 Oswald, Arial, sans-serif;
+	}
+	
+	.weather-widget__items {
+	
+		font: 400 14px/1.4 Roboto, Arial, sans-serif;
+		border: 1px solid #ddd;
+		width: 100%;
+	}
+	
+	table {
+	
+		max-width: 100%;
+		background-color: transparent;
+	}
+	
+	tbody {
+	
+		display: table-row-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	
+	tr {
+	
+		display: table-row;
+		vertical-align: inherit;
+		border-color: inherit;
+	}
+	
+	.weather-widget__item td {
+	
+		text-align: left;
+		padding: 5px;
+		border: 1px solid #ddd;
+	}
+	
+	.weather-widget__item td {
+	
+		text-align: left;
+		padding: 5px;
+		border: 1px solid #ddd;
+	}
+	
+	.tempmax {
+	background-color: #d6581ccc;
+	}
+
+	.tempmin {
+		background-color: #000000a6;
+	}
+	
+	.showmorestyle {
+	color: black;
+	font-weight: 700;
+	width: 90px;
+	margin: auto;
+	}
+
+	.trshowmore {
+		background-color: #d9edf76e;
+	}
+	
+	.trshowmore1 {
+		background-color: #d9edf76e;
+	}
+	
+	.showmorestyle {
+		cursor: pointer;
+	}
+	
+	#hideshowless {
+		display: none;
+	}
+	
+	#showless {
+		display: none;
+	}
+	
+	/* forecast weather */
+	.panel {
+	background-color: #ffffff4d;
+	}
+
+	.table-striped>tbody>tr:nth-of-type(odd) {
+		background-color: #f9f9f961;
+	}
+	
+	.panel-default>.panel-heading {
+		color: #333;
+		background-color: #f5f5f56b;
+		border-color: #ddd;
+	}
+	
+	#tr-today0{
+		background-color: #867e7e99;
+	}
+	
+	
+	/* Css login */
+	
+	.login-form form .textpass {
+	margin: 0px 65px 10px;
+	}
+
+	
+	.login-form form .C_signup {
+		color: white;
+		font-size: 21px;
+		text-align: center;
+		padding-top: 12px;
+		background-color: #337ab7;
+		height: 55px;
+		width: 302px;
+	}
+	
+	/* form reset */
+	.login-form-reset {
+		width: 340px;
+		margin: 50px auto;
+		position: relative;
+	}
+	
+	.login-form-reset form {
+		margin-bottom: 15px;
+		background: #f7f7f7;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		padding: 30px;
+	}
+	
+	.title-reset {
+		background-color: #337ab7;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 340px;
+	}
+	
+	.title-reset p {
+		color: white;
+	}
+	
+	
+	
+	
+	
