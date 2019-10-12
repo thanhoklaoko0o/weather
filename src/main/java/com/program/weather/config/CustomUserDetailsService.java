@@ -45,7 +45,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 	        		true,true,true,grantedAuthorities);
 	        
 	        return userDetails;
-		
 	}
-
 }

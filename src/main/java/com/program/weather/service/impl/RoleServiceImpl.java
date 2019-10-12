@@ -9,18 +9,24 @@ import com.program.weather.entity.RoleEntity;
 import com.program.weather.repository.RoleRepository;
 import com.program.weather.service.RoleService;
 
+/**
+ * Business Logic Layer Role Service
+ * 
+ * @author USER
+ *
+ */
 @Service
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
 
 	@Autowired
 	RoleRepository roleRepository;
-	
+
 	/**
 	 * Get all role in DB
 	 */
 	@Override
-	public List<RoleEntity> findAll() {
-		
+	public List<RoleEntity> findAllRole() {
+
 		return roleRepository.findAll();
 	}
 

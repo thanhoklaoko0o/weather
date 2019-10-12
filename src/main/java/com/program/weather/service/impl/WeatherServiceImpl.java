@@ -10,68 +10,114 @@ import com.program.weather.entity.WeatherEntity;
 import com.program.weather.converter.WeatherConverter;
 import com.program.weather.dto.CurrentWeatherDTO;
 import com.program.weather.dto.DetailsWeatherDTO;
+import com.program.weather.entity.CurrentWeatherEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.WeatherRepository;
 import com.program.weather.service.WeatherService;
 import com.program.weather.utils.Constants;
 
+/**
+ * Business Logic Layer Weather Service
+ * 
+ * @author USER
+ *
+ */
 @Service
 public class WeatherServiceImpl implements WeatherService {
 
 	@Autowired
 	WeatherRepository weatherRepository;
-	
+
 	@Autowired
 	WeatherConverter weatherConverter;
 
+	/**
+	 * Add New Weather In DB
+	 */
 	@Override
 	public void saveWeather(WeatherEntity weatherEntity) {
+
 		weatherRepository.save(weatherEntity);
 	}
 
+	/**
+	 * Delete Weather By IdWeather
+	 */
 	@Override
-	public void deleteWeather(Long id) {
-		
-		  WeatherEntity weatherEntity = weatherRepository.findByWeatherId(id);
-		  weatherEntity.getUserEntities().removeAll(weatherEntity.getUserEntities());
-		  weatherRepository.delete(weatherEntity);
-		 
+	public void deleteWeatherById(Long id) {
+
+		weatherRepository.deleteById(id);
 	}
 
-	
-	  @Override public List<WeatherEntity> findAllByUserEntities(UserEntity
-	  userEntity) { return weatherRepository.findAllByUserEntities(userEntity); }
-	 
-	  public WeatherEntity restJsonData(String name) {
-			String URL = Constants.WEATHER_URL+name+Constants.APPID;
-			RestTemplate restTemplate = new RestTemplate();
-			CurrentWeatherDTO weatherDTO = restTemplate.getForObject(URL, CurrentWeatherDTO.class);
-			return  weatherConverter.convertToEntity(weatherDTO);
-		}
+	/**
+	 * Get All List Weather By USER
+	 */
+	@Override
+	public List<WeatherEntity> findAllByUserEntity(UserEntity userEntity) {
+
+		return weatherRepository.findAllByUserEntity(userEntity);
+	}
+
+	/**
+	 * Call API Weather By Name City
+	 * 
+	 * @param name
+	 * @return WeatherEntity
+	 */
+	public WeatherEntity getWeatherByApi(String nameCity) {
 		
-		public DetailsWeatherDTO foreCast(String name) {
-			String URL = Constants.FORECAST_URL+name+Constants.APPID;
-			RestTemplate restTemplate = new RestTemplate();
-			return restTemplate.getForObject(URL, DetailsWeatherDTO.class);
-		}
+		String URL = Constants.WEATHER_URL + nameCity + Constants.APP_ID;
+		RestTemplate restTemplate = new RestTemplate();
+		CurrentWeatherDTO weatherDTO = restTemplate.getForObject(URL, CurrentWeatherDTO.class);
 
-		@Override
-		public void deleteWeather(WeatherEntity weatherEntity) {
-			 weatherEntity.getUserEntities().removeAll(weatherEntity.getUserEntities());
-			  weatherRepository.delete(weatherEntity);
-			
-		}
+		return weatherConverter.convertToEntity(weatherDTO);
+	}
 
-		@Override
-		public List<WeatherEntity> findDateTimeByUserGroupbyDateTimeDest(long id) {
-			
-			return weatherRepository.findDateTimeByUserGroupbyDateTimeDest(id);
-		}
+	/**
+	 * Get Info Weather At Current Location By Latitude And Longitude
+	 * 
+	 * @param lat
+	 * @param lon
+	 * @return CurrentWeatherEntity
+	 */
+	public CurrentWeatherEntity restCurWeather(String lat, String lon) {
 
-		@Override
-		public List<WeatherEntity> findDateTimeByUserGroupbyDateTimeAcs(long id) {
+		String URL = Constants.URL_LAT + lat + Constants.URL_LON + lon + Constants.APP_ID;
+		RestTemplate restTemplate = new RestTemplate();
+		CurrentWeatherDTO weatherDTO = restTemplate.getForObject(URL, CurrentWeatherDTO.class);
 
-			return weatherRepository.findDateTimeByUserGroupbyDateTimeAcs(id);
-		}
+		return weatherConverter.convertToCurWeather(weatherDTO);
+	}
 
+	/**
+	 * Call API Forecast Weather By Name City
+	 * 
+	 * @param name
+	 * @return DetailWeatherDTO
+	 */
+	public DetailsWeatherDTO foreCast(String nameCity) {
+
+		String URL = Constants.FORECAST_URL + nameCity + Constants.APP_ID;
+		RestTemplate restTemplate = new RestTemplate();
+
+		return restTemplate.getForObject(URL, DetailsWeatherDTO.class);
+	}
+	
+	/**
+	 *  //Get weather by User by group by name city by date DESC
+	 */
+	@Override
+	public List<WeatherEntity> findAllByUserByDateDesc(UserEntity userEntity) {
+
+		return weatherRepository.findAllByUserByDateDesc(userEntity);
+	}
+	
+	/**
+	 *  //Get weather by User by group by name city by date ASC
+	 */
+	@Override
+	public List<WeatherEntity> findAllByUserByDateAsc(UserEntity userEntity) {
+
+		return weatherRepository.findAllByUserByDateAsc(userEntity);
+	}
 }

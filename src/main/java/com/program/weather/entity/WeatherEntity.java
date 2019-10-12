@@ -1,9 +1,7 @@
 package com.program.weather.entity;
 
 import java.sql.Timestamp;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,8 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
@@ -43,7 +40,7 @@ public class WeatherEntity {
 	@Column(name = "date")
 	private Timestamp date;
 
-	@Column(name = "temp")
+	@Column(name = "temp")   
 	private String temp;
 
 	@Column(name = "description")
@@ -58,18 +55,7 @@ public class WeatherEntity {
 	@Column(name = "pressure")
 	private String pressure;
 
-	@Column(name = "create_by")
-	private String createBy;
-
-	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-	@JoinTable(name = "user_weather", joinColumns = @JoinColumn(name = "weather_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
-	private Set<UserEntity> userEntities;
-
-	/*
-	 * @Override public int hashCode() { return this.nameCity.hashCode(); }
-	 * 
-	 * @Override public boolean equals(Object obj) { WeatherEntity weatherEntity =
-	 * (WeatherEntity) obj; return this.nameCity.equals(weatherEntity.nameCity); }
-	 */
-
+	@ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "create_by")
+    private UserEntity userEntity;
 }

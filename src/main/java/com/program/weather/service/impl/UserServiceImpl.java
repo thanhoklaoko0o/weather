@@ -16,21 +16,27 @@ import com.program.weather.service.UserService;
 import com.program.weather.utils.Constants;
 import com.program.weather.utils.EncrytedPasswordUtils;
 
+/**
+ * Business Logic Layer User Service
+ * 
+ * @author USER
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
 	/**
-	 * Find one User By Username
+	 * Find one User By User Name
 	 */
 	@Override
 	public UserEntity findByUserName(String userName) {
-		
+
 		return userRepository.findByUserName(userName);
 	}
 
@@ -39,15 +45,16 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public UserEntity saveUser(UserEntity user) {
-		//set property for info USER
+
+		// set property for info USER
 		user.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(user.getEncrytedPassword()));
 		user.setEnabled(true);
 		user.setCreateDate(new Timestamp(System.currentTimeMillis()));
-		
-		//set role default is USER
+
+		// set role default is USER
 		RoleEntity userrole = roleRepository.findByRole("USER");
 		user.setRoles(new HashSet<RoleEntity>(Arrays.asList(userrole)));
-		
+
 		return userRepository.save(user);
 	}
 
@@ -55,20 +62,17 @@ public class UserServiceImpl implements UserService {
 	 * Delete user by userId
 	 */
 	@Override
-	public void delete(Long id) {
-		
-		UserEntity userEntity= userRepository.findByUserId(id);
-		userEntity.getRoles().removeAll(userEntity.getRoles());
-		
-		userRepository.delete(userEntity);
+	public void deleteUserById(Long id) {
+
+		userRepository.deleteById(id);
 	}
 
 	/**
 	 * Get all list user in DB
 	 */
 	@Override
-	public List<UserEntity> findAll() {
-		
+	public List<UserEntity> findAllUser() {
+
 		return userRepository.findAll();
 	}
 
@@ -77,44 +81,40 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void editActiveUser(Long id) {
-		
+
 		UserEntity userEntity = userRepository.findByUserId(id);
-		
-		//check status user and change status
-		if(userEntity.isEnabled()) {
-			
+
+		// check status user and change status
+		if (userEntity.isEnabled()) {
+
 			userEntity.setEnabled(Constants.UN_ACTIVE);
-		}else {
-			
+		} else {
+
 			userEntity.setEnabled(Constants.ACTIVE);
 		}
-		
 		userRepository.save(userEntity);
 	}
-	
-	
+
 	/**
 	 * Change role User , USER <-> ADMIN <-> USERADMIN
 	 */
 	@Override
-	public void editRoleUser(Long id , String roleName) {
-		
-		//get user and all Role of one
+	public void editRoleUser(Long id, String roleName) {
+
+		// get user and all Role of one
 		UserEntity userEntity = userRepository.findByUserId(id);
 		RoleEntity roleEntity = roleRepository.findByRole(roleName);
-		
+
 		userEntity.setRoles(new HashSet<RoleEntity>(Arrays.asList(roleEntity)));
 		userRepository.save(userEntity);
-		
 	}
-	
-	
+
 	/**
 	 * find User By id
 	 */
 	@Override
 	public UserEntity findByUserId(Long id) {
-		
+
 		return userRepository.findByUserId(id);
 	}
 
@@ -123,7 +123,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public Boolean checkExistsByUserName(String userName) {
-		
+
 		return userRepository.existsByUserName(userName);
 	}
 
@@ -136,8 +136,4 @@ public class UserServiceImpl implements UserService {
 		return userRepository.existsByEmail(email);
 	}
 
-
-	
-
-	
 }
