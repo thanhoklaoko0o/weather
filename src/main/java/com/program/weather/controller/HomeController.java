@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.program.weather.dto.DetailsWeatherDTO;
+import com.program.weather.entity.CurrentWeatherEntity;
 import com.program.weather.entity.DetailsWeatherEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.entity.WeatherEntity;
@@ -54,25 +55,37 @@ public class HomeController {
 	 */
 	@GetMapping
 	public String homeDefault(Model model, Principal principal) {
+		
 		// Get data weather city By UserID
-		UserEntity userEntity = userServiceImpl.findByUserName(principal.getName());
-		List<WeatherEntity> listWeatherByDateAsc = weatherServiceImpl
-				.findDateTimeByUserGroupbyDateTimeAcs(userEntity.getUserId());
+		List<WeatherEntity> listWeatherByDateAsc  = weatherServiceImpl
+				.findDateTimeByUserGroupbyDateTimeAcs(getCurUserEntity(principal).getUserId());
+		
 		List<WeatherEntity> listWeatherByDateDest = weatherServiceImpl
-				.findDateTimeByUserGroupbyDateTimeDest(userEntity.getUserId());
-
+				.findDateTimeByUserGroupbyDateTimeDest(getCurUserEntity(principal).getUserId());
+		
+		if(listWeatherByDateDest.isEmpty()) {
+			
+			model.addAttribute("msgListEmpty", "No city had been choosen !");
+			return "user/pageHome";
+		}
+		
 		model.addAttribute("listWeatherDest", listWeatherByDateDest);
-		model.addAttribute("listWeatherAsc", listWeatherByDateAsc);
+		model.addAttribute("listWeatherAsc",  listWeatherByDateAsc);
 
 		return "user/pageHome";
 	}
 
+	@GetMapping("/forecast-current")
+	@ResponseBody
+	public CurrentWeatherEntity forecastCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
+		
+		return weatherServiceImpl.restCurWeather(lat, lon);
+	}
+	
+	
 	/**
 	 * get list weather by nameCity
-<<<<<<< HEAD
 	 * 
-=======
->>>>>>> c8ba72f0d214a3da1b2e79a2515f4003c0f4e15e
 	 * @param name
 	 * @return
 	 */
@@ -80,8 +93,8 @@ public class HomeController {
 	@ResponseBody
 	public List<WeatherEntity> showMoreCity(@RequestParam String name) {
 		// Get User to get List weather by user
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		UserEntity userEntity = userServiceImpl.findByUserName(authentication.getName());
+		Authentication authentication  = SecurityContextHolder.getContext().getAuthentication();
+		UserEntity userEntity		   = userServiceImpl.findByUserName(authentication.getName());
 
 		// Filter list weather to get list weather by name city
 		List<WeatherEntity> lstWeather = weatherServiceImpl.findAllByUserEntities(userEntity);
@@ -108,7 +121,7 @@ public class HomeController {
 			UserEntity userEntity = userServiceImpl.findByUserName(principal.getName());
 
 			String message = "Hi " + userEntity.getFirstName() + " " + userEntity.getLastName() + " !"
-					+ "<br> You do not have permission to access this page.";
+								   + "<br> You do not have permission to access this page.";
 			model.addAttribute("message", message);
 		}
 
@@ -133,7 +146,7 @@ public class HomeController {
 			
 			lstForCast.add(
 				 	new DetailsWeatherEntity(i,detailsWeatherDTO.getList().get(i).getDt_txt(),
-					Constants.IMG_URL+detailsWeatherDTO.getList().get(i).getWeather().get(0).getIcon()+Constants.PNG,
+					Constants.IMG_URL+detailsWeatherDTO.getList().get(i).getWeather().get(0).getIcon()+Constants.EX_PNG,
 					CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_min())),
 					CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_max())),
 					detailsWeatherDTO.getList().get(i).getWeather().get(0).getDescription(),
@@ -168,11 +181,20 @@ public class HomeController {
 				.findDateTimeByUserGroupbyDateTimeDest(userEntity.getUserId());
 		List<WeatherEntity> listWeatherByDateAsc  = weatherServiceImpl
 				.findDateTimeByUserGroupbyDateTimeAcs(userEntity.getUserId());
-
+		
+		List<WeatherEntity> listAllByUser		  = weatherServiceImpl.findAllByUserEntities(userEntity);
 		// catch error if result search return null
 		try {
 
-			WeatherEntity weatherEntity = weatherServiceImpl.restJsonData(name);
+			WeatherEntity 		weatherEntity 	= weatherServiceImpl.getWeatherByApi(name);
+			List<WeatherEntity> listByNameCity	= listAllByUser.stream().filter(weather -> 
+										  			weather.getNameCity().equalsIgnoreCase(name))
+										  			.collect(Collectors.toList());
+			if(listByNameCity.isEmpty()) {
+				
+				modelMap.addAttribute("checkButton", " ");
+			}
+			
 			modelMap.addAttribute("weatherSearch", weatherEntity);
 
 		} catch (Exception e) {
@@ -194,7 +216,7 @@ public class HomeController {
 	@GetMapping("/deleteWeather")
 	public String deleteWeatherUser(@RequestParam Long id) {
 
-		weatherServiceImpl.deleteWeather(id);
+		weatherServiceImpl.deleteWeatherById(id);
 		return "redirect:?Delete_Successful_WeatherId=" + id;
 	}
 
@@ -223,12 +245,13 @@ public class HomeController {
 
 		// then sort list weather By Date ASC , Get weather first and delete it
 		Optional<WeatherEntity> entityWeather = lstByUserByCity.stream().findFirst();
-		weatherServiceImpl.deleteWeather(entityWeather.get());
+		weatherServiceImpl.deleteWeatherById(entityWeather.get().getWeatherId());
 		insertWeather(name, getCurUserEntity(principal));
 
 		return "redirect:?Add_Successfull_Name=" + name;
 	}
 
+	
 	@GetMapping("/update-weather")
 	public String updateWeather(@RequestParam String name, Principal principal) {
 
@@ -238,8 +261,8 @@ public class HomeController {
 		// then sort list weather By Date DESC , Get weather first and delete it to
 		// update
 		lstByUserByCity.sort((WeatherEntity w1, WeatherEntity w2) -> w2.getDate().compareTo(w1.getDate()));
-		Optional<WeatherEntity> entitya = lstByUserByCity.stream().findFirst();
-		weatherServiceImpl.deleteWeather(entitya.get());
+		Optional<WeatherEntity> entityWeather = lstByUserByCity.stream().findFirst();
+		weatherServiceImpl.deleteWeatherById(entityWeather.get().getWeatherId());
 		insertWeather(name, getCurUserEntity(principal));
 
 		return "redirect:?Update_Successfull_Name=" + name;
@@ -279,7 +302,7 @@ public class HomeController {
 	 */
 	public void insertWeather(String name, UserEntity userEntity) {
 
-		WeatherEntity result = weatherServiceImpl.restJsonData(name);
+		WeatherEntity result = weatherServiceImpl.getWeatherByApi(name);
 		// Set property weather and insert
 		result.setUserEntities(new HashSet<UserEntity>(Arrays.asList(userEntity)));
 		result.setCreateBy(userEntity.getLastName() + " " + userEntity.getFirstName());

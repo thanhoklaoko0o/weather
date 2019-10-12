@@ -10,21 +10,29 @@ import org.springframework.stereotype.Service;
 
 import com.program.weather.entity.RoleEntity;
 import com.program.weather.entity.UserEntity;
+import com.program.weather.entity.WeatherEntity;
 import com.program.weather.repository.RoleRepository;
 import com.program.weather.repository.UserRepository;
 import com.program.weather.service.UserService;
 import com.program.weather.utils.Constants;
 import com.program.weather.utils.EncrytedPasswordUtils;
-
+/**
+ * Business Logic Layer User Service
+ * @author USER
+ *
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	UserRepository userRepository;
+	private UserRepository userRepository;
 
 	@Autowired
-	RoleRepository roleRepository;
+	private RoleRepository roleRepository;
 
+	@Autowired
+	private WeatherServiceImpl weatherServiceImpl;
+	
 	/**
 	 * Find one User By Username
 	 */
@@ -58,9 +66,11 @@ public class UserServiceImpl implements UserService {
 	public void delete(Long id) {
 		
 		UserEntity userEntity= userRepository.findByUserId(id);
+		List<WeatherEntity> listWeather = weatherServiceImpl.findAllByUserEntities(userEntity);
 		userEntity.getRoles().removeAll(userEntity.getRoles());
-		
 		userRepository.delete(userEntity);
+		weatherServiceImpl.deleteAllWeatherByUser(listWeather);
+		
 	}
 
 	/**

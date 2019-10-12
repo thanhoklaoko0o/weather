@@ -32,13 +32,12 @@
 		}
 	}
 	
-<<<<<<< HEAD
+
 	.w-50{
 		width: 86% !important; 
-	}
-=======
->>>>>>> c8ba72f0d214a3da1b2e79a2515f4003c0f4e15e
-	.col-sm-8 {
+		}
+		
+/* 	.col-sm-8 {
 		overflow: hidden;
 		height: 400px;
 	}
@@ -46,14 +45,23 @@
 	.col-sm-8:hover {
 	
 		overflow: auto !important;
+	} */
+	
+	.tbl{
+		background-color: #d2bbbb7d;
+		overflow: auto;
+		height: 400px;
 	}
 	
+	/* .tbl:hover{
+		overflow: auto;
+	} */
 	
-	.col-sm-12 {
+	/* .col-sm-12 {
 	
 		overflow: hidden;
-		/* height: 400px; */
-	}
+		height: 400px;
+	} */
 	
 	.navbar-inverse {
 	

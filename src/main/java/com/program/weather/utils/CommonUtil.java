@@ -2,19 +2,17 @@ package com.program.weather.utils;
 
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
-import java.text.Normalizer;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.regex.Pattern;
 
 
 public class CommonUtil {
 	
 	/**
-	 * Convert temp F --> C
+	 * Convert temperature F --> C
 	 * @param Fah
 	 * @return
 	 */
@@ -23,19 +21,22 @@ public class CommonUtil {
 	    return  formatter.format((Fah - 32) * 5/9);
 	    }
 	
+
+	
 	/**
-	 * Format Key Search
-	 * @param s
+	 * 
+	 * @param UTC
 	 * @return
 	 */
-	public static String removeAccent(String s) {
-		String temp = Normalizer.normalize(s, Normalizer.Form.NFD);
-		Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
-		return pattern.matcher(temp).replaceAll("").replace('đ', 'd').replace('Đ','D').replaceAll("\\s+","");
+	public static String fomatHHmmss( int UTC) {
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+		Timestamp HHmmss = new Timestamp(UTC*1000);
+		return sdf.format(HHmmss);
 	}
 	
 	/**
-	 * Display Name Month Day, Yeart
+	 * Display Name Month Day, Year
 	 * @return
 	 */
 	public static String fomatDate(){

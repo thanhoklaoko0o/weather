@@ -3,7 +3,11 @@ package com.program.weather.service;
 import java.util.List;
 
 import com.program.weather.entity.UserEntity;
-
+/**
+ * Define method for Business Logic Layer User Service
+ * @author USER
+ *
+ */
 public interface UserService {
 	
 	UserEntity       findByUserName 		(String userName);

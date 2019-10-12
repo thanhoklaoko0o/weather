@@ -1,8 +1,6 @@
 package com.program.weather.controller;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.program.weather.converter.UserConverter;
 import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.RoleEntity;
-import com.program.weather.entity.UserEntity;
 import com.program.weather.service.impl.RoleServiceImpl;
 import com.program.weather.service.impl.UserServiceImpl;
 
@@ -30,6 +28,9 @@ public class AdminController {
 	@Autowired
 	private RoleServiceImpl roleServiceImpl;
 	
+	@Autowired
+	private UserConverter userConverter;
+	
 	/**
 	 * Load pageAdmin show all USER when admin access to APP
 	 * @param model
@@ -39,7 +40,10 @@ public class AdminController {
 	@GetMapping
 	public String homeAdmin(Model model) {
 		
-		List<UserDTO>	 lstUser = userServiceImpl.findAll().stream().map(AdminController::castUserToDTO).collect(Collectors.toList());
+		List<UserDTO>	 lstUser = userServiceImpl.findAll().stream()
+								   .map(x-> userConverter.convertUserToDTO(x))
+								   .collect(Collectors.toList());
+		
 		List<RoleEntity> lstRole = roleServiceImpl.findAll();
 
 		model.addAttribute("lstUser", lstUser);
@@ -48,21 +52,6 @@ public class AdminController {
 		return "admin/pageAdmin";
 	}
 	
-	private static UserDTO castUserToDTO(UserEntity userEntity) {
-		UserDTO user =  new UserDTO(userEntity.getUserId(), userEntity.getUserName(), userEntity.getEmail()
-								  , userEntity.getFirstName(), userEntity.getLastName(), userEntity.isEnabled());
-		
-		Set<Long> roles = new HashSet<Long>();
-		
-		userEntity.getRoles().stream().forEach(i->{
-			roles.add(i.getRoleId());
-		});
-		
-		user.setRoles(roles);
-		
-		return user;
-	}
-
 	/**
 	 * Delete user 
 	 * @param id
@@ -70,6 +59,7 @@ public class AdminController {
 	@GetMapping("/delete")
 	@ResponseBody
 	public void deleteUser(@RequestParam Long id) {
+		
 		userServiceImpl.delete(id);
 	}
 

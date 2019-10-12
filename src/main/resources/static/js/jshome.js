@@ -1,3 +1,6 @@
+
+
+
 //search weather
 $(".search-weather").click(function() {
 	var nameSearch = $document.getElementById("nameSearch").value;

@@ -65,11 +65,5 @@ public class WeatherEntity {
 	@JoinTable(name = "user_weather", joinColumns = @JoinColumn(name = "weather_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private Set<UserEntity> userEntities;
 
-	/*
-	 * @Override public int hashCode() { return this.nameCity.hashCode(); }
-	 * 
-	 * @Override public boolean equals(Object obj) { WeatherEntity weatherEntity =
-	 * (WeatherEntity) obj; return this.nameCity.equals(weatherEntity.nameCity); }
-	 */
 
 }
