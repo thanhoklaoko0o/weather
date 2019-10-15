@@ -6,7 +6,7 @@ import com.program.weather.entity.WeatherEntity;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer Weather Service
- * @author USER
+ * @author Ngoc Hung
  *
  */
 public interface WeatherService {

@@ -1,7 +1,11 @@
 package com.program.weather.utils;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-
+/**
+ * 
+ * @author Ngoc Hung
+ *
+ */
 public class EncrytedPasswordUtils {
 
 	/**

@@ -17,7 +17,7 @@ import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * Convert info USER , DTO <-> ENTITY
- * @author USER
+ * @author Ngoc Hung
  *
  */
 @Component
@@ -42,5 +42,18 @@ public class UserConverter {
 		user.setRoles(roles);
 
 		return user;
+	}
+	
+	/**
+	 * Convert DTO -> Entity
+	 * @param userDTO
+	 * @return
+	 */
+	public UserEntity convertUserEntity(UserDTO userDTO) {
+		
+		UserEntity userEntity = new UserEntity(userDTO.getUserName(), userDTO.getEmail(), 
+											   userDTO.getEncrytedPassword(), userDTO.getFirstName(),
+											   userDTO.getLastName());
+		return userEntity;
 	}
 }

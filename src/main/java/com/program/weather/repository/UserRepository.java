@@ -6,7 +6,7 @@ import com.program.weather.entity.UserEntity;
 
 /**
  *  Data Access Layer USER with DB
- * @author USER
+ * @author Ngoc Hung
  *
  */
 @Repository

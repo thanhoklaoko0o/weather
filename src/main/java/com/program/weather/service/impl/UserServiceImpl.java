@@ -19,7 +19,7 @@ import com.program.weather.utils.EncrytedPasswordUtils;
 /**
  * Business Logic Layer User Service
  * 
- * @author USER
+ * @author Ngoc Hung
  *
  */
 @Service
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 	 */
 	@Override
 	public void editActiveUser(Long id) {
-
+		
 		UserEntity userEntity = userRepository.findByUserId(id);
 
 		// check status user and change status

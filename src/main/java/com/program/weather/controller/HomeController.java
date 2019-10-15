@@ -24,12 +24,11 @@ import com.program.weather.entity.WeatherEntity;
 import com.program.weather.service.impl.UserServiceImpl;
 import com.program.weather.service.impl.WeatherServiceImpl;
 import com.program.weather.utils.CommonUtil;
-import com.program.weather.utils.Constants;
 
 /**
  * 
  * 
- * @author USER
+ * @author Ngoc Hung
  *
  */
 @Controller
@@ -140,17 +139,14 @@ public class HomeController {
 		for (int i = 0; i < 40; i += 8) {
 
 			lstForCast.add(new DetailsWeatherEntity(i, detailsWeatherDTO.getList().get(i).getDt_txt(),
-					Constants.IMG_URL + detailsWeatherDTO.getList().get(i).getWeather().get(0).getIcon()
-							+ Constants.EX_PNG,
-					CommonUtil
-							.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_min())),
-					CommonUtil
-							.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_max())),
-					detailsWeatherDTO.getList().get(i).getWeather().get(0).getDescription(),
-					detailsWeatherDTO.getList().get(i).getWind().getSpeed(),
-					detailsWeatherDTO.getList().get(i).getMain().getHumidity(),
-					detailsWeatherDTO.getList().get(i).getMain().getPressure(),
-					detailsWeatherDTO.getList().get(i).getClouds().getAll()));
+							   detailsWeatherDTO.getList().get(i).getWeather().get(0).getIcon(),
+								CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_min())),
+								CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_max())),
+								detailsWeatherDTO.getList().get(i).getWeather().get(0).getDescription(),
+								detailsWeatherDTO.getList().get(i).getWind().getSpeed(),
+								detailsWeatherDTO.getList().get(i).getMain().getHumidity(),
+								detailsWeatherDTO.getList().get(i).getMain().getPressure(),
+								detailsWeatherDTO.getList().get(i).getClouds().getAll()));
 		}
 
 		model.addAttribute("lstForeCast", lstForCast);

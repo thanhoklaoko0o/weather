@@ -12,19 +12,22 @@
 <script th:src ="@{/js/bootstrap.min.js}" 		 type="text/javascript" ></script>
 </head>
 <body style="height: 100vh;">
+
+	<br>
+	<br>
 	<br>
 	<br>
  <div class="container">
 	<div class="row ">
 	  <div class="col-sm-3 " >
 	  </div>
-	  <div class="col-sm-6 " >
+	  <div class="col-sm-6 iframe-login" >
 	  		
 	  		<!-- Form Login -->
 			<div class="login-form">
 				<form name='f' th:action="@{/form-login}" method="post">
 				
-					<h3 class="text-center">Login</h3>
+					<h3 class="text-center"><b>Login</b></h3>
 					
 					<div class="form-group">
 						<span  th:if="${(param.message != null)}" style="color: green;">You registered account successfully</span>
@@ -90,23 +93,10 @@
 	  <div class="col-sm-3">
 	  </div>
 	</div>
-	<hr>
+	 <hr>
 	</div>
-  
-	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	
-	
-	
-	<!-- Footer -->
+ 
+	<!-- <!-- Footer -->
   <footer class="page-footer font-small blue">
 
     <div class="footer-copyright text-center py-3" style="color: red;">

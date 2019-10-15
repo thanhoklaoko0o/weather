@@ -1,15 +1,20 @@
 package com.program.weather.config;
 import java.util.Properties;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
-
-import com.program.weather.utils.Constants;
  
 @Configuration
 public class MailConfig {
+	
+	@Value("${my.email}")
+	private String email;
+	
+	@Value("${my.password}")
+	private String password;
 	
 	@Bean
     public JavaMailSender getJavaMailSender() {
@@ -17,8 +22,8 @@ public class MailConfig {
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
  
-        mailSender.setUsername(Constants.MY_EMAIL);
-        mailSender.setPassword(Constants.MY_PASSWORD);
+        mailSender.setUsername(email);
+        mailSender.setPassword(password);
  
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");

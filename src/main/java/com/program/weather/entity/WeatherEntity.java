@@ -15,7 +15,11 @@ import javax.persistence.Table;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+/**
+ * 
+ * @author Ngoc Hung
+ *
+ */
 @Entity
 @Getter
 @Setter

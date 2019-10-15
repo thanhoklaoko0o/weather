@@ -5,7 +5,7 @@ import java.util.List;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer User Service
- * @author USER
+ * @author Ngoc Hung
  *
  */
 public interface UserService {

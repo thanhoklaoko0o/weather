@@ -20,17 +20,17 @@
 	<br>
  <div class="container">
 	<div class="row ">
-	  <div class="col-sm-3 " >
+	  <div class="col-sm-3 ">
 	  </div>
-	  <div class="col-sm-6 " >
+	  <div class="col-sm-6 iframe-login">
 	  		
 	  		<div class="login-form">
-				<form  th:action="@{/registerAccount}" method="post" th:object="${userEntity}">
+				<form  th:action="@{/registerAccount}" method="post" th:object="${userDTO}">
 				
 					<h2 class="text-center">Register Account</h2>
 					
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Username" required="required" onchange="checkUserName(this.value)" th:field="*{userName}" >
+						<input type="text" class="form-control" placeholder="Username" onchange="checkUserName(this.value)" th:field="*{userName}" >
 						<span id="kqCheckName" style="color:red"></span>
 						<span th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="color:red" ></span>
 					</div>
@@ -40,7 +40,7 @@
 					</div>
 					
 					<div class="form-group">
-						<input type="email" class="form-control disinput" placeholder="Email Address" required="required" onchange="checkEmail(this.value)" th:field="*{email}">
+						<input type="email" class="form-control disinput" placeholder="Email Address" onchange="checkEmail(this.value)" th:field="*{email}">
 						<span id="kqCheckMail" style="color:red"></span>
 						<span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red" ></span>
 					</div>
@@ -50,47 +50,35 @@
 					</div>
 					
 					<div class="form-group">
-						<input type="password" class="form-control disinput dinput" maxlength="32" minlength="8" placeholder="Password"required="required" th:field="*{encrytedPassword}">
+						<input type="password" class="form-control disinput dinput" placeholder="Password" th:field="*{encrytedPassword}">
 						<span th:if="${#fields.hasErrors('encrytedPassword')}" th:errors="*{encrytedPassword}" style="color:red" ></span>
 					</div>
 					
 					<div class="form-group">
-						<input type="text" class="form-control disinput dinput" placeholder="First Name" required="required" th:field="*{firstName}">
+						<input type="text" class="form-control disinput dinput" placeholder="First Name" th:field="*{firstName}">
 						<span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}" style="color:red" ></span>
 					</div>
 					
 					<div class="form-group">
-						<input type="text" class="form-control disinput dinput" placeholder="Last Name" required="required" th:field="*{lastName}">
+						<input type="text" class="form-control disinput dinput" placeholder="Last Name" th:field="*{lastName}">
 						<span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}" style="color:red" ></span>
 					</div>
 					
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block disinput dinput"  th:text="Register"></button> <!-- onchange="checkUserName()"  -->
+						<button type="submit" class="btn btn-primary btn-block disinput dinput"  th:text="Register"></button> 
 					</div>
 				
 				</form>
-			</div>
-	  		
-	  </div>
+				<a th:href="@{/login}"><b style="color: red;">Back Page Login</b></a>
+				
+		</div>
+	   </div>
 	  <div class="col-sm-3">
 	  </div>
 	</div>
 	<hr>
 	</div>
   
-	
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	
-	
-	
 	<!-- Footer -->
   <footer class="page-footer font-small blue">
 

@@ -14,14 +14,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Pattern;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
+/**
+ * 
+ * @author Ngoc Hung
+ *
+ */
 @Entity
 @Getter
 @Setter
@@ -34,23 +35,18 @@ public class UserEntity {
     @Column(name = "user_id")
     private Long userId;
 	
-	@Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$", message= "Only have character a-z, A-Z, 0-9 and Length 8 - 32 char")
 	@Column(name = "user_name")
     private String userName;
  
-	@Email(regexp="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}")
     @Column(name = "email")
     private String email;
  
-	@NotEmpty
     @Column(name = "encryted_password")
     private String encrytedPassword;
     
-	@NotEmpty
     @Column(name = "firstname")
     private String firstName;
     
-	@NotEmpty
     @Column(name = "lastname")
     private String lastName;
  
@@ -59,6 +55,14 @@ public class UserEntity {
     
     @Column(name = "create_date")
     private Timestamp createDate;
+    
+    public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName) {
+    	this.userName 			= userName;
+    	this.email	  			= email;
+    	this.encrytedPassword	= encrytedPassword;
+    	this.firstName			= firstName;
+    	this.lastName			= lastName;
+    }
     
 	@ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))

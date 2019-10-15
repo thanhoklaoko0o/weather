@@ -64,11 +64,11 @@
                          </td>
 					                                
                          <td>
-                           <img th:src="*{image}" width="65" height="65">
+                           <img th:src="'http://openweathermap.org/img/wn/'+*{image}+'.png'" width="65" height="65">
                          </td>
 					                                
                          <td>
-                         	<span class="badge badge-info tempmax" th:text="*{tempMax}+'°С'" ></span>
+                         	 <span class="badge badge-info tempmax" th:text="*{tempMax}+'°С'"></span>
                         	 <span class="badge badge-info tempmin" th:text="*{tempMin}+'°С'"></span>
                         	 <b><i th:text="*{description}"></i></b>
                         	 <p style="margin-top: 10px" th:text="*{wind}+' m/s '"></p>

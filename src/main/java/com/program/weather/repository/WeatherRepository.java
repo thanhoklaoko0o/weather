@@ -8,12 +8,11 @@ import org.springframework.stereotype.Repository;
 
 import com.program.weather.entity.UserEntity;
 import com.program.weather.entity.WeatherEntity;
-import com.program.weather.utils.Constants;
 
 /**
  * Data Access Layer Weather with DB
  * 
- * @author USER
+ * @author Ngoc Hung
  *
  */
 @Repository
@@ -27,11 +26,15 @@ public interface WeatherRepository extends JpaRepository<WeatherEntity, Long> {
 	  List<WeatherEntity> 	findAllByUserEntity(UserEntity userEntity);
 	  
 	  //Get weather by User by group by name city by date DESC
-	  @Query(value=Constants.QUERY_WEARTHER_DESC, nativeQuery=true)
+	  @Query(value="SELECT * FROM weatherinfo WHERE create_by = ?1 and date in (SELECT max(date)"
+	  			 + "FROM weatherinfo WHERE create_by = ?1 GROUP BY name_city ORDER BY date desc)"
+	  			 + "GROUP BY name_city ORDER BY date desc", nativeQuery=true)
 	  List<WeatherEntity>   findAllByUserByDateDesc (UserEntity userEntity);
 	  
 	  //Get weather by User by group by name city by date ASC
-	  @Query(value=Constants.QUERY_WEARTHER_ASC, nativeQuery=true)
+	  @Query(value="SELECT * FROM weatherinfo WHERE create_by = ?1 and date in (SELECT min(date)" 
+	  			  +"FROM weatherinfo WHERE create_by = ?1 GROUP BY name_city ORDER BY date desc)"
+	  			  +"GROUP BY name_city ORDER BY date desc", nativeQuery=true)
 	  List<WeatherEntity>   findAllByUserByDateAsc (UserEntity userEntity);
 
 }
