@@ -10,7 +10,7 @@ import com.program.weather.entity.CurrentWeatherEntity;
 import com.program.weather.entity.WeatherEntity;
 import com.program.weather.utils.CommonUtil;
 /**
- * Converter Weather , DTO <-> ENTITY
+ * 
  * @author Ngoc Hung
  *
  */

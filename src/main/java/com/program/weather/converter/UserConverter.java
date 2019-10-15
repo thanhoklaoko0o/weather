@@ -16,7 +16,7 @@ import org.springframework.stereotype.Component;
 import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
- * Convert info USER , DTO <-> ENTITY
+ * 
  * @author Ngoc Hung
  *
  */
