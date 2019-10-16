@@ -46,25 +46,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserEntity saveUser(UserEntity user) {
 		
-		if(roleRepository.findByRole("USER")==null) {
-			
-			RoleEntity roleEntity = new RoleEntity();
-			RoleEntity roleEntitya = new RoleEntity();
-			roleEntity.setRole("ADMIN");
-			roleEntitya.setRole("USER");
-			roleRepository.save(roleEntity);
-			roleRepository.save(roleEntitya);
-			/*
-			 * UserEntity useradmin= new UserEntity();
-			 * useradmin.setUserName("AdminWeather");
-			 * useradmin.setEmail("NgocHung@gmail.com");
-			 * useradmin.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(
-			 * "ngochung")); useradmin.setFirstName("Ngoc"); useradmin.setLastName("Hung");
-			 * userRepository.save(useradmin);
-			 */
-			
-		}
-		
 		// set property for info USER
 		user.setEncrytedPassword(EncrytedPasswordUtils.encrytePassword(user.getEncrytedPassword()));
 		user.setEnabled(true);
