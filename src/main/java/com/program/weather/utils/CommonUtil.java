@@ -16,12 +16,10 @@ public class CommonUtil {
 	 * @param Fah
 	 * @return
 	 */
-	public static  String toCelsius(double Fah) {
+	public static  String toCelsius(double Fahrenheit) {
 		NumberFormat formatter =new DecimalFormat("#0.00");
-	    return  formatter.format((Fah - 32) * 5/9);
+	    return  formatter.format((Fahrenheit - 32) * 5/9);
 	    }
-	
-
 	
 	/**
 	 * 

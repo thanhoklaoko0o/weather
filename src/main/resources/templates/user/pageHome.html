@@ -47,7 +47,7 @@
 	<div class="row ">
 	  <div class="col-sm-8 " >
 	    <div class="col-sm-12 ">
-	       <form  class="form-inline" th:action="@{/home-weather/search-city}" >
+	       <form  class="form-inline" th:action="@{/search-city}" >
 	           <input  type="text" class="form-control w-50" placeholder="Type name city to watch infomation weather" name="name">
 	           <button type="submit"  class=" btn btn-primary" th:text="Search"></button>
 	       </form>
@@ -70,7 +70,7 @@
 	              </td>
 	                          
 	              <td>
-	              	<b><a th:href="@{/home-weather/foreCast(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
+	              	<b><a th:href="@{/forecast-weather(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
 	             	<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
 	              </td> 
 	                              
@@ -129,7 +129,7 @@
 					</td>
 														
 					<td>
-					<b><a th:href="@{/home-weather/foreCast(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
+					<b><a th:href="@{/forecast-weather(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
 					<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
 					</td>	
 																

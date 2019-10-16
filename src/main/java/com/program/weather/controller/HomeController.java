@@ -1,8 +1,6 @@
 package com.program.weather.controller;
 
 import java.security.Principal;
-import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,20 +8,16 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.program.weather.dto.DetailsWeatherDTO;
 import com.program.weather.entity.CurrentWeatherEntity;
-import com.program.weather.entity.DetailsWeatherEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.entity.WeatherEntity;
 import com.program.weather.service.impl.UserServiceImpl;
 import com.program.weather.service.impl.WeatherServiceImpl;
-import com.program.weather.utils.CommonUtil;
 
 /**
  * 
@@ -65,7 +59,7 @@ public class HomeController {
 		}
 
 		model.addAttribute("listWeatherDest", listWeatherByDateDest);
-		model.addAttribute("listWeatherAsc", listWeatherByDateAsc);
+		model.addAttribute("listWeatherAsc" , listWeatherByDateAsc);
 
 		return "user/pageHome";
 	}
@@ -120,78 +114,6 @@ public class HomeController {
 	public CurrentWeatherEntity forecastCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
 
 		return weatherServiceImpl.restCurWeather(lat, lon);
-	}
-
-	/**
-	 * USER click nameCity to watch ForeCast 5 day of City ForeCast 5 day of City
-	 * 
-	 * @param name
-	 * @param model
-	 * @return view : foreCast
-	 */
-	@GetMapping("/foreCast")
-	public String foreCast5Day(@RequestParam String name, Model model) {
-
-		// List contain forecast 5 day of city
-		List<DetailsWeatherEntity> lstForCast = new ArrayList<DetailsWeatherEntity>();
-		DetailsWeatherDTO detailsWeatherDTO = weatherServiceImpl.foreCast(name);
-
-		for (int i = 0; i < 40; i += 8) {
-
-			lstForCast.add(new DetailsWeatherEntity(i, detailsWeatherDTO.getList().get(i).getDt_txt(),
-							   detailsWeatherDTO.getList().get(i).getWeather().get(0).getIcon(),
-								CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_min())),
-								CommonUtil.toCelsius(Double.parseDouble(detailsWeatherDTO.getList().get(i).getMain().getTemp_max())),
-								detailsWeatherDTO.getList().get(i).getWeather().get(0).getDescription(),
-								detailsWeatherDTO.getList().get(i).getWind().getSpeed(),
-								detailsWeatherDTO.getList().get(i).getMain().getHumidity(),
-								detailsWeatherDTO.getList().get(i).getMain().getPressure(),
-								detailsWeatherDTO.getList().get(i).getClouds().getAll()));
-		}
-
-		model.addAttribute("lstForeCast", lstForCast);
-		model.addAttribute("nameCity", name.toUpperCase());
-		model.addAttribute("timeToday", Instant.now());
-
-		return "user/foreCast";
-	}
-
-	/**
-	 * Search current Weather City
-	 * 
-	 * @param name
-	 * @param modelMap
-	 * @param principal
-	 * @return view Home
-	 */
-	@GetMapping("/search-city")
-	public String searchWeather(@RequestParam String name, ModelMap modelMap, Principal principal) {
-
-		try {
-
-			WeatherEntity		 weatherEntity = weatherServiceImpl.getWeatherByApi(name);
-			List<WeatherEntity> listByNameCity = listWeatherByUserByNameCity(name, principal);
-			if (listByNameCity.isEmpty()) {
-
-				modelMap.addAttribute("checkButton", " ");
-			}
-
-			modelMap.addAttribute("weatherSearch", weatherEntity);
-
-		} catch (Exception e) {
-
-			modelMap.addAttribute("msgSearch", "City is not found !");
-		}
-
-		List<WeatherEntity> listWeatherByDateDest = weatherServiceImpl
-				.findAllByUserByDateDesc(getCurUserEntity(principal));
-		List<WeatherEntity> listWeatherByDateAsc = weatherServiceImpl
-				.findAllByUserByDateAsc(getCurUserEntity(principal));
-
-		modelMap.addAttribute("listWeatherDest", listWeatherByDateDest);
-		modelMap.addAttribute("listWeatherAsc", listWeatherByDateAsc);
-
-		return "user/pageHome";
 	}
 
 	/**

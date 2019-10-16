@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -57,7 +58,7 @@ public class AdminController {
 	 * 
 	 * @param id
 	 */
-	@GetMapping("/delete")
+	@PostMapping("/delete")
 	@ResponseBody
 	public void deleteUser(@RequestParam Long id) {
 
@@ -69,7 +70,7 @@ public class AdminController {
 	 * 
 	 * @param id
 	 */
-	@GetMapping("/editActiveUser")
+	@PostMapping("/editActiveUser")
 	@ResponseBody
 	public void editActive(@RequestParam Long id) {
 		
@@ -82,7 +83,7 @@ public class AdminController {
 	 * @param id
 	 * @param role
 	 */
-	@GetMapping("/change-role")
+	@PostMapping("/change-role")
 	@ResponseBody
 	public void changeRole(@RequestParam Long id, @RequestParam String roleName) {
 		userServiceImpl.editRoleUser(id, roleName);

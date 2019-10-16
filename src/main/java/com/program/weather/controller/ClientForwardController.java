@@ -4,40 +4,24 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.program.weather.converter.UserConverter;
-import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.service.impl.UserServiceImpl;
 import com.program.weather.utils.Constants;
 
 @Controller
-public class ForwardController {
+public class ClientForwardController {
 
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-
-	@Autowired
-	private JavaMailSender emailSender;
-	
-	@Autowired
-	private UserConverter userConverter;
 
 	/**
 	 * Load pageLogin when user access to APP
@@ -128,81 +112,6 @@ public class ForwardController {
 		return userAuthority;
 	}
 
-	/**
-	 * show page register for USER
-	 * 
-	 * @param model
-	 * @return page register
-	 */
-	@GetMapping("/registerAccount")
-	public String pageRegister(Model model) {
-		UserDTO userDTO = new UserDTO();
-		model.addAttribute("userDTO", userDTO );
-
-		return "user/register";
-	}
-
-	/**
-	 * process info User when User register
-	 * 
-	 * @param userEntity
-	 * @param result
-	 * @return
-	 */
-	@PostMapping("/registerAccount")
-	public String processRegister(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result) {
-
-		// check error validate when user register
-		if (userServiceImpl.checkExistsByUserName(userDTO.getUserName())) {
-
-			return "redirect:registerAccount?msgUserName=Register_Failed";
-		}
-
-		if (userServiceImpl.checkExistsByEmail(userDTO.getEmail())) {
-
-			return "redirect:registerAccount?msgEmail=Register_Failed";
-		}
-
-		if (result.hasErrors()) {
-
-			return "user/register";
-		}
-
-		userServiceImpl.saveUser(userConverter.convertUserEntity(userDTO));
-
-		return "redirect:login?message=Register_Successful";
-	}
-
-	/**
-	 * Check exists username in DB
-	 * 
-	 * @param userName
-	 * @return
-	 */
-	@GetMapping("/checkUserName")
-	@ResponseBody
-	public String checkExistsByUserName(@RequestParam String userName) {
-
-		Boolean result = userServiceImpl.checkExistsByUserName(userName);
-
-		return "" + result;
-	}
-
-	/**
-	 * Check exists email in DB
-	 * 
-	 * @param email
-	 * @return
-	 */
-	@GetMapping("/checkEmail")
-	@ResponseBody
-	public String checkExistsByEmail(@RequestParam String email) {
-
-		Boolean result = userServiceImpl.checkExistsByEmail(email);
-
-		return "" + result;
-	}
-
 	@PostMapping("/processUrlFail")
 	public String processUrlFail(@RequestParam String username, @RequestParam String password) {
 
@@ -232,21 +141,4 @@ public class ForwardController {
 
 		return "error/401";
 	}
-
-	@GetMapping("/getNewPassWord")
-	@ResponseBody
-	public String getNewPassword(@RequestParam String name) {
-		// Create a Simple MailMessage.
-		SimpleMailMessage message = new SimpleMailMessage();
-
-		message.setTo(name);
-		message.setSubject("Test Simple Email");
-		message.setText("Hello, Im testing Simple Email");
-
-		// Send Message!
-		this.emailSender.send(message);
-
-		return "";
-	}
-
 }

@@ -1,6 +1,3 @@
-
-		
- 
 		/**
 		 * check user name in DB
 		 * @param userName
@@ -10,7 +7,7 @@
 			
 			$.ajax({
 				url : "/checkUserName",
-				type : "GET",
+				type : "POST",
 				data : {
 					userName : userName
 				},
@@ -43,7 +40,7 @@
 			
 			$.ajax({
 				url : "/checkEmail",
-				type : "GET",
+				type : "POST",
 				data : {
 					email : email
 				},
