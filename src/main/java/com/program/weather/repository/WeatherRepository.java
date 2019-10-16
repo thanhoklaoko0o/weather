@@ -28,13 +28,12 @@ public interface WeatherRepository extends JpaRepository<WeatherEntity, Long> {
 	  //Get weather by User by group by name city by date DESC
 	  @Query(value=" SELECT * FROM weatherinfo WHERE create_by = ?1 and date in (SELECT max(date)"
 	  			 + " FROM weatherinfo WHERE create_by = ?1 GROUP BY name_city)"
-	  			 + " GROUP BY name_city ORDER BY date desc", nativeQuery=true)
+	  			 + " ORDER BY date desc", nativeQuery=true)
 	  List<WeatherEntity>   findAllByUserByDateDesc (UserEntity userEntity);
 	  
 	  //Get weather by User by group by name city by date ASC
 	  @Query(value=" SELECT * FROM weatherinfo WHERE create_by = ?1 and date in (SELECT min(date)" 
 	  			  +" FROM weatherinfo WHERE create_by = ?1 GROUP BY name_city)"
-	  			  +" GROUP BY name_city ORDER BY date desc", nativeQuery=true)
+	  			  +" ORDER BY date desc", nativeQuery=true)
 	  List<WeatherEntity>   findAllByUserByDateAsc (UserEntity userEntity);
-	  
 }
