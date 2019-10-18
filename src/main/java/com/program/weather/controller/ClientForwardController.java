@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.service.impl.UserServiceImpl;
 import com.program.weather.utils.Constants;
-
+/**
+ * 
+ * @author NgocHung
+ *
+ */
 @Controller
 public class ClientForwardController {
-
 	@Autowired
 	private UserServiceImpl userServiceImpl;
 
@@ -28,9 +31,8 @@ public class ClientForwardController {
 	 * 
 	 * @return
 	 */
-	@GetMapping(value = { "/", "/login" })
+	@GetMapping(value = { "/", "/login"})
 	public String login() {
-
 		return "user/pageLogin";
 	}
 
@@ -41,22 +43,19 @@ public class ClientForwardController {
 	 */
 	@GetMapping("/logoutSuccessful")
 	public String logout() {
-
 		return "redirect:login?logoutTC";
 	}
 
 	/**
-	 * process request URL
+	 * process request URL User when user login
 	 * 
 	 * @return
 	 */
 	@GetMapping("/processURL")
-	public String processURL() {
-
+	public StringBuilder processURL() {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		String URL = urlMappingUser(authentication);
-
-		return URL;
+		StringBuilder urlPageByRoleName = urlMappingUser(authentication);
+		return urlPageByRoleName;
 	}
 
 	/**
@@ -65,22 +64,16 @@ public class ClientForwardController {
 	 * @param authentication
 	 * @return URL <-> Role
 	 */
-	public String urlMappingUser(Authentication authentication) {
-
-		String USER  = "ROLE_USER";
-		String ADMIN = "ROLE_ADMIN";
-		String url   = "";
+	public StringBuilder urlMappingUser(Authentication authentication) {
+		//Get list Role when User login sucessfully
 		List<GrantedAuthority> authorities = getListAuthority(authentication);
-
-		if (checkRoleUser(authorities, USER))
-
-			url = "redirect:/home-weather";
-
-		if (checkRoleUser(authorities, ADMIN))
-
-			url = "redirect:/home-admin";
-
-		return url;
+		//Check if User have role is ROLE_ADMIN, forward page MANAGEMENT
+		if (checkRoleUser(authorities, Constants.ADMIN))
+			return urlForward().append("redirect:/home-admin");
+		//Check if role is USER, urlForward page HOME WEATHER
+		if (checkRoleUser(authorities, Constants.USER))
+			return urlForward().append("redirect:/home-weather");
+		return null;
 	}
 
 	/**
@@ -88,10 +81,9 @@ public class ClientForwardController {
 	 * 
 	 * @param userAuthority
 	 * @param role
-	 * @return if roleName in userAuthority then return True
+	 * @return if roleName in userAuthority then return True, else False
 	 */
 	public boolean checkRoleUser(List<GrantedAuthority> userAuthority, String roleName) {
-
 		return userAuthority.stream().anyMatch(author -> author.getAuthority().equalsIgnoreCase(roleName));
 	}
 
@@ -102,9 +94,8 @@ public class ClientForwardController {
 	 * @return List contain authority
 	 */
 	public List<GrantedAuthority> getListAuthority(Authentication authentication) {
-
 		List<GrantedAuthority> userAuthority = new ArrayList<GrantedAuthority>();
-
+		
 		@SuppressWarnings("unchecked")
 		Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) authentication.getAuthorities();
 		userAuthority.addAll(authorities);
@@ -114,31 +105,25 @@ public class ClientForwardController {
 
 	@PostMapping("/processUrlFail")
 	public String processUrlFail(@RequestParam String username, @RequestParam String password) {
-
 		if (checkUserExist(username)) {
-
 			UserEntity userEntity = userServiceImpl.findByUserName(username);
-
 			if (userEntity.isEnabled() == Constants.UN_ACTIVE)
-
 				return "redirect:error/401";
-
 			else
-
 				return "redirect:login?error=true";
 		}
-
 		return "redirect:login?error=true";
 	}
 
 	public boolean checkUserExist(String userName) {
-
 		return userServiceImpl.checkExistsByUserName(userName);
 	}
 
 	@GetMapping("/error/401")
-	public String page404() {
+	public String page404() {return "error/401";}
 
-		return "error/401";
+	private StringBuilder urlForward() {
+		StringBuilder stringBuilder = new StringBuilder();
+		return stringBuilder;
 	}
 }

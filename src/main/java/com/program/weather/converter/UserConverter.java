@@ -22,38 +22,32 @@ import com.program.weather.entity.UserEntity;
  */
 @Component
 public class UserConverter {
-
 	/**
 	 * Converter Entity -> DTO
 	 * @param userEntity
 	 * @return User DTO
 	 */
 	public UserDTO convertUserToDTO(UserEntity userEntity) {
-
-		UserDTO user = new UserDTO(	 userEntity.getUserId(), userEntity.getUserName(), 
-									 userEntity.getEmail(), userEntity.getFirstName(),
-									 userEntity.getLastName(), userEntity.isEnabled());
-
+		UserDTO user = new UserDTO(userEntity.getUserId(), userEntity.getUserName(), 
+									userEntity.getEmail(), userEntity.getFirstName(),
+									userEntity.getLastName(), userEntity.isEnabled());
 		Set<Long> roles = new HashSet<Long>();
 		userEntity.getRoles().stream().forEach(i -> {
 			roles.add(i.getRoleId());
 		});
-
 		user.setRoles(roles);
-
 		return user;
 	}
-	
+
 	/**
 	 * Convert DTO -> Entity
 	 * @param userDTO
 	 * @return
 	 */
 	public UserEntity convertUserEntity(UserDTO userDTO) {
-		
 		UserEntity userEntity = new UserEntity(userDTO.getUserName(), userDTO.getEmail(), 
-											   userDTO.getEncrytedPassword(), userDTO.getFirstName(),
-											   userDTO.getLastName());
+												userDTO.getEncrytedPassword(), userDTO.getFirstName(),
+												userDTO.getLastName());
 		return userEntity;
 	}
 }

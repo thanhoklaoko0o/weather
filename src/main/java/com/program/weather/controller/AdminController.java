@@ -17,17 +17,18 @@ import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.RoleEntity;
 import com.program.weather.service.impl.RoleServiceImpl;
 import com.program.weather.service.impl.UserServiceImpl;
-
+/**
+ * 
+ * @author NgocHung
+ *
+ */
 @Controller
 @RequestMapping("/home-admin")
 public class AdminController {
-
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-
 	@Autowired
 	private RoleServiceImpl roleServiceImpl;
-
 	@Autowired
 	private UserConverter userConverter;
 
@@ -36,20 +37,17 @@ public class AdminController {
 	 * 
 	 * @param model
 	 * @param principal
-	 * @return
+	 * @return view admin
 	 */
 	@GetMapping
 	public String homeAdmin(Model model) {
-
-		List<UserDTO>    lstUser = userServiceImpl.findAllUser().stream()
-									.map(x -> userConverter.convertUserToDTO(x))
-									.collect(Collectors.toList());
-
+		List<UserDTO> lstUser = userServiceImpl.findAllUser().stream()
+								.map(x -> userConverter.convertUserToDTO(x))
+								.collect(Collectors.toList());
 		List<RoleEntity> lstRole = roleServiceImpl.findAllRole();
-
+		//Tranfer data from list to view admin
 		model.addAttribute("lstUser", lstUser);
 		model.addAttribute("lstRole", lstRole);
-
 		return "admin/pageAdmin";
 	}
 
@@ -60,10 +58,7 @@ public class AdminController {
 	 */
 	@PostMapping("/delete")
 	@ResponseBody
-	public void deleteUser(@RequestParam Long id) {
-
-		userServiceImpl.deleteUserById(id);
-	}
+	public void deleteUser(@RequestParam Long id) {userServiceImpl.deleteUserById(id);}
 
 	/**
 	 * Edit enable of user
@@ -72,10 +67,7 @@ public class AdminController {
 	 */
 	@PostMapping("/editActiveUser")
 	@ResponseBody
-	public void editActive(@RequestParam Long id) {
-		
-		userServiceImpl.editActiveUser(id);
-	}
+	public void editActive(@RequestParam Long id) {userServiceImpl.updateStatusUser(id);}
 
 	/**
 	 * Change role of user
@@ -85,7 +77,5 @@ public class AdminController {
 	 */
 	@PostMapping("/change-role")
 	@ResponseBody
-	public void changeRole(@RequestParam Long id, @RequestParam String roleName) {
-		userServiceImpl.editRoleUser(id, roleName);
-	}
+	public void changeRole(@RequestParam Long id, @RequestParam String roleName) {userServiceImpl.updateRoleUser(id, roleName);}
 }

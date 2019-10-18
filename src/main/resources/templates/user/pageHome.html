@@ -47,7 +47,7 @@
 	<div class="row ">
 	  <div class="col-sm-8 " >
 	    <div class="col-sm-12 ">
-	       <form  class="form-inline" th:action="@{/search-city}" >
+	       <form  class="form-inline" th:action="@{/home-weather/search-city}" >
 	           <input  type="text" class="form-control w-50" placeholder="Type name city to watch infomation weather" name="name">
 	           <button type="submit"  class=" btn btn-primary" th:text="Search"></button>
 	       </form>
@@ -80,7 +80,7 @@
 	                <p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>  
 	              </td>
 	             
-	               <th:block th:if="${checkButton != null}">
+	               <th:block th:if="${addButton != null}">
 	              	   <td>
 	              		<a class="btn btn-primary" th:href="@{/home-weather/save-weather?(name=*{nameCity})}" >Add</a>
 	             	 </td>

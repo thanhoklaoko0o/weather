@@ -3,7 +3,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import com.program.weather.entity.UserEntity;
-
 /**
  *  Data Access Layer USER with DB
  * @author Ngoc Hung
@@ -11,10 +10,12 @@ import com.program.weather.entity.UserEntity;
  */
 @Repository
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-	
-	UserEntity findByUserName   (String userName);
-    UserEntity findByUserId		(Long 	id);
-    Boolean    existsByUserName (String userName);
-    Boolean    existsByEmail	(String email);
-    
+	//Find one userentity by username 
+	UserEntity findByUserName (String userName);
+	//Find one userEntity by userId
+	UserEntity findByUserId (Long id);
+	//Check username of user in DB had been exists 
+	Boolean existsByUserName (String userName);
+	//Check email of user in DB had been exists 
+	Boolean existsByEmail (String email);
 }

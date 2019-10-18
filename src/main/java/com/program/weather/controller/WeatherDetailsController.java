@@ -25,10 +25,9 @@ import com.program.weather.utils.CommonUtil;
 @Controller
 @RequestMapping("/forecast-weather")
 public class WeatherDetailsController {
-	
 	@Autowired
 	private WeatherServiceImpl weatherServiceImpl;
-	
+
 	/**
 	 * USER click nameCity to watch ForeCast 5 day of City ForeCast 5 day of City
 	 * 
@@ -40,26 +39,21 @@ public class WeatherDetailsController {
 	public String foreCast5Day(@RequestParam String name, Model model) {
 		//Get list forecast weather 5 day of city
 		List<DetailsWeatherEntity> lstForecast = getListDetails5Day(name);
-
 		model.addAttribute("lstForeCast", lstForecast);
 		model.addAttribute("nameCity", name.toUpperCase());
 		model.addAttribute("timeToday", Instant.now());
-
 		return "user/foreCast";
 	}
-	
+
 	/**
 	 * get list detail 5 day from ListDTO
 	 * @param listDetail
 	 * @return list detail weather entity
 	 */
 	private List<DetailsWeatherEntity> getListDetailsDTO(List<ListDetailDTO> listDetail){
-		
 		int SIZE_WEATHER_REPEAT = 8;
 		List<DetailsWeatherEntity> lstForecast = new ArrayList<DetailsWeatherEntity>();
-		
 		for (int i = 0; i < listDetail.size(); i += SIZE_WEATHER_REPEAT) {
-			
 			lstForecast.add(new DetailsWeatherEntity(i, listDetail.get(i).getDt_txt(),
 							listDetail.get(i).getWeather().get(0).getIcon(),
 							CommonUtil.toCelsius(Double.parseDouble(listDetail.get(i).getMain().getTemp_min())),
@@ -70,20 +64,16 @@ public class WeatherDetailsController {
 							listDetail.get(i).getMain().getPressure(),
 							listDetail.get(i).getClouds().getAll()));
 		}
-		
 		return lstForecast;
 	}
-	
+
 	/**
 	 * Get list detail weather entity forecast
 	 * @param nameCity
 	 * @return list detailweatherEntity forecast
 	 */
 	private List<DetailsWeatherEntity> getListDetails5Day(String nameCity){
-		
 		DetailsWeatherDTO detailsWeatherDTO = weatherServiceImpl.foreCast(nameCity);
-		
 		return getListDetailsDTO(detailsWeatherDTO.getList());
 	}
-	
 }

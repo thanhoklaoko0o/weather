@@ -12,7 +12,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 /**
  * 
@@ -22,10 +21,8 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @Table(name = "weatherinfo")
 public class WeatherEntity {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "weather_id")
@@ -59,6 +56,6 @@ public class WeatherEntity {
 	private String pressure;
 
 	@ManyToOne
-    @JoinColumn(name = "create_by")
-    private UserEntity userEntity;
+	@JoinColumn(name = "create_by")
+	private UserEntity userEntity;
 }

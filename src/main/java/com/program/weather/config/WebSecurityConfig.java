@@ -9,22 +9,22 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-
+/**
+ * 
+ * @author NgocHung
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-	
 	@Autowired
-    private CustomFilter customFilter;
-	
+	private CustomFilter customFilter;
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
-		
 		BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
-		
 		return bCryptPasswordEncoder;
 	}
 
@@ -56,6 +56,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.passwordParameter("password")
 				// Cấu hình cho Logout Page.
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
-
 	}
+	
+	/*
+	 * @Bean public DaoAuthenticationProvider authenticationProvider() { final
+	 * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+	 * authProvider.setUserDetailsService(userDetailsService);
+	 * authProvider.setPasswordEncoder(encoder()); return authProvider; }
+	 */
 }

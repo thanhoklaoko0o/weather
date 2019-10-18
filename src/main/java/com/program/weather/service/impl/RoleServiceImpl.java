@@ -17,17 +17,11 @@ import com.program.weather.service.RoleService;
  */
 @Service
 public class RoleServiceImpl implements RoleService {
-
 	@Autowired
 	RoleRepository roleRepository;
-
 	/**
-	 * Get all role in DB
+	 * Get list role entity in DB
 	 */
 	@Override
-	public List<RoleEntity> findAllRole() {
-
-		return roleRepository.findAll();
-	}
-
+	public List<RoleEntity> findAllRole() {return roleRepository.findAll();}
 }

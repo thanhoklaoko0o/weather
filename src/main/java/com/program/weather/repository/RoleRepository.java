@@ -10,6 +10,6 @@ import com.program.weather.entity.RoleEntity;
  */
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity,Long>{
-	
-	 RoleEntity findByRole(String role);
+	//Find one object RoleEntity by roleName
+	RoleEntity findByRole(String roleName);
 }

@@ -9,6 +9,6 @@ import com.program.weather.entity.RoleEntity;
  *
  */
 public interface RoleService {
-	
-	 List<RoleEntity> findAllRole(); 
+	//Get all role entity in Db
+	List<RoleEntity> findAllRole();
 }

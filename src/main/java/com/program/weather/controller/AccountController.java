@@ -25,16 +25,13 @@ import com.program.weather.service.impl.UserServiceImpl;
  */
 @Controller
 public class AccountController {
-	
 	@Autowired
 	private UserConverter userConverter;
-	
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-	
 	@Autowired
 	private JavaMailSender emailSender;
-	
+
 	/**
 	 * show page register for USER
 	 * 
@@ -45,53 +42,44 @@ public class AccountController {
 	public String pageRegister(Model model) {
 		UserDTO userDTO = new UserDTO();
 		model.addAttribute("userDTO", userDTO );
-
 		return "user/register";
 	}
-	
+
 	/**
 	 * process info User when User register
 	 * 
 	 * @param userEntity
 	 * @param result
-	 * @return
+	 * @return view login if register sucessfully, else view register
 	 */
 	@PostMapping("/registerAccount")
 	public String processRegister(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result) {
-
-		// check error validate when user register
+		//Check error when username exist
 		if (userServiceImpl.checkExistsByUserName(userDTO.getUserName())) {
-
 			return "redirect:registerAccount?msgUserName=Register_Failed";
 		}
-
+		//Check error when email exist
 		if (userServiceImpl.checkExistsByEmail(userDTO.getEmail())) {
-
 			return "redirect:registerAccount?msgEmail=Register_Failed";
 		}
-
+		//Check error when validate bean
 		if (result.hasErrors()) {
-
 			return "user/register";
 		}
-
 		userServiceImpl.saveUser(userConverter.convertUserEntity(userDTO));
-
 		return "redirect:login?message=Register_Successful";
 	}
-	
+
 	/**
 	 * Check exists username in DB
 	 * 
 	 * @param userName
-	 * @return
+	 * @return true if exists, else false
 	 */
 	@PostMapping("/checkUserName")
 	@ResponseBody
 	public String checkExistsByUserName(@RequestParam String userName) {
-
 		Boolean result = userServiceImpl.checkExistsByUserName(userName);
-
 		return "" + result;
 	}
 
@@ -99,30 +87,25 @@ public class AccountController {
 	 * Check exists email in DB
 	 * 
 	 * @param email
-	 * @return
+	 * @return true if exists, else false
 	 */
 	@PostMapping("/checkEmail")
 	@ResponseBody
 	public String checkExistsByEmail(@RequestParam String email) {
-
 		Boolean result = userServiceImpl.checkExistsByEmail(email);
-
 		return "" + result;
 	}
-	
+
 	@GetMapping("/getNewPassWord")
 	@ResponseBody
 	public String getNewPassword(@RequestParam String name) {
-		// Create a Simple MailMessage.
+		//Create a Simple MailMessage.
 		SimpleMailMessage message = new SimpleMailMessage();
-
 		message.setTo(name);
 		message.setSubject("Test Simple Email");
 		message.setText("Hello, Im testing Simple Email");
-
 		// Send Message!
 		this.emailSender.send(message);
-
 		return "user/pageLogin?message=Reset_Successful";
 	}
 }

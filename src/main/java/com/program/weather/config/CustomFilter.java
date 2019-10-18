@@ -29,7 +29,7 @@ public class CustomFilter extends GenericFilterBean {
 	            ServletRequest request,
 	            ServletResponse response,
 	            FilterChain chain) throws IOException, ServletException {
-	        HttpServletRequest req = (HttpServletRequest) request;
+	        HttpServletRequest  req = (HttpServletRequest) request;
 	        HttpServletResponse res = (HttpServletResponse) response;
 
 	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,6 +54,12 @@ public class CustomFilter extends GenericFilterBean {
 
 	                                if (!userDetailsQuery.isEnabled()) {
 	                                    new SecurityContextLogoutHandler().logout(req, res, authentication);
+	                                }
+	                                
+	                                boolean isAdmin = userDetailsQuery.getAuthorities().stream()
+	                                					.anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+	                                if(isAdmin) {
+	                                //	new SecurityContextLogoutHandler().logout(req, res, authentication);
 	                                }
 
 	                            } catch (Exception e) {

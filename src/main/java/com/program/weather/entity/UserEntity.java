@@ -2,7 +2,6 @@ package com.program.weather.entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -35,47 +34,45 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "user")
 public class UserEntity {
-	
 	@Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name = "user_id")
-    private Long userId;
-	
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "user_id")
+	private Long userId;
+
 	@Column(name = "user_name")
-    private String userName;
- 
-    @Column(name = "email")
-    private String email;
- 
-    @Column(name = "encryted_password")
-    private String encrytedPassword;
-    
-    @Column(name = "firstname")
-    private String firstName;
-    
-    @Column(name = "lastname")
-    private String lastName;
- 
-    @Column(name = "enabled")
-    private boolean enabled;
-    
-    @Column(name = "create_date")
-    private Timestamp createDate;
-    
-    public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName) {
-    	this.userName 			= userName;
-    	this.email	  			= email;
-    	this.encrytedPassword	= encrytedPassword;
-    	this.firstName			= firstName;
-    	this.lastName			= lastName;
-    }
-    
-	@ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+	private String userName;
+
+	@Column(name = "email")
+	private String email;
+
+	@Column(name = "encryted_password")
+	private String encrytedPassword;
+
+	@Column(name = "firstname")
+	private String firstName;
+
+	@Column(name = "lastname")
+	private String lastName;
+
+	@Column(name = "enabled")
+	private boolean enabled;
+
+	@Column(name = "create_date")
+	private Timestamp createDate;
+
+	public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName) {
+		this.userName = userName;
+		this.email = email;
+		this.encrytedPassword = encrytedPassword;
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+
+	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
 	private Set<RoleEntity> roles;
 	
 	@OneToMany(mappedBy = "userEntity", cascade=CascadeType.REMOVE)
 	@JsonIgnore
-//	private Set<WeatherEntity> listWeather = new HashSet<WeatherEntity>();
 	private List<WeatherEntity> listWeather = new ArrayList<WeatherEntity>();
 }
