@@ -20,21 +20,19 @@ import org.springframework.web.filter.GenericFilterBean;
 
 @Component
 public class CustomFilter extends GenericFilterBean {
-	
-	 @Autowired
-	    private UserDetailsService userDetailsService;
 
-	    @Override
-	    public void doFilter(
-	            ServletRequest request,
-	            ServletResponse response,
-	            FilterChain chain) throws IOException, ServletException {
-	        HttpServletRequest  req = (HttpServletRequest) request;
-	        HttpServletResponse res = (HttpServletResponse) response;
+	@Autowired
+	private UserDetailsService userDetailsService;
 
-	        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+	@Override
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-	        if (authentication != null) {
+		HttpServletRequest  req = (HttpServletRequest) request;
+		HttpServletResponse res = (HttpServletResponse) response;
+
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+		if (authentication != null) {
 	        	
 	            if (authentication.getPrincipal() != null) {
 	            	

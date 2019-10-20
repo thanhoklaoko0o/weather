@@ -17,10 +17,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
 	@Autowired
 	private CustomFilter customFilter;
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
+	@Autowired
+	private UserAuthenticationSuccessHandler successHandler;
 
 	@Bean
 	public BCryptPasswordEncoder passwordEncoder() {
@@ -44,17 +47,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().antMatchers("/home-admin", "/home-admin/**").access("hasRole('ADMIN')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");
 
-		// Cấu hình cho Login Form.
 		http.authorizeRequests().and().formLogin()//
-				// Submit URL của trang login
 				.loginPage("/login")//
 				.loginProcessingUrl("/form-login") 
-				.defaultSuccessUrl("/processURL")//
-				//.failureUrl("/login?error=true")//
+				.successHandler(successHandler)
 				.failureForwardUrl("/processUrlFail")
 				.usernameParameter("username")//
 				.passwordParameter("password")
-				// Cấu hình cho Logout Page.
 				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
 	}
 	
