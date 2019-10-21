@@ -33,37 +33,36 @@ public class CustomFilter extends GenericFilterBean {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
 		if (authentication != null) {
-	        	
-	            if (authentication.getPrincipal() != null) {
-	            	
-	                if (authentication.getPrincipal() instanceof UserDetails) {
-	                	
-	                    // if login then authentication.getCredentials() null
-	                    if (authentication.getCredentials() == null) {
-	                    	
-	                        // get username of user logged saved by getPrincipal()
-	                        String username = ((UserDetails) authentication.getPrincipal()).getUsername();
-	                        
-	                        if (!username.isEmpty()) {
-	                            UserDetails userDetailsQuery = null;
+			
+			if (authentication.getPrincipal() != null) {
+				
+					if (authentication.getPrincipal() instanceof UserDetails) {
+						
+						// if login then authentication.getCredentials() null
+						if (authentication.getCredentials() == null) {
+							// get username of user logged saved by getPrincipal()
+							String username = ((UserDetails) authentication.getPrincipal()).getUsername();
+							
+							if (!username.isEmpty()) {
+								UserDetails userDetailsQuery = null;
 
-	                            try {
-	                                userDetailsQuery = userDetailsService.loadUserByUsername(username);
+								try {
+									userDetailsQuery = userDetailsService.loadUserByUsername(username);
 
-	                                if (!userDetailsQuery.isEnabled()) {
-	                                    new SecurityContextLogoutHandler().logout(req, res, authentication);
-	                                }
-	                                
-	                                boolean isAdmin = userDetailsQuery.getAuthorities().stream()
-	                                					.anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
-	                                if(isAdmin) {
-	                                //	new SecurityContextLogoutHandler().logout(req, res, authentication);
-	                                }
+									if (!userDetailsQuery.isEnabled()) {
+										new SecurityContextLogoutHandler().logout(req, res, authentication);
+									}
+									
+									//boolean isAdmin = userDetailsQuery.getAuthorities().stream()
+									//		.anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
+									//if(isAdmin) {
+									//	new SecurityContextLogoutHandler().logout(req, res, authentication);
+									//}
 
-	                            } catch (Exception e) {
-	                            }
+								} catch (Exception e) {
+								}
 
-	                            if (userDetailsQuery == null) {
+								if (userDetailsQuery == null) {
 	                                new SecurityContextLogoutHandler().logout(req, res, authentication);
 	                            }
 

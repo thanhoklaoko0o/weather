@@ -13,9 +13,9 @@ public class PasswordResetToken {
 	@Column(nullable = false, unique = true)
 	private String token;
 
-	@OneToOne(targetEntity = UserEntity.class, fetch = FetchType.EAGER)
-	@JoinColumn(nullable = false, name = "user_id")
-	private UserEntity user;
+	@OneToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "user_id", nullable = false)
+	private UserEntity userEntity;
 
 	@Column(nullable = false)
 	private Date expiryDate;
@@ -37,11 +37,11 @@ public class PasswordResetToken {
 	}
 
 	public UserEntity getUser() {
-		return user;
+		return userEntity;
 	}
 
 	public void setUser(UserEntity user) {
-		this.user = user;
+		this.userEntity = user;
 	}
 
 	public Date getExpiryDate() {

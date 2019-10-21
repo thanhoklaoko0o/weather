@@ -28,7 +28,7 @@ public class UserDTO {
 	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$", message = "{user.username.msg}")
 	private String userName;
 
-	@Email(regexp = "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}", message = "{user.email.msg}")
+	@Email(message = "{user.email.msg}")
 	private String email;
 
 	@Size(min = 8, max = 32, message = "{user.password.msg}")

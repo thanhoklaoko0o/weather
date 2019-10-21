@@ -3,8 +3,6 @@ package com.program.weather.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,9 +29,6 @@ public class AccountController {
 
 	@Autowired
 	private UserServiceImpl userServiceImpl;
-
-	@Autowired
-	private JavaMailSender emailSender;
 
 	/**
 	 * show page register for USER
@@ -97,18 +92,5 @@ public class AccountController {
 	public String checkExistsByEmail(@RequestParam String email) {
 		Boolean result = userServiceImpl.checkExistsByEmail(email);
 		return "" + result;
-	}
-
-	@GetMapping("/getNewPassWord")
-	@ResponseBody
-	public String getNewPassword(@RequestParam String name) {
-		//Create a Simple MailMessage.
-		SimpleMailMessage message = new SimpleMailMessage();
-		message.setTo(name);
-		message.setSubject("Test Simple Email");
-		message.setText("Hello, Im testing Simple Email");
-		// Send Message!
-		this.emailSender.send(message);
-		return "user/pageLogin?message=Reset_Successful";
 	}
 }

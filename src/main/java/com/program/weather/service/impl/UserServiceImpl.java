@@ -136,6 +136,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void updatePassword(String password, Long userId) {
-		userRepository.updatePassword(password, userId);
+		UserEntity userEntity = userRepository.findByUserId(userId);
+		userEntity.setEncrytedPassword(password);
+		userRepository.save(userEntity);
 	}
 }
