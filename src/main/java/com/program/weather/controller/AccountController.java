@@ -25,10 +25,13 @@ import com.program.weather.service.impl.UserServiceImpl;
  */
 @Controller
 public class AccountController {
+
 	@Autowired
 	private UserConverter userConverter;
+
 	@Autowired
 	private UserServiceImpl userServiceImpl;
+
 	@Autowired
 	private JavaMailSender emailSender;
 

@@ -14,6 +14,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class DetailsWeatherEntity {
+
 	private int index;
 	private Instant day;
 	private String image;

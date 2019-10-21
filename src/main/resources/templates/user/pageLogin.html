@@ -5,11 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Page Login</title>
-<link 	th:href="@{/css/bootstrap.min.css}" 	 rel="stylesheet">
-<link 	th:href="@{/css/stylepage.css}" 	  	 rel="stylesheet">
-<script th:src ="@{/js/jquery.min.js}" 	  		 type="text/javascript"></script>
-<script th:src ="@{/js/sweetalert2.all.min.js}"  type="text/javascript"></script>
-<script th:src ="@{/js/bootstrap.min.js}" 		 type="text/javascript" ></script>
+<link 	th:href="@{/css/bootstrap.min.css}"		rel="stylesheet">
+<link 	th:href="@{/css/stylepage.css}"			rel="stylesheet">
+<script th:src ="@{/js/jquery.min.js}"			type="text/javascript"></script>
+<script th:src ="@{/js/sweetalert2.all.min.js}" type="text/javascript"></script>
+<script th:src ="@{/js/bootstrap.min.js}"		type="text/javascript" ></script>
 </head>
 <body style="height: 100vh;">
 
@@ -31,26 +31,27 @@
 					
 					<div class="form-group">
 						<span  th:if="${(param.message != null)}" style="color: green;">You registered account successfully</span>
-					</div>
-					<div class="form-group">
 						<span  th:if="${(param.error != null)}" style="color: red;">Login Failed !</span>
 					</div>
 					
 					<div class="form-group">
-						<input type="text" class="form-control" placeholder="Username" required="required" name="username" id="username">
+						<input type="text" class="form-control" onchange="checkUserName(this.value)" placeholder="Username" name="username">
+					</div>
+					<div class="form-group">
+						<span id="kqCheckName" style="color:red"></span>
 					</div>
 					
 					<div class="form-group">
-						<input type="password" class="form-control" placeholder="Password"required="required" name="password" id=password>
+						<input type="password" class="form-control disinput" placeholder="Password" name="password" id=password>
 					</div>
 					
 					<div class="form-group">
-						<button type="submit" class="btn btn-primary btn-block">Sign in</button>
+						<button type="submit" class="btn btn-primary btn-block disinput">Sign in</button>
 					</div>
 					
 					<div class="clearfix">
 						<p class="textpass">
-						<a href="" class="pull-right" data-toggle="modal"data-target=".bd-example-modal-sm1">Lost your Password?</a>
+						<a th:href="/forgot-password" class="pull-right" >Lost your Password?</a>
 						</p>
 					</div>
 					
@@ -108,5 +109,6 @@
 
   </footer>
   <!-- Footer -->
+  <script type="text/javascript" th:src="@{/js/jslogin.js}"></script>
 </body>
 </html>

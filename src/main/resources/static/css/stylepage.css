@@ -235,10 +235,6 @@
 	.iframe-login{
 		background-color: #1e27312e;
 	}
-	
-	/* .container{
-		height: 700px;
-	} */
-	
-	
-	
+	.form-group{
+		height: 25px;
+	}

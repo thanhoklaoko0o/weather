@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CurrentWeatherEntity {
+
 	private String image;
 	private String temp;
 	private String cloudiness;

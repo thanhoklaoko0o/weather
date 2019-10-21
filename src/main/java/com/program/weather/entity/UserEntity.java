@@ -34,6 +34,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Table(name = "user")
 public class UserEntity {
+
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name = "user_id")

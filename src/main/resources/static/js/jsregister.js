@@ -29,8 +29,7 @@
 				}
 			})
 		}
-		
-		
+
 		/**
 		 * check email in DB
 		 * @param email

@@ -42,7 +42,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable();
 		http.addFilterAt(customFilter, UsernamePasswordAuthenticationFilter.class);
-		http.authorizeRequests().antMatchers("/", "/login", "/logout").permitAll();
+		http.authorizeRequests().antMatchers("/", "/login", "/logout","/forgot-password**","/reset-password**").permitAll();
 		http.authorizeRequests().antMatchers("/home-weather", "/home-weather/**").access("hasAnyRole('USER', 'ADMIN')");
 		http.authorizeRequests().antMatchers("/home-admin", "/home-admin/**").access("hasRole('ADMIN')");
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");

@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 /**
  * 
@@ -16,8 +17,10 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@NoArgsConstructor
 @Table(name="role")
 public class RoleEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "role_id")
@@ -25,4 +28,8 @@ public class RoleEntity {
 
 	@Column(name = "role")
 	private String role;
+
+	public RoleEntity(String role) {
+		this.role = role;
+	}
 }

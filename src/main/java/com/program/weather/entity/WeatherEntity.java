@@ -23,6 +23,7 @@ import lombok.Setter;
 @Setter
 @Table(name = "weatherinfo")
 public class WeatherEntity {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "weather_id")

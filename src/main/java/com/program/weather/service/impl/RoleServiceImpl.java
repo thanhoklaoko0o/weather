@@ -17,8 +17,10 @@ import com.program.weather.service.RoleService;
  */
 @Service
 public class RoleServiceImpl implements RoleService {
+
 	@Autowired
 	RoleRepository roleRepository;
+
 	/**
 	 * Get list role entity in DB
 	 */

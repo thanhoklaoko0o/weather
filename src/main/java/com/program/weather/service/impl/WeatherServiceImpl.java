@@ -24,21 +24,30 @@ import com.program.weather.service.WeatherService;
  */
 @Service
 public class WeatherServiceImpl implements WeatherService {
+
 	@Autowired
 	private WeatherRepository weatherRepository;
+
 	@Autowired
 	private WeatherConverter weatherConverter;
+
 	@Autowired
 	RestTemplate restTemplate;
 
 	@Value("${weather.api.key}")
 	private String appID;
+
 	@Value("${weather.url}")
+
 	private String weatherURL;
+
 	@Value("${weather.url.version}")
+
 	private String weatherVersion;
+
 	@Value("${weather.url.current}")
 	private String weatherCurrent;
+
 	@Value("${weather.url.forecast}")
 	private String weatherForecast;
 

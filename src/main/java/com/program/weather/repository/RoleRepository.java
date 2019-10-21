@@ -1,4 +1,6 @@
 package com.program.weather.repository;
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,6 +12,6 @@ import com.program.weather.entity.RoleEntity;
  */
 @Repository
 public interface RoleRepository extends JpaRepository<RoleEntity,Long>{
-	//Find one object RoleEntity by roleName
-	RoleEntity findByRole(String roleName);
+
+	Optional<RoleEntity> findByRole(String roleName);
 }

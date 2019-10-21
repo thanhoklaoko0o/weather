@@ -33,5 +33,25 @@
     "name": "my.password",
     "type": "java.lang.String",
     "description": "A description for 'my.password'"
+  },
+  {
+    "name": "account.admin.user",
+    "type": "java.lang.String",
+    "description": "A description for 'account.admin.user'"
+  },
+  {
+    "name": "account.admin.password",
+    "type": "java.lang.String",
+    "description": "A description for 'account.admin.password'"
+  },
+  {
+    "name": "admin.firstname",
+    "type": "java.lang.String",
+    "description": "A description for 'admin.firstname'"
+  },
+  {
+    "name": "admin.lastname",
+    "type": "java.lang.String",
+    "description": "A description for 'admin.lastname'"
   }
 ]}

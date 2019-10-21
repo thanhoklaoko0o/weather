@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import com.program.weather.validator.PasswordMatches;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -18,22 +20,27 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+@PasswordMatches
 public class UserDTO {
+	
 	private Long userId;
 
-	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$", message = "{userName.msg}")
+	@Pattern(regexp = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{8,32}$", message = "{user.username.msg}")
 	private String userName;
 
-	@Email(regexp = "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}", message = "{email.msg}")
+	@Email(regexp = "[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{1,}[.]{1}[a-zA-Z]{2,}", message = "{user.email.msg}")
 	private String email;
 
-	@Size(min = 8, max = 32, message = "{password.msg}")
+	@Size(min = 8, max = 32, message = "{user.password.msg}")
 	private String encrytedPassword;
 
-	@NotEmpty(message = "{firstName}")
+	@Size(min = 8, max = 32, message = "{user.password.msg}")
+	private String confirmPassword;
+
+	@NotEmpty(message = "{user.firstname.msg}")
 	private String firstName;
 
-	@NotEmpty(message = "{lastName}")
+	@NotEmpty(message = "{user.lastname.msg}")
 	private String lastName;
 
 	private boolean enabled;
