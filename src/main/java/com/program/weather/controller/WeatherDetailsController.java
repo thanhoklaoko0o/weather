@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.program.weather.dto.DetailsWeatherDTO;
 import com.program.weather.dto.property.ListDetailDTO;
 import com.program.weather.entity.DetailsWeatherEntity;
-import com.program.weather.service.impl.WeatherServiceImpl;
+import com.program.weather.service.WeatherService;
 import com.program.weather.utils.CommonUtil;
 
 /**
@@ -25,8 +25,9 @@ import com.program.weather.utils.CommonUtil;
 @Controller
 @RequestMapping("/forecast-weather")
 public class WeatherDetailsController {
+
 	@Autowired
-	private WeatherServiceImpl weatherServiceImpl;
+	private WeatherService weatherService;
 
 	/**
 	 * USER click nameCity to watch ForeCast 5 day of City ForeCast 5 day of City
@@ -37,7 +38,7 @@ public class WeatherDetailsController {
 	 */
 	@GetMapping
 	public String foreCast5Day(@RequestParam String name, Model model) {
-		//Get list forecast weather 5 day of city
+		// Get list forecast weather 5 day of city
 		List<DetailsWeatherEntity> lstForecast = getListDetails5Day(name);
 		model.addAttribute("lstForeCast", lstForecast);
 		model.addAttribute("nameCity", name.toUpperCase());
@@ -73,7 +74,7 @@ public class WeatherDetailsController {
 	 * @return list detailweatherEntity forecast
 	 */
 	private List<DetailsWeatherEntity> getListDetails5Day(String nameCity){
-		DetailsWeatherDTO detailsWeatherDTO = weatherServiceImpl.foreCast(nameCity);
+		DetailsWeatherDTO detailsWeatherDTO = weatherService.foreCast(nameCity);
 		return getListDetailsDTO(detailsWeatherDTO.getList());
 	}
 }

@@ -41,7 +41,7 @@ public class PasswordForgotController {
 
 	@GetMapping
 	public String displayForgotPasswordPage() {
-		return "forgot-password";
+		return "email/forgot-password";
 	}
 
 	@PostMapping
@@ -50,13 +50,13 @@ public class PasswordForgotController {
 											HttpServletRequest request) {
 
 		if (result.hasErrors()){
-			return "forgot-password";
+			return "email/forgot-password";
 		}
 
 		UserEntity user = userService.findByEmail(form.getEmail());
 		if (user == null){
 			result.rejectValue("email", null, "We could not find an account for that e-mail address.");
-			return "forgot-password";
+			return "email/forgot-password";
 		}
 
 		PasswordResetToken token = new PasswordResetToken();
@@ -66,14 +66,14 @@ public class PasswordForgotController {
 		tokenRepository.save(token);
 
 		MailDTO mail = new MailDTO();
-		mail.setFrom("no-reply@memorynotfound.com");
+		mail.setFrom("no-reply@weatherapp.com");
 		mail.setTo(user.getEmail());
 		mail.setSubject("Password reset request");
 
 		Map<String, Object> model = new HashMap<>();
 		model.put("token", token);
 		model.put("user", user);
-		model.put("signature", "https://memorynotfound.com");
+		model.put("signature", "WeatherApp.com");
 		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 		model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
 		mail.setModel(model);

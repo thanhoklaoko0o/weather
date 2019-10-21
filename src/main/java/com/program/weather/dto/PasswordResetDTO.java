@@ -2,13 +2,13 @@ package com.program.weather.dto;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.program.weather.validator.PasswordMatches;
+import com.program.weather.validator.FieldMatch;
 
 import lombok.Getter;
 import lombok.Setter;
 @Setter
 @Getter
-@PasswordMatches
+@FieldMatch(first = "password", second = "confirmPassword", message = "{user.password.confirm.msg}")
 public class PasswordResetDTO {
 
 	@NotEmpty

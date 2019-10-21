@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.program.weather.converter.UserConverter;
 import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.RoleEntity;
-import com.program.weather.service.impl.RoleServiceImpl;
-import com.program.weather.service.impl.UserServiceImpl;
+import com.program.weather.service.RoleService;
+import com.program.weather.service.UserService;
 /**
  * 
  * @author NgocHung
@@ -25,10 +25,13 @@ import com.program.weather.service.impl.UserServiceImpl;
 @Controller
 @RequestMapping("/home-admin")
 public class AdminController {
+
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
+
 	@Autowired
-	private RoleServiceImpl roleServiceImpl;
+	private RoleService roleService;
+
 	@Autowired
 	private UserConverter userConverter;
 
@@ -41,10 +44,12 @@ public class AdminController {
 	 */
 	@GetMapping
 	public String homeAdmin(Model model) {
-		List<UserDTO> lstUser = userServiceImpl.findAllUser().stream()
+		// Get list User in DB
+		List<UserDTO> lstUser = userService.findAllUser().stream()
 								.map(x -> userConverter.convertUserToDTO(x))
 								.collect(Collectors.toList());
-		List<RoleEntity> lstRole = roleServiceImpl.findAllRole();
+		// Get list Role in DB
+		List<RoleEntity> lstRole = roleService.findAllRole();
 		//Tranfer data from list to view admin
 		model.addAttribute("lstUser", lstUser);
 		model.addAttribute("lstRole", lstRole);
@@ -52,13 +57,13 @@ public class AdminController {
 	}
 
 	/**
-	 * Delete user
+	 * Delete USER bu Id
 	 * 
 	 * @param id
 	 */
 	@PostMapping("/delete")
 	@ResponseBody
-	public void deleteUser(@RequestParam Long id) {userServiceImpl.deleteUserById(id);}
+	public void deleteUser(@RequestParam Long id) {userService.deleteUserById(id);}
 
 	/**
 	 * Edit enable of user
@@ -67,7 +72,7 @@ public class AdminController {
 	 */
 	@PostMapping("/editActiveUser")
 	@ResponseBody
-	public void editActive(@RequestParam Long id) {userServiceImpl.updateStatusUser(id);}
+	public void editActive(@RequestParam Long id) {userService.updateStatusUser(id);}
 
 	/**
 	 * Change role of user
@@ -77,5 +82,5 @@ public class AdminController {
 	 */
 	@PostMapping("/change-role")
 	@ResponseBody
-	public void changeRole(@RequestParam Long id, @RequestParam String roleName) {userServiceImpl.updateRoleUser(id, roleName);}
+	public void changeRole(@RequestParam Long id, @RequestParam String roleName) {userService.updateRoleUser(id, roleName);}
 }

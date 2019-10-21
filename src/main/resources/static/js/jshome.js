@@ -57,16 +57,16 @@
 	function convertDay(day){
 		
 		var mydate = new Date(day)
-        var year = mydate.getYear()
-        if (year < 1000)
-            year += 1900
-        var day = mydate.getDay()
-        var month = mydate.getMonth()
-        var daym = mydate.getDate()
-        if (daym < 10)
-            daym = "0" + daym
-        var montharray = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
-       
+		var year = mydate.getYear()
+		if (year < 1000)
+			year += 1900
+			var day = mydate.getDay()
+			var month = mydate.getMonth()
+			var daym = mydate.getDate()
+			if (daym < 10)
+				daym = "0" + daym
+				var montharray = new Array("January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December")
+
 		var fomatDay = " " + montharray[month] + " " + daym + ", " + year + "";
 		
 		return fomatDay;

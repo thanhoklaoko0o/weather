@@ -137,7 +137,7 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @param lon
 	 * @return CurrentWeatherEntity
 	 */
-	public CurrentWeatherEntity restCurWeather(String lat, String lon) {
+	public CurrentWeatherEntity getWeatherCurWeather(String lat, String lon) {
 		CurrentWeatherDTO weatherDTO = restTemplate.getForObject(urlApiGetCurrentLocation(lat, lon).toString(), CurrentWeatherDTO.class);
 		//conver weatherDTO to current Weather
 		return weatherConverter.convertToCurWeather(weatherDTO);

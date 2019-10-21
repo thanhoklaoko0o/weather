@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.program.weather.converter.UserConverter;
 import com.program.weather.dto.UserDTO;
-import com.program.weather.service.impl.UserServiceImpl;
+import com.program.weather.service.UserService;
 
 /**
  * 
@@ -28,7 +28,7 @@ public class AccountController {
 	private UserConverter userConverter;
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
 
 	/**
 	 * show page register for USER
@@ -52,19 +52,19 @@ public class AccountController {
 	 */
 	@PostMapping("/registerAccount")
 	public String processRegister(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result) {
-		//Check error when username exist
-		if (userServiceImpl.checkExistsByUserName(userDTO.getUserName())) {
+		// Check error when username exist
+		if (userService.checkExistsByUserName(userDTO.getUserName())) {
 			return "redirect:registerAccount?msgUserName=Register_Failed";
 		}
-		//Check error when email exist
-		if (userServiceImpl.checkExistsByEmail(userDTO.getEmail())) {
+		// Check error when email exist
+		if (userService.checkExistsByEmail(userDTO.getEmail())) {
 			return "redirect:registerAccount?msgEmail=Register_Failed";
 		}
-		//Check error when validate bean
+		// Check error when validate bean
 		if (result.hasErrors()) {
 			return "user/register";
 		}
-		userServiceImpl.saveUser(userConverter.convertUserEntity(userDTO));
+		userService.saveUser(userConverter.convertUserEntity(userDTO));
 		return "redirect:login?message=Register_Successful";
 	}
 
@@ -77,7 +77,7 @@ public class AccountController {
 	@PostMapping("/checkUserName")
 	@ResponseBody
 	public String checkExistsByUserName(@RequestParam String userName) {
-		Boolean result = userServiceImpl.checkExistsByUserName(userName);
+		Boolean result = userService.checkExistsByUserName(userName);
 		return "" + result;
 	}
 
@@ -90,7 +90,7 @@ public class AccountController {
 	@PostMapping("/checkEmail")
 	@ResponseBody
 	public String checkExistsByEmail(@RequestParam String email) {
-		Boolean result = userServiceImpl.checkExistsByEmail(email);
+		Boolean result = userService.checkExistsByEmail(email);
 		return "" + result;
 	}
 }
