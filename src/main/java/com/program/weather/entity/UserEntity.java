@@ -1,7 +1,6 @@
 package com.program.weather.entity;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -75,5 +74,5 @@ public class UserEntity {
 	
 	@OneToMany(mappedBy = "userEntity", cascade=CascadeType.REMOVE)
 	@JsonIgnore
-	private List<WeatherEntity> listWeather = new ArrayList<WeatherEntity>();
+	private List<WeatherEntity> listWeather;
 }

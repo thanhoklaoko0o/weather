@@ -63,22 +63,22 @@ public class CustomFilter extends GenericFilterBean {
 								}
 
 								if (userDetailsQuery == null) {
-	                                new SecurityContextLogoutHandler().logout(req, res, authentication);
-	                            }
+								new SecurityContextLogoutHandler().logout(req, res, authentication);
+							}
 
-	                        }
-	                    }
-	                }
-	            }
-	        }
+						}
+					}
+				}
+			}
+		}
 
-	        chain.doFilter(req, res);
-	    }
+		chain.doFilter(req, res);
+	}
 
-	    public CustomFilter(UserDetailsService userDetailsService) {
-	        this.userDetailsService = userDetailsService;
-	    }
+	public CustomFilter(UserDetailsService userDetailsService) {
+		this.userDetailsService = userDetailsService;
+	}
 
-	    public CustomFilter() {
-	    }
+	public CustomFilter() {
+	}
 }

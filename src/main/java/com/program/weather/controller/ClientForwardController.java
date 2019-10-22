@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.program.weather.entity.UserEntity;
-import com.program.weather.service.impl.UserServiceImpl;
+import com.program.weather.service.UserService;
 import com.program.weather.utils.Constants;
 /**
  * 
@@ -18,7 +18,7 @@ import com.program.weather.utils.Constants;
 public class ClientForwardController {
 
 	@Autowired
-	private UserServiceImpl userServiceImpl;
+	private UserService userService;
 
 	/**
 	 * Load pageLogin when user access to APP
@@ -51,7 +51,7 @@ public class ClientForwardController {
 		// Check UserName have been exist, if result = true
 		if (checkUserExist(username)) {
 			// Find UserEntity by userName, Then check status of User
-			UserEntity userEntity = userServiceImpl.findByUserName(username);
+			UserEntity userEntity = userService.findByUserName(username);
 			// Check status User, If Status = Unactive 
 			if (userEntity.isEnabled() == Constants.UN_ACTIVE)
 				// Return page 401 , announcement User is block
@@ -69,7 +69,7 @@ public class ClientForwardController {
 	 * @return True if UserName existed, else return False
 	 */
 	public boolean checkUserExist(String userName) {
-		return userServiceImpl.checkExistsByUserName(userName);
+		return userService.checkExistsByUserName(userName);
 	}
 
 	/**

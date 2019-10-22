@@ -8,22 +8,22 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		
-	}
 	
+	}
+
 	/* Add a gray background color and some padding to the footer */
 	footer {
 	
 		background-color: #000000b8;
 		padding: 25px;
 	}
-	
+
 	.carousel-inner img {
 	
 		width: 100%; /* Set width to 100% */
 		min-height: 200px;
 	}
-	
+
 	/* Hide the carousel text when the screen is less than 600 pixels wide */
 	@media ( max-width : 600px) {
 	
@@ -34,6 +34,7 @@
 	
 
 	.w-50{
+		
 		width: 86% !important; 
 		}
 		
@@ -46,7 +47,7 @@
 	
 		overflow: auto !important;
 	} */
-	
+
 	.tbl{
 		background-color: #d2bbbb7d;
 		overflow: auto;
@@ -62,7 +63,7 @@
 		overflow: hidden;
 		height: 400px;
 	} */
-	
+
 	.navbar-inverse {
 	
 		background-color: #222222bf;
@@ -70,66 +71,66 @@
 	}
 	
 	/* Css weather current location */
-	
+
 	.weather-widget {
 	
 		min-width: 250px;
 		font: 400 14px/1.4 Roboto, Arial, sans-serif;
 		margin-bottom: 30px;
 	}
-	
+
 	.weather-widget__city-name {
 	
 		font: 600 24px/1.4 Oswald, Arial, sans-serif;
 		margin-top: 0;
 	}
-	
+
 	.weather-widget__temperature {
 	
 		font: 600 30px/1.4 Oswald, Arial, sans-serif;
 	}
-	
+
 	.weather-widget__items {
 	
 		font: 400 14px/1.4 Roboto, Arial, sans-serif;
 		border: 1px solid #ddd;
 		width: 100%;
 	}
-	
+
 	table {
 	
 		max-width: 100%;
 		background-color: transparent;
 	}
-	
+
 	tbody {
 	
 		display: table-row-group;
 		vertical-align: middle;
 		border-color: inherit;
 	}
-	
+
 	tr {
 	
 		display: table-row;
 		vertical-align: inherit;
 		border-color: inherit;
 	}
-	
+
 	.weather-widget__item td {
 	
 		text-align: left;
 		padding: 5px;
 		border: 1px solid #ddd;
 	}
-	
+
 	.weather-widget__item td {
 	
 		text-align: left;
 		padding: 5px;
 		border: 1px solid #ddd;
 	}
-	
+
 	.tempmax {
 	background-color: #d6581ccc;
 	}
@@ -137,7 +138,7 @@
 	.tempmin {
 		background-color: #000000a6;
 	}
-	
+
 	.showmorestyle {
 	color: black;
 	font-weight: 700;
@@ -148,23 +149,23 @@
 	.trshowmore {
 		background-color: #d9edf76e;
 	}
-	
+
 	.trshowmore1 {
 		background-color: #d9edf76e;
 	}
-	
+
 	.showmorestyle {
 		cursor: pointer;
 	}
-	
+
 	#hideshowless {
 		display: none;
 	}
-	
+
 	#showless {
 		display: none;
 	}
-	
+
 	/* forecast weather */
 	.panel {
 	background-color: #ffffff4d;
@@ -173,20 +174,17 @@
 	.table-striped>tbody>tr:nth-of-type(odd) {
 		background-color: #f9f9f961;
 	}
-	
+
 	.panel-default>.panel-heading {
 		color: #333;
 		background-color: #f5f5f56b;
 		border-color: #ddd;
 	}
-	
+
 	#tr-today0{
 		background-color: #867e7e99;
 	}
-	
-	
-	/* Css login */
-	
+
 	.login-form form .textpass {
 	margin: 0px 65px 10px;
 	}
@@ -201,21 +199,21 @@
 		height: 55px;
 		width: 302px;
 	}
-	
+
 	/* form reset */
 	.login-form-reset {
 		width: 340px;
 		margin: 50px auto;
 		position: relative;
 	}
-	
+
 	.login-form-reset form {
 		margin-bottom: 15px;
 		background: #f7f7f7;
 		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
 		padding: 30px;
 	}
-	
+
 	.title-reset {
 		background-color: #337ab7;
 		position: absolute;
@@ -223,18 +221,52 @@
 		left: 0px;
 		width: 340px;
 	}
-	
+
 	.title-reset p {
 		color: white;
 	}
-	
+
 	.iframe-admin{
 		background-color: #b9b5b096;
 	}
-	
+
 	.iframe-login{
 		background-color: #1e27312e;
 	}
+
 	.form-group{
-		height: 25px;
+		height : 50px;
+		width : 80%;
+		margin: auto;
+		margin-bottom : 32px
+	}
+
+	.form-search{
+		width: 100%;
+	}
+
+	.error{
+		color: red;
+	}
+
+	.form-control{
+		color: #000000ad;
+		height: 42px;
+	}
+
+	.group-message{
+		height: 50px;
+	}
+
+	.btn-signin{
+		width: 50%;
+		margin: auto;
+	}
+
+	.btn-register{
+		width: 80%;
+		margin: auto;
+	}
+	.btn-search{
+		height: 42px;
 	}
