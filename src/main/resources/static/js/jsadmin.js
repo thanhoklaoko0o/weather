@@ -105,9 +105,9 @@
 		var id = $(this).closest("tr").attr("data-id");
 		var selected = $(this).children("option:selected").val();
 		if(selected == 1){
-			var roleName = "ROLE_ADMIN";
+			var roleName = "ADMIN";
 		}else{
-			var roleName = "ROLE_USER";
+			var roleName = "USER";
 		}
 
 		$.ajax({

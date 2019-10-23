@@ -21,8 +21,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private CustomFilter customFilter;
+
 	@Autowired
 	private CustomUserDetailsService customUserDetailsService;
+
 	@Autowired
 	private UserAuthenticationSuccessHandler successHandler;
 
@@ -49,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");
 
 		http.authorizeRequests().and().formLogin()//
-				.loginPage("/login")//
-				.loginProcessingUrl("/form-login") 
+				//.loginPage("/login")//
+				.loginProcessingUrl("/form-login")
 				.successHandler(successHandler)
 				.failureForwardUrl("/processUrlFail")
 				.usernameParameter("username")//

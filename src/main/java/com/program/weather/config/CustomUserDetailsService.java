@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 			Set<RoleEntity> roles					 = user.getRoles();
 
 			for (RoleEntity role : roles) {
-				grantedAuthorities.add(new SimpleGrantedAuthority(role.getRole()));
+				grantedAuthorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRole()));
 			}
 			UserDetails userDetails = (UserDetails) new User (user.getUserName(),user.getEncrytedPassword(),user.isEnabled(),
 																true,true,true,grantedAuthorities);

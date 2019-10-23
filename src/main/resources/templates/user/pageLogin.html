@@ -19,7 +19,7 @@
 	<br>
  <div class="container" style="height: 700px;">
 	<div class="row ">
-	  <div class="col-sm-3 " >
+	  <div class="col-sm-3">
 	  </div>
 	  <div class="col-sm-6 iframe-login" >
 	  		
@@ -31,7 +31,7 @@
 					
 					<div class="group-message">
 						<label  th:if="${(param.message != null)}" style="color: green;">You registered account successfully</label>
-						<label  th:if="${(param.error != null)}" style="color: red;">Login Failed !</label>
+						<label  th:if="${(param.error != null)}" style="color: red;">Your username or password is not correct !</label>
 					</div>
 					
 					<div class="form-group">
@@ -49,7 +49,7 @@
 					
 					<div class="clearfix">
 						<p class="textpass">
-						<a th:href="@{/forgot-password}" class="pull-right" >Lost your Password?</a>
+						<a data-toggle="modal"data-target=".bd-example-modal-sm1" class="pull-right" >Lost your Password?</a>
 						</p>
 					</div>
 					
@@ -60,6 +60,31 @@
 						 <a class="C_linksignup" th:href="@{/registerAccount}">Sign up here</a>
 					</p>
 				
+			</div>
+			<!-- reset password -->
+			<div class="modal fade bd-example-modal-sm1" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+				<div class="modal-dialog modal-sm">
+						<div class="col-sm-12 frame-reset">
+						<div class="col-sm-12"><h4>Reset Password</h4></div>
+						<div class="col-sm-12">
+							<form method="post">
+							<div class="form-group form-reset">
+								
+							</div>
+							<div class="form-group form-reset">
+								<input type="text" class="form-control"placeholder="Type email..." name="name">
+							</div>
+
+							<div class="form-group form-reset">
+								<button type="submit" class="btn btn-primary btn-block">Get New Password</button>
+							</div>
+							
+						</form>
+						</div>
+					</div>
+					
+					
+				</div>
 			</div>
 	  </div>
 	  <div class="col-sm-3">

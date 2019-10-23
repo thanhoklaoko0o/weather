@@ -43,7 +43,6 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 
 	@Override
 	public void onApplicationEvent(ContextRefreshedEvent event) {
-		// Set Role entity
 		// Check ROLE_ADMIN have been existed
 		if (!roleRepository.findByRole(Constants.ADMIN).isPresent()) {
 			// If result = false, Create ROLE_ADMIN
@@ -73,8 +72,6 @@ public class DataSeedingListener implements ApplicationListener<ContextRefreshed
 			accountAdmin.setRoles(roles);
 			//Add USER Admin in DB
 			userRepository.save(accountAdmin);
-			
 		}
 	}
-
 }

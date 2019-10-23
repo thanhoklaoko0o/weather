@@ -63,7 +63,7 @@ public class UserServiceImpl implements UserService {
 		userEntity.setCreateDate(new Timestamp(System.currentTimeMillis()));
 		// Set role default is USER
 		// RoleEntity userrole = roleRepository.findByRole("ROLE_USER");
-		RoleEntity userrole = roleRepository.findByRole("ROLE_USER").get();
+		RoleEntity userrole = roleRepository.findByRole(Constants.USER).get();
 		userEntity.setRoles(new HashSet<RoleEntity>(Arrays.asList(userrole)));
 	}
 
