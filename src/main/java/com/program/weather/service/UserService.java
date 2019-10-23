@@ -26,7 +26,7 @@ public interface UserService {
 
 	void deleteUserById(Long id);
 
-	List<UserEntity> findAllUser();
+	List<UserEntity> findAllUser(Long userId);
 
 	Boolean checkExistsByUserName(String userName);
 

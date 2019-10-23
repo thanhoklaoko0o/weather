@@ -85,8 +85,8 @@
 
 		//
 		$.validator.addMethod("validateUserName", function(value, element) {
-			return this.optional(element)|| /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,32}$/i.test(value);
-		}, "Include uppercase, lowercase letters and least one digit, Length least 8 , up to 32 .");
+			return this.optional(element)|| /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{1,}$/i.test(value);
+		}, "At least 1 uppercase, 1 lowercase and 1 number .");
 
 		//Validate Form
 		$("#form-signup").validate({
@@ -94,6 +94,8 @@
 				"userName" : {
 					required: true,
 					validateUserName : true,
+					minlength : 8,
+					maxlength : 32
 				},
 				"email" : {
 					required : true,
@@ -118,6 +120,8 @@
 			 messages : {
 					"userName" : {
 						required : "UserName is required .",
+						minlength : "Please enter at least 8 characters .",
+						maxlength : "Please enter up to 32 characters ."
 					},
 					"email" : {
 						required : "Email is required ."

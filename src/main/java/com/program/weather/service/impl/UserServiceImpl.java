@@ -77,7 +77,7 @@ public class UserServiceImpl implements UserService {
 	* Get all list user in DB
 	*/
 	@Override
-	public List<UserEntity> findAllUser() {return userRepository.findAll();}
+	public List<UserEntity> findAllUser(Long userId) {return userRepository.findAllUser(userId);}
 
 	/**
 	* Change status active user

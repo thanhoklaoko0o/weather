@@ -1,5 +1,6 @@
 package com.program.weather.controller;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.program.weather.converter.UserConverter;
 import com.program.weather.dto.UserDTO;
 import com.program.weather.entity.RoleEntity;
+import com.program.weather.entity.UserEntity;
 import com.program.weather.service.RoleService;
 import com.program.weather.service.UserService;
 /**
@@ -43,9 +45,11 @@ public class AdminController {
 	 * @return view admin
 	 */
 	@GetMapping
-	public String homeAdmin(Model model) {
+	public String homeAdmin(Model model, Principal principal) {
+		// Get info user Admin
+		UserEntity userEntity = userService.findByUserName(principal.getName());
 		// Get list User in DB
-		List<UserDTO> lstUser = userService.findAllUser().stream()
+		List<UserDTO> lstUser = userService.findAllUser(userEntity.getUserId()).stream()
 								.map(x -> userConverter.convertUserToDTO(x))
 								.collect(Collectors.toList());
 		// Get list Role in DB

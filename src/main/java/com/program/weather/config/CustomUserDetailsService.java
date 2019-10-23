@@ -16,7 +16,6 @@ import com.program.weather.entity.RoleEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.UserRepository;
 
-
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 

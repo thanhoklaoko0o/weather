@@ -51,7 +51,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");
 
 		http.authorizeRequests().and().formLogin()//
-				//.loginPage("/login")//
+				.loginPage("/login")//
 				.loginProcessingUrl("/form-login")
 				.successHandler(successHandler)
 				.failureForwardUrl("/processUrlFail")
