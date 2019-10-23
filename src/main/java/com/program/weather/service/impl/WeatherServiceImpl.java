@@ -8,9 +8,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.program.weather.converter.WeatherConverter;
-import com.program.weather.dto.CurrentWeatherDTO;
-import com.program.weather.dto.DetailsWeatherDTO;
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.dto.display.CurrentWeatherLocationDTO;
+import com.program.weather.dto.tranfer.CurrentWeatherDTO;
+import com.program.weather.dto.tranfer.DetailsWeatherDTO;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.entity.WeatherEntity;
 import com.program.weather.repository.WeatherRepository;
@@ -79,16 +79,16 @@ public class WeatherServiceImpl implements WeatherService {
 	 * Get weather by User by group by name city by date DESC
 	 */
 	@Override
-	public List<WeatherEntity> findAllByUserByDateDesc(UserEntity userEntity) {
-		return weatherRepository.findAllByUserByDateDesc(userEntity);
+	public List<WeatherEntity> findAllByUserByDateDesc(Long userId) {
+		return weatherRepository.findAllByUserByDateDesc(userId);
 	}
 	
 	/**
 	 * Get weather by User by group by name city by date ASC
 	 */
 	@Override
-	public List<WeatherEntity> findAllByUserByDateAsc(UserEntity userEntity) {
-		return weatherRepository.findAllByUserByDateAsc(userEntity);
+	public List<WeatherEntity> findAllByUserByDateAsc(Long userId) {
+		return weatherRepository.findAllByUserByDateAsc(userId);
 	}
 
 	/**
@@ -137,7 +137,7 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @param lon
 	 * @return CurrentWeatherEntity
 	 */
-	public CurrentWeatherEntity getWeatherCurWeather(String lat, String lon) {
+	public CurrentWeatherLocationDTO getWeatherCurWeather(String lat, String lon) {
 		CurrentWeatherDTO weatherDTO = restTemplate.getForObject(urlApiGetCurrentLocation(lat, lon).toString(), CurrentWeatherDTO.class);
 		//conver weatherDTO to current Weather
 		return weatherConverter.convertToCurWeather(weatherDTO);

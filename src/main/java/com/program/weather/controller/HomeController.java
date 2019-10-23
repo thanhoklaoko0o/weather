@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.dto.display.CurrentWeatherLocationDTO;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.entity.WeatherEntity;
 import com.program.weather.service.UserService;
@@ -44,7 +44,7 @@ public class HomeController {
 	public String homeDefault(Model model, Principal principal) {
 		//Get list weather by User order by Date desc
 		List<WeatherEntity> listWeatherByDateDest = weatherService
-				.findAllByUserByDateDesc(getCurUserEntity(principal));
+				.findAllByUserByDateDesc(getCurUserEntity(principal).getUserId());
 		//Check list weather is empty, If is empty forward page Home 
 		if (listWeatherByDateDest.isEmpty()) {
 			model.addAttribute("msgListEmpty", "No city had been choosen !");
@@ -96,10 +96,10 @@ public class HomeController {
 	private String processHome(Model model, Principal principal) {
 		// Get list weather by User order by Date desc
 		List<WeatherEntity> listWeatherByDateDest = weatherService
-				.findAllByUserByDateDesc(getCurUserEntity(principal));
+				.findAllByUserByDateDesc(getCurUserEntity(principal).getUserId());
 		// Get list weather by User order by Date Asc
 		List<WeatherEntity> listWeatherByDateAsc = weatherService
-				.findAllByUserByDateAsc(getCurUserEntity(principal));
+				.findAllByUserByDateAsc(getCurUserEntity(principal).getUserId());
 		// Set list weather for model to View
 		model.addAttribute("listWeatherDest", listWeatherByDateDest);
 		model.addAttribute("listWeatherAsc",  listWeatherByDateAsc);
@@ -131,7 +131,7 @@ public class HomeController {
 
 	@GetMapping("/forecast-current")
 	@ResponseBody
-	public CurrentWeatherEntity forecastCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
+	public CurrentWeatherLocationDTO forecastCurrentWeather(@RequestParam String lat, @RequestParam String lon) {
 		return weatherService.getWeatherCurWeather(lat, lon);
 	}
 

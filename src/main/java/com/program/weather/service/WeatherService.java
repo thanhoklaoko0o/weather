@@ -3,8 +3,8 @@ package com.program.weather.service;
 import java.util.List;
 
 import com.program.weather.entity.WeatherEntity;
-import com.program.weather.dto.DetailsWeatherDTO;
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.dto.display.CurrentWeatherLocationDTO;
+import com.program.weather.dto.tranfer.DetailsWeatherDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer Weather Service
@@ -19,13 +19,13 @@ public interface WeatherService {
 
 	List<WeatherEntity> findAllByUserEntity(UserEntity userEntity);
 
-	List<WeatherEntity> findAllByUserByDateDesc(UserEntity userEntity);
+	List<WeatherEntity> findAllByUserByDateDesc(Long userId);
 
-	List<WeatherEntity> findAllByUserByDateAsc(UserEntity userEntity);
+	List<WeatherEntity> findAllByUserByDateAsc(Long userId);
 
 	WeatherEntity getWeatherByApi(String nameCity);
 
 	DetailsWeatherDTO foreCast(String nameCity);
 
-	CurrentWeatherEntity getWeatherCurWeather(String lat, String lon);
+	CurrentWeatherLocationDTO getWeatherCurWeather(String lat, String lon);
 }

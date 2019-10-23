@@ -1,5 +1,7 @@
 package com.program.weather.controller;
 
+import java.security.Principal;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.program.weather.converter.UserConverter;
-import com.program.weather.dto.UserDTO;
+import com.program.weather.dto.tranfer.UserDTO;
+import com.program.weather.entity.UserEntity;
 import com.program.weather.service.UserService;
 
 /**
@@ -92,5 +95,20 @@ public class AccountController {
 	public String checkExistsByEmail(@RequestParam String email) {
 		Boolean result = userService.checkExistsByEmail(email);
 		return "" + result;
+	}
+
+	/**
+	 * Get Info UserEntity
+	 * @param model
+	 * @param principal
+	 * @return page profile
+	 */
+	@GetMapping("/profile-user")
+	public String getProfileUser(Model model, Principal principal) {
+		// Get USER when User login sucessful
+		UserDTO userDTO = userConverter.convertUserToDTO(userService.findByUserName(principal.getName()));
+		model.addAttribute("userDTO", userDTO);
+		
+		return "user/profile";
 	}
 }

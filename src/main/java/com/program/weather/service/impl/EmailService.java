@@ -6,7 +6,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring5.SpringTemplateEngine;
-import com.program.weather.dto.MailDTO;
+
+import com.program.weather.dto.tranfer.MailDTO;
 
 import javax.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.program.weather.converter.UserConverter;
-import com.program.weather.dto.UserDTO;
+import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.RoleEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.service.RoleService;

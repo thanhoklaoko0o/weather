@@ -24,6 +24,8 @@ public interface UserService {
 
 	void updateRoleUser(Long id, String roleName);
 
+	void updateProfileUser(String userName);
+
 	void deleteUserById(Long id);
 
 	List<UserEntity> findAllUser(Long userId);

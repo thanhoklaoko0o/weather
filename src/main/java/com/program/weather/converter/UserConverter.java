@@ -13,7 +13,7 @@ import java.util.Set;
 
 import org.springframework.stereotype.Component;
 
-import com.program.weather.dto.UserDTO;
+import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * 
@@ -29,8 +29,8 @@ public class UserConverter {
 	 */
 	public UserDTO convertUserToDTO(UserEntity userEntity) {
 		UserDTO user = new UserDTO(userEntity.getUserId(), userEntity.getUserName(), 
-									userEntity.getEmail(), userEntity.getFirstName(),
-									userEntity.getLastName(), userEntity.isEnabled());
+							userEntity.getEmail(),userEntity.getEncrytedPassword(), userEntity.getFirstName(),
+							userEntity.getLastName(), userEntity.isEnabled());
 		Set<Long> roles = new HashSet<Long>();
 		userEntity.getRoles().stream().forEach(i -> {
 			roles.add(i.getRoleId());

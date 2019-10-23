@@ -3,7 +3,7 @@ package com.program.weather.validator;
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 
-import com.program.weather.dto.UserDTO;
+import com.program.weather.dto.tranfer.UserDTO;
 
 public class PasswordMatchesValidator implements ConstraintValidator<PasswordMatches, Object> {
 

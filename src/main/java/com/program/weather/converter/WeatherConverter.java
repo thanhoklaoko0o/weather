@@ -5,8 +5,8 @@ import java.sql.Timestamp;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
-import com.program.weather.dto.CurrentWeatherDTO;
-import com.program.weather.entity.CurrentWeatherEntity;
+import com.program.weather.dto.display.CurrentWeatherLocationDTO;
+import com.program.weather.dto.tranfer.CurrentWeatherDTO;
 import com.program.weather.entity.WeatherEntity;
 import com.program.weather.utils.CommonUtil;
 /**
@@ -43,9 +43,9 @@ public class WeatherConverter {
 	 * @param weatherDTO
 	 * @return CurrentWeatherEntity
 	 */
-	public CurrentWeatherEntity convertToCurWeather(CurrentWeatherDTO weatherDTO) {
+	public CurrentWeatherLocationDTO convertToCurWeather(CurrentWeatherDTO weatherDTO) {
 		ModelMapper modelMapper = new ModelMapper();
-		CurrentWeatherEntity result = modelMapper.map(weatherDTO, CurrentWeatherEntity.class);
+		CurrentWeatherLocationDTO result = modelMapper.map(weatherDTO, CurrentWeatherLocationDTO.class);
 			// set property
 			result.setImage(weatherDTO.getWeather().get(0).getIcon());
 			result.setTemp(CommonUtil.toCelsius(Double.parseDouble(weatherDTO.getMain().getTemp())));

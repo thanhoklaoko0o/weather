@@ -10,7 +10,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.program.weather.dto.PasswordResetDTO;
+import com.program.weather.dto.tranfer.PasswordResetDTO;
 import com.program.weather.entity.PasswordResetToken;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.PasswordResetTokenRepository;

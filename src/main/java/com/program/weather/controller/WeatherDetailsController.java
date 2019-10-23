@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.program.weather.dto.DetailsWeatherDTO;
-import com.program.weather.dto.property.ListDetailDTO;
-import com.program.weather.entity.DetailsWeatherEntity;
+import com.program.weather.dto.display.DetailsWeatherForecastDTO;
+import com.program.weather.dto.tranfer.DetailsWeatherDTO;
+import com.program.weather.dto.tranfer.property.ListDetailDTO;
 import com.program.weather.service.WeatherService;
 import com.program.weather.utils.CommonUtil;
 
@@ -39,7 +39,7 @@ public class WeatherDetailsController {
 	@GetMapping
 	public String foreCast5Day(@RequestParam String name, Model model) {
 		// Get list forecast weather 5 day of city
-		List<DetailsWeatherEntity> lstForecast = getListDetails5Day(name);
+		List<DetailsWeatherForecastDTO> lstForecast = getListDetails5Day(name);
 		model.addAttribute("lstForeCast", lstForecast);
 		model.addAttribute("nameCity", name.toUpperCase());
 		model.addAttribute("timeToday", Instant.now());
@@ -51,11 +51,11 @@ public class WeatherDetailsController {
 	 * @param listDetail
 	 * @return list detail weather entity
 	 */
-	private List<DetailsWeatherEntity> getListDetailsDTO(List<ListDetailDTO> listDetail){
+	private List<DetailsWeatherForecastDTO> getListDetailsDTO(List<ListDetailDTO> listDetail){
 		int SIZE_WEATHER_REPEAT = 8;
-		List<DetailsWeatherEntity> lstForecast = new ArrayList<DetailsWeatherEntity>();
+		List<DetailsWeatherForecastDTO> lstForecast = new ArrayList<DetailsWeatherForecastDTO>();
 		for (int i = 0; i < listDetail.size(); i += SIZE_WEATHER_REPEAT) {
-			lstForecast.add(new DetailsWeatherEntity(i, listDetail.get(i).getDt_txt(),
+			lstForecast.add(new DetailsWeatherForecastDTO(i, listDetail.get(i).getDt_txt(),
 							listDetail.get(i).getWeather().get(0).getIcon(),
 							CommonUtil.toCelsius(Double.parseDouble(listDetail.get(i).getMain().getTemp_min())),
 							CommonUtil.toCelsius(Double.parseDouble(listDetail.get(i).getMain().getTemp_max())),
@@ -73,7 +73,8 @@ public class WeatherDetailsController {
 	 * @param nameCity
 	 * @return list detailweatherEntity forecast
 	 */
-	private List<DetailsWeatherEntity> getListDetails5Day(String nameCity){
+	private List<DetailsWeatherForecastDTO> getListDetails5Day(String nameCity){
+		// Get list forecast weather from API
 		DetailsWeatherDTO detailsWeatherDTO = weatherService.foreCast(nameCity);
 		return getListDetailsDTO(detailsWeatherDTO.getList());
 	}

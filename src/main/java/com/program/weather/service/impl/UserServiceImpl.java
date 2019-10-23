@@ -140,4 +140,12 @@ public class UserServiceImpl implements UserService {
 		userEntity.setEncrytedPassword(password);
 		userRepository.save(userEntity);
 	}
+
+	@Override
+	public void updateProfileUser(String userName) {
+		// Get UserEntity
+		UserEntity userEntity = userRepository.findByUserName(userName);
+		// Set info user modified
+		
+	}
 }

@@ -60,6 +60,9 @@ public class UserEntity {
 	@Column(name = "create_date")
 	private Timestamp createDate;
 
+	@Column(name = "modified_date")
+	private Timestamp modifiedDate;
+
 	public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName) {
 		this.userName = userName;
 		this.email = email;

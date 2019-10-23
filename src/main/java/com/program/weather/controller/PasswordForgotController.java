@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.program.weather.dto.MailDTO;
-import com.program.weather.dto.PasswordForgotDTO;
+import com.program.weather.dto.tranfer.MailDTO;
+import com.program.weather.dto.tranfer.PasswordForgotDTO;
 import com.program.weather.entity.PasswordResetToken;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.PasswordResetTokenRepository;
