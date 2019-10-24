@@ -1,47 +1,4 @@
-
 	$().ready(function() {
-		/**
-		 * check user name in DB
-		 * 
-		 * @param userName
-		 * @returns
-		 *//*
-		$('.userName').on('keyup', function() {
-			//Check UserName existed when user type input
-			if (this.value.length > 0) {
-				var userName = this.value;
-				//Check in DB system
-				$.ajax({
-					url : "/checkUserName",
-					type : "POST",
-					data : {
-						userName : userName
-					},
-					success : function(value) {
-						// If result = true, UserName exsts 
-						if(value == "true"){
-							// Message when UserName exists
-							$("#kqCheckName").text("");
-							// Disable input in form sign up
-							var inputs=document.getElementsByClassName("disinput");
-							for(i=0;i<inputs.length;i++){
-								inputs[i].disabled=false;
-							}
-						// If result = false
-						}else{
-							$("#kqCheckName").text("User name not exists in system !")
-							var inputs=document.getElementsByClassName("disinput");
-							for(i=0;i<inputs.length;i++){
-								inputs[i].disabled=true;
-							}
-						}
-					}
-				})
-		}else{
-			$("#kqCheckName").text("");
-		}
-	});
-	*/
 		//Validate Form
 		$("#form-login").validate({
 			rules: {
@@ -67,4 +24,25 @@
 					}
 			}
 		});
+
+		//Reset password
+		$(".btn-block").click(function(){
+			var form =  $('#txt_email').val();
+			$.ajax({
+				url : "/forgot-password",
+				type : "POST",
+				data : {
+					form : form
+				},
+
+				success : function(value) {
+					if(value == true){
+						Swal.fire('Done !', 'You click OK to continue !', 'success')
+					}
+				},
+				error : function() {
+					
+				}
+			})
+		})
 	});

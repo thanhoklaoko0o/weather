@@ -30,7 +30,7 @@
 					 	error: function() {
 					 		window.location.href = "/home-admin?message=error_system";
 					 	}
-				 })   
+				 })
 			 }
 		 })
 	})

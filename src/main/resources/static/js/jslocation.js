@@ -10,8 +10,8 @@ $( document ).ready(function() {
 	
 	function showPosition(position) {
 		
-		var lat =  position.coords.latitude;
-		var lon =  position.coords.longitude;
+		var lat = position.coords.latitude;
+		var lon = position.coords.longitude;
 			
 		$.ajax({
 			url		:"/home-weather/forecast-current",
@@ -23,8 +23,8 @@ $( document ).ready(function() {
 			
 			success: function(value){
 				var weHTML = '<div class="widget__temperature"><div class="weather-widget"> <h2 class="weather-widget__city-name" style="color: #9100ff;">Weather now </h2>'
-							+' <h3 class="weather-widget__temperature"><img class="weather-widget__img" src="https://openweathermap.org/img/wn/'
-							+value.image+'.png"  width="50" height="50">'+value.temp+' °C </h3><b><p class="weather-widget__main">'
+							+' <h3 class="weather-widget__temperature" style=" color: #337ab7d9;">'+value.temp+' °C <img class="weather-widget__img" src="https://openweathermap.org/img/wn/'
+							+value.image+'.png" style="width:100px;height:70px;"></h3><b><p class="weather-widget__main">'
 							+value.cloudiness+'</p></b>'
 							+'<table class="weather-widget__items">'
 							+'<tbody>'

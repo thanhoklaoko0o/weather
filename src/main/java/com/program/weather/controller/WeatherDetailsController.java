@@ -38,12 +38,19 @@ public class WeatherDetailsController {
 	 */
 	@GetMapping
 	public String foreCast5Day(@RequestParam String name, Model model) {
-		// Get list forecast weather 5 day of city
-		List<DetailsWeatherForecastDTO> lstForecast = getListDetails5Day(name);
-		model.addAttribute("lstForeCast", lstForecast);
-		model.addAttribute("nameCity", name.toUpperCase());
-		model.addAttribute("timeToday", Instant.now());
-		return "user/foreCast";
+		try {
+			// Get list forecast weather 5 day of city
+			List<DetailsWeatherForecastDTO> lstForecast = getListDetails5Day(name);
+			if(lstForecast != null) {
+				model.addAttribute("lstForeCast", lstForecast);
+				model.addAttribute("nameCity", name.toUpperCase());
+				model.addAttribute("timeToday", Instant.now());
+				return "user/foreCast";
+			}
+		} catch (Exception e) {
+			return "redirect:home-weather?message_forecast=notfound";
+		}
+		return "";
 	}
 
 	/**

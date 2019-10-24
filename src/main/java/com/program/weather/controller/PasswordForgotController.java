@@ -1,28 +1,24 @@
 package com.program.weather.controller;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.program.weather.dto.tranfer.MailDTO;
-import com.program.weather.dto.tranfer.PasswordForgotDTO;
 import com.program.weather.entity.PasswordResetToken;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.PasswordResetTokenRepository;
 import com.program.weather.service.UserService;
 import com.program.weather.service.impl.EmailService;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.UUID;
-
 @Controller
-@RequestMapping("/forgot-password")
 public class PasswordForgotController {
 
 	@Autowired 
@@ -34,28 +30,23 @@ public class PasswordForgotController {
 	@Autowired 
 	private EmailService emailService;
 
-	@ModelAttribute("forgotPasswordForm")
-	public PasswordForgotDTO forgotPasswordDto() {
-		return new PasswordForgotDTO();
-	}
+	/*
+	 * @ModelAttribute("forgotPasswordForm") public PasswordForgotDTO
+	 * forgotPasswordDto() { return new PasswordForgotDTO(); }
+	 */
 
 	/*
 	 * @GetMapping public String displayForgotPasswordPage() { return
 	 * "email/forgot-password"; }
 	 */
-	@PostMapping
-	public String processForgotPasswordForm(@ModelAttribute("forgotPasswordForm") @Valid PasswordForgotDTO form,
-											BindingResult result,
+	@PostMapping("/forgot-password")
+	@ResponseBody
+	public Boolean processForgotPasswordForm(@RequestParam String form,
 											HttpServletRequest request) {
 
-		if (result.hasErrors()){
-			return "email/forgot-password";
-		}
-
-		UserEntity user = userService.findByEmail(form.getEmail());
+		UserEntity user = userService.findByEmail(form);
 		if (user == null){
-			result.rejectValue("email", null, "We could not find an account for that e-mail address.");
-			return "email/forgot-password";
+			return false;
 		}
 
 		PasswordResetToken token = new PasswordResetToken();
@@ -78,7 +69,8 @@ public class PasswordForgotController {
 		mail.setModel(model);
 		emailService.sendEmail(mail);
 
-		return "redirect:/forgot-password?success";
+		//return "redirect:/forgot-password?success";
+		return true;
 
 	}
 }
