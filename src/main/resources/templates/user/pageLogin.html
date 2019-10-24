@@ -50,11 +50,11 @@
 									<h4>Reset Password</h4>
 								</div>
 							<div class="col-sm-12">
-								<form th:action = "@{/forgot-password}" method="post">
+								<form th:action = "@{/forgot-password}" method="get">
 									<div class="form-group form-reset"></div>
 									<div class="form-group form-reset">
 										<input type="text" class="form-control"
-											placeholder="Type email..." name="form">
+											placeholder="Type email..." name="form" th:value="${(param.name)}">
 									</div>
 									<div class="form-group form-reset">
 										<button type="submit" class="btn btn-primary btn-block">Get New Password</button>

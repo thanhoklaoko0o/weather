@@ -72,6 +72,25 @@ public class AccountController {
 	}
 
 	/**
+	 * Update infomation User
+	 * @param userDTO
+	 * @param result
+	 * @param principal
+	 * @return page profile if sucessfull
+	 */
+	@PostMapping("/update-profile")
+	public String processUpdateUser(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result, Principal principal) {
+		// Check error when validate bean
+		if (result.hasErrors()) {
+			return "user/profile";
+		}
+		UserEntity userEntity = userService.findByUserName(principal.getName());
+		//update info USER
+		userService.updateProfileUser(userEntity, userDTO);
+		return "redirect:profile-user?message=Update_Successful";
+	}
+
+	/**
 	 * Check exists username in DB
 	 * 
 	 * @param userName

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.RoleEntity;
 import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.RoleRepository;
@@ -129,23 +130,39 @@ public class UserServiceImpl implements UserService {
 		return userRepository.existsByEmail(email);
 	}
 
+	/**
+	 * Find USER by email
+	 */
 	@Override
 	public UserEntity findByEmail(String email) {
 		return userRepository.findByEmail(email);
 	}
 
+	/**
+	 * update password when reset password
+	 */
 	@Override
 	public void updatePassword(String password, Long userId) {
+		// get USER need change
 		UserEntity userEntity = userRepository.findByUserId(userId);
+		// Set new password
 		userEntity.setEncrytedPassword(password);
+		//Update password
 		userRepository.save(userEntity);
 	}
 
+	/**
+	 * Update infomatin USER
+	 */
 	@Override
-	public void updateProfileUser(String userName) {
-		// Get UserEntity
-		UserEntity userEntity = userRepository.findByUserName(userName);
+	public void updateProfileUser(UserEntity userEntity, UserDTO userDTO) {
 		// Set info user modified
-		
+		userEntity.setFirstName(userDTO.getFirstName());
+		userEntity.setLastName(userDTO.getLastName());
+		userEntity.setEmail(userDTO.getEmail());
+		userEntity.setEncrytedPassword(passwordEncoder.encode(userDTO.getEncrytedPassword()));
+		userEntity.setModifiedDate(new Timestamp(System.currentTimeMillis()));
+		// Update User
+		userRepository.save(userEntity);
 	}
 }

@@ -32,10 +32,8 @@ public class CustomFilter extends GenericFilterBean {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-		if (authentication != null) {
+		if (authentication != null && authentication.getPrincipal() != null) {
 			
-			if (authentication.getPrincipal() != null) {
-				
 					if (authentication.getPrincipal() instanceof UserDetails) {
 						
 						// if login then authentication.getCredentials() null
@@ -45,33 +43,25 @@ public class CustomFilter extends GenericFilterBean {
 							
 							if (!username.isEmpty()) {
 								UserDetails userDetailsQuery = null;
-
+								
 								try {
 									userDetailsQuery = userDetailsService.loadUserByUsername(username);
-
+									
 									if (!userDetailsQuery.isEnabled()) {
 										new SecurityContextLogoutHandler().logout(req, res, authentication);
 									}
-									
-									//boolean isAdmin = userDetailsQuery.getAuthorities().stream()
-									//		.anyMatch(role -> role.getAuthority().equals("ROLE_ADMIN"));
-									//if(isAdmin) {
-									//	new SecurityContextLogoutHandler().logout(req, res, authentication);
-									//}
-
 								} catch (Exception e) {
 								}
-
+								
 								if (userDetailsQuery == null) {
 								new SecurityContextLogoutHandler().logout(req, res, authentication);
 							}
-
+						
 						}
 					}
 				}
-			}
 		}
-
+	
 		chain.doFilter(req, res);
 	}
 

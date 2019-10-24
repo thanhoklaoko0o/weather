@@ -2,6 +2,7 @@ package com.program.weather.service;
 
 import java.util.List;
 
+import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer User Service
@@ -24,7 +25,7 @@ public interface UserService {
 
 	void updateRoleUser(Long id, String roleName);
 
-	void updateProfileUser(String userName);
+	void updateProfileUser(UserEntity userEntity, UserDTO userDTO);
 
 	void deleteUserById(Long id);
 

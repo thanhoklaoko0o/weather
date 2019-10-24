@@ -39,11 +39,10 @@ public class PasswordForgotController {
 		return new PasswordForgotDTO();
 	}
 
-	@GetMapping
-	public String displayForgotPasswordPage() {
-		return "email/forgot-password";
-	}
-
+	/*
+	 * @GetMapping public String displayForgotPasswordPage() { return
+	 * "email/forgot-password"; }
+	 */
 	@PostMapping
 	public String processForgotPasswordForm(@ModelAttribute("forgotPasswordForm") @Valid PasswordForgotDTO form,
 											BindingResult result,
