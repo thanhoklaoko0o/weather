@@ -13,11 +13,11 @@
 				}
 			},
 			 messages : {
-					"userName" : {
+					"username" : {
 						required : "UserName is required .",
 					},
 					
-					"username" : {
+					"password" : {
 						required : "Password is required .",
 						minlength : "Please enter at least 8 characters .",
 						maxlength : "Please enter up to 32 characters ."
