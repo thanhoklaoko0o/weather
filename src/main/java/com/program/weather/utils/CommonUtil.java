@@ -1,7 +1,5 @@
 package com.program.weather.utils;
 import java.sql.Timestamp;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 /**
  * 
@@ -9,15 +7,6 @@ import java.text.SimpleDateFormat;
  *
  */
 public class CommonUtil {
-	/**
-	 * Convert temperature F --> C
-	 * @param Fah
-	 * @return temprature C
-	 */
-	public static String toCelsius(double Fahrenheit) {
-		NumberFormat formatter =new DecimalFormat("#0.00");
-		return formatter.format((Fahrenheit - 32) * 5/9);
-	}
 
 	/**
 	 * 

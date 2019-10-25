@@ -97,7 +97,7 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @return Url api weather by namecity
 	 */
 	private StringBuilder urlApiGetWeather(String nameCity) {
-		return urlApiWeather().append(weatherURL+weatherVersion+weatherCurrent+"q="+nameCity+"&APPID="+appID+"&units=imperial");
+		return urlApiWeather().append(weatherURL+weatherVersion+weatherCurrent+"q="+nameCity+"&APPID="+appID+"&units=metric");
 	}
 
 	/**
@@ -106,7 +106,7 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @return Url api forecast weather
 	 */
 	private StringBuilder urlApiGetForecast(String nameCity) {
-		return urlApiWeather().append(weatherURL+weatherVersion+weatherForecast+"q="+nameCity+"&APPID="+appID+"&units=imperial");
+		return urlApiWeather().append(weatherURL+weatherVersion+weatherForecast+"q="+nameCity+"&APPID="+appID+"&units=metric");
 	}
 
 	/**
@@ -115,7 +115,7 @@ public class WeatherServiceImpl implements WeatherService {
 	 * @return Url api current location
 	 */
 	private StringBuilder urlApiGetCurrentLocation(String lat, String lon) {
-		return urlApiWeather().append(weatherURL+weatherVersion+weatherCurrent+"lat="+lat+"&lon="+lon+"&APPID="+appID+"&units=imperial");
+		return urlApiWeather().append(weatherURL+weatherVersion+weatherCurrent+"lat="+lat+"&lon="+lon+"&APPID="+appID+"&units=metric");
 	}
 
 	/**

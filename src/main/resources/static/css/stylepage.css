@@ -8,6 +8,7 @@ body {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	font-family: Arial, Helvetica, sans-serif;
 }
 
 /* Add a gray background color and some padding to the footer */
@@ -39,7 +40,7 @@ footer {
 }
 
 .navbar-inverse {
-	background-color: #033f8a9e;
+	background-color: #033f8a69;
 	border-color: #0a0a0a1a;
 }
 
@@ -203,7 +204,7 @@ tr {
 
 .form-group {
 	height: 50px;
-	width: 80%;
+	width: 100%;
 	margin: auto;
 	margin-bottom: 32px
 }
@@ -222,8 +223,7 @@ tr {
 }
 
 .group-message {
-	height: 40px;
-	width: 440px;
+	height: 15px;
 	margin: auto;
 }
 
@@ -275,4 +275,78 @@ h4 {
 	width: 80px;
 	height: 50px;
 }
-/* scroll */
+
+
+/* form login */
+/* Full-width input fields */
+input[type=text], input[type=password] {
+	width: 100%;
+	padding: 12px 20px;
+	margin: 8px 0;
+	display: inline-block;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+	background-color: #4c86aff5;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	margin-bottom: 10px;
+	border: none;
+	cursor: pointer;
+	width: 100%;
+}
+
+button:hover {
+	opacity: 0.8;
+}
+
+.btnlogin {
+	margin-bottom: 10px;
+}
+/* Center the image and position the close button */
+
+/* Modal Content/Box */
+.modal-content {
+	background-color: #fefefe47;
+	margin: 5% auto 15% auto;
+	/* 5% from the top, 15% from the bottom and centered */
+	border: 1px solid #888;
+	width: 100%; /* Could be more or less, depending on screen size */
+}
+
+/* Add Zoom Animation */
+.container-form {
+	margin: 20px
+}
+
+.frame-formlogin {
+	width: 50%;
+	margin: auto;
+}
+
+p {
+	text-align: center;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+  text-align: center;
+  margin: 24px 0 12px 0;
+  position: relative;
+}
+
+img.avatar {
+  width: 30%;
+  border-radius: 50%;
+}
+.btn-nav{
+	width: 15%;
+	border-color: #33333375;
+}
+ .btn-nav:focus, .btn-nav:hover {
+    background-color: #33333373;
+}

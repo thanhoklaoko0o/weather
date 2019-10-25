@@ -24,12 +24,12 @@
 					 type	:"POST",
 					 data	:{id:id},
 					 
-					 	success: function(value){
-					 		self.closest("tr").remove();
-					 	},
-					 	error: function() {
-					 		window.location.href = "/home-admin?message=error_system";
-					 	}
+				 	success: function(value){
+				 		self.closest("tr").remove();
+				 	},
+				 	error: function() {
+				 		window.location.href = "/home-admin?message=error_system";
+				 	}
 				 })
 			 }
 		 })

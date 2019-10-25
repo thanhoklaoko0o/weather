@@ -30,7 +30,7 @@ public class WeatherConverter {
 			result.setNameCity(weatherDTO.getName());
 			result.setIdCity(weatherDTO.getId());
 			result.setDate(new Timestamp(System.currentTimeMillis()));
-			result.setTemp(CommonUtil.toCelsius(Double.parseDouble(weatherDTO.getMain().getTemp())));
+			result.setTemp(weatherDTO.getMain().getTemp());
 			result.setDescription(weatherDTO.getWeather().get(0).getDescription());
 			result.setWind(weatherDTO.getWind().getSpeed());
 			result.setHumidity(weatherDTO.getMain().getHumidity());
@@ -48,7 +48,7 @@ public class WeatherConverter {
 		CurrentWeatherLocationDTO result = modelMapper.map(weatherDTO, CurrentWeatherLocationDTO.class);
 			// set property
 			result.setImage(weatherDTO.getWeather().get(0).getIcon());
-			result.setTemp(CommonUtil.toCelsius(Double.parseDouble(weatherDTO.getMain().getTemp())));
+			result.setTemp(weatherDTO.getMain().getTemp());
 			result.setCloudiness(weatherDTO.getWeather().get(0).getDescription());
 			result.setWind(weatherDTO.getWind().getSpeed());
 			result.setPressure(weatherDTO.getMain().getPressure());

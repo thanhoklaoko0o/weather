@@ -15,7 +15,6 @@ import com.program.weather.dto.display.DetailsWeatherForecastDTO;
 import com.program.weather.dto.tranfer.DetailsWeatherDTO;
 import com.program.weather.dto.tranfer.property.ListDetailDTO;
 import com.program.weather.service.WeatherService;
-import com.program.weather.utils.CommonUtil;
 
 /**
  * 
@@ -64,8 +63,8 @@ public class WeatherDetailsController {
 		for (int i = 0; i < listDetail.size(); i += SIZE_WEATHER_REPEAT) {
 			lstForecast.add(new DetailsWeatherForecastDTO(i, listDetail.get(i).getDt_txt(),
 							listDetail.get(i).getWeather().get(0).getIcon(),
-							CommonUtil.toCelsius(Double.parseDouble(listDetail.get(i).getMain().getTemp_min())),
-							CommonUtil.toCelsius(Double.parseDouble(listDetail.get(i).getMain().getTemp_max())),
+							listDetail.get(i).getMain().getTemp_min(),
+							listDetail.get(i).getMain().getTemp_max(),
 							listDetail.get(i).getWeather().get(0).getDescription(),
 							listDetail.get(i).getWind().getSpeed(),
 							listDetail.get(i).getMain().getHumidity(),
