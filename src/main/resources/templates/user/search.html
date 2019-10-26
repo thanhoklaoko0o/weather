@@ -1,0 +1,65 @@
+<th:block th:fragment="search" xmlns:th="http://www.thymeleaf.org">
+	<thead id="showSearch">
+		
+		<th:block th:if="${weatherSearch != null}">
+			<tr th:object="${weatherSearch}">
+				<td>
+					<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'" width="50" height="50">
+				</td>
+				
+				<td>
+					<b><a th:href="@{/forecast-weather(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
+					<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+				</td>
+				
+				<td>
+					<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+					<b><i th:text="*{description}"></i></b>
+					<p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>
+				</td>
+				
+				<th:block th:if="${addButton != null}">
+					<td><a class="btn btn-primary"
+						th:href="@{/home-weather/save-weather?(name=*{nameCity})}">Add</a>
+					</td>
+				</th:block>
+				
+				<th:block th:each="wea : ${listWeatherDest}">
+					<td
+						th:if="${weatherSearch.nameCity == wea.nameCity && #calendars.format(weatherSearch.date,'MMMM dd, yyyy') !=  #calendars.format(wea.date,'MMMM dd, yyyy')}">
+						<a class="btn btn-primary"
+						th:href="@{/home-weather/save-weather?(name=*{nameCity})}">Add</a>
+					</td>
+				</th:block>
+				
+				<th:block th:each="wea : ${listWeatherDest}">
+					<td
+						th:if="${weatherSearch.nameCity == wea.nameCity && #calendars.format(weatherSearch.date,'MMMM dd, yyyy') ==  #calendars.format(wea.date,'MMMM dd, yyyy')}">
+						<a class="btn btn btn-warning"
+						th:href="@{/home-weather/update-weather?(name=*{nameCity})}">Update</a>
+					</td>
+				</th:block>
+			
+			</tr>
+			
+		</th:block>
+		<!--  Message when weatherforecast not found -->
+		
+			<tr>
+				<td colspan="4">
+					<label th:if="${(param.message_forecast != null)}" style="color: black;">Now, Weather forecast is not found .</label>
+				</td>
+			</tr>
+		
+		<!--  Message when Weather city is not found  -->
+			<tr th:if="${msgSearch != null}">
+				<td colspan="4"><b><span th:text="${msgSearch}"></span></b></td>
+			</tr>
+		
+		<!-- Message when weather in DB is empty -->
+			<tr th:if="${msgListEmpty != null}">
+				<td colspan="4"><b><span th:text="${msgListEmpty}"></span></b></td>
+			</tr>
+	
+	</thead>
+</th:block>

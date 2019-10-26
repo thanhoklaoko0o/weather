@@ -1,0 +1,38 @@
+<th:block th:fragment="dataWeather" xmlns:th="http://www.thymeleaf.org">
+	<th:block th:if="${not #lists.isEmpty(listWeatherDest)}" th:each="we : ${listWeatherDest}">
+		<tbody th:class="${we.nameCity}">
+			<tr th:object="${we}" th:data-id="*{weatherId}">
+				
+				<td>
+					<img th:src="'http://openweathermap.org/img/wn/'+*{icon}+'.png'" width="50" height="50">
+				</td>
+				
+				<td>
+					<b><a th:href="@{/forecast-weather(name=*{nameCity})}" th:text="*{nameCity}">NameCity</a></b>
+					<p><span th:text="*{#calendars.format(date,'MMMM dd, yyyy')}">Date</span></p>
+				</td>
+				
+				<td>
+					<span class="badge badge-info" th:text="*{temp}+'°С'">Temperature</span>
+					<b><i th:text="*{description}"></i></b>
+					<p th:text="*{wind}+' m/s. '+*{humidity}+' %, '+*{pressure}+' hpa'">win humidity</p>
+				</td>
+				
+				<td>
+					<a class="btn btn-danger" th:href="@{/home-weather/deleteWeather(id=*{weatherId})}">Delete</a>
+				</td>
+				
+			</tr>
+			
+			<th:block th:each="item : ${listWeatherAsc}">
+				<tr th:id="${we.nameCity}+'showmore'" th:if="${item.nameCity == we.nameCity && item.date != we.date}">
+					<!-- <td colspan="1"></td> -->
+					<td colspan="4" th:id="${we.nameCity}+'showmoretd'" class="frame-showlist">
+						<p onclick="showlist(this)" th:attr-name="${we.nameCity}" class="showmorestyle">Show More</p>
+					</td>
+					<!-- <td colspan="1"></td> -->
+				</tr>
+			</th:block>
+		</tbody>
+	</th:block>
+</th:block>

@@ -1,0 +1,25 @@
+<th:block th:fragment="header" xmlns:th="http://www.thymeleaf.org">
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			
+			<div class="navbar-header" style="display: po">
+				<button type="button" class="navbar-toggle btn-nav" data-toggle="collapse" data-target="#myNavbar">
+					<span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" th:href="@{/home-weather}"></a>
+			</div>
+			
+			<div class="collapse navbar-collapse" id="myNavbar">
+				<ul class="nav navbar-nav">
+					<li th:if="${#request.isUserInRole('ADMIN')}"><a th:href="@{/home-admin}">MANAGEMENT</a></li>
+				</ul>
+				
+				<ul class="nav navbar-nav navbar-right">
+					<li><a th:href="@{/profile-user}" style="background-color: #009aff5c;
+							color: #f5f5f5;" th:utext="${#request.userPrincipal.name}"></a>
+					<li><a th:href="@{/logout}"> Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+</th:block>
