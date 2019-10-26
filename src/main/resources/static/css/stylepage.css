@@ -397,8 +397,8 @@ img.avatar {
     height:0px
 }
 .bg-fff{
-	background: #fff;
-    border: 1px solid blue;
+	background: #ffffff6b;
+    border: 1px solid #0095ff36;
     text-align: center;
     padding:30px;
 }
@@ -412,9 +412,7 @@ img.avatar {
 	margin-bottom:0px;
 	margin-top:40px;
 }
-.custom-update-submit input{
-	background: #28a745;
-}
+
 .nav-profile{
 	position: absolute;
     top: 0;
