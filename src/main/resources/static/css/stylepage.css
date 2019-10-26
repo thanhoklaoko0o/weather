@@ -200,6 +200,8 @@ tr {
 
 .iframe-login {
 	background-color: #1e27312e;
+	max-width: 360px;
+	margin: auto;
 }
 
 .form-group {
@@ -239,6 +241,7 @@ tr {
 
 .btn-search {
 	height: 42px;
+	width: 100%;
 }
 
 .frame-reset {
@@ -297,15 +300,21 @@ button {
 	margin-bottom: 10px;
 	border: none;
 	cursor: pointer;
-	width: 100%;
+	/* width: 100%; */
 }
 
 button:hover {
 	opacity: 0.8;
 }
 
+.frame-btnlogin {
+	width: 50%;
+	margin: auto;
+}
+
 .btnlogin {
 	margin-bottom: 10px;
+	width: 100%;
 }
 /* Center the image and position the close button */
 
@@ -324,7 +333,7 @@ button:hover {
 }
 
 .frame-formlogin {
-	width: 50%;
+	max-width:360px;
 	margin: auto;
 }
 
@@ -350,3 +359,77 @@ img.avatar {
  .btn-nav:focus, .btn-nav:hover {
     background-color: #33333373;
 }
+
+/* backgroud showmore show less */
+.frame-showlist{
+	background-color: #77777773;
+}
+.footer-login{
+	position: absolute;
+    bottom: 0;
+    width: 100vw;
+    margin-top: 20px;]
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555; 
+}
+.avatar{
+	cursor: pointer;
+}
+#customFile{
+	overflow: hidden;
+    width: 0px;
+    height:0px
+}
+.bg-fff{
+	background: #fff;
+    border: 1px solid blue;
+    text-align: center;
+    padding:30px;
+}
+.bg-fff label{
+	margin-bottom:0px;
+}
+.bg-fff label img{
+	width:150px ;
+}
+.custom-update-submit{
+	margin-bottom:0px;
+	margin-top:40px;
+}
+.custom-update-submit input{
+	background: #28a745;
+}
+.nav-profile{
+	position: absolute;
+    top: 0;
+    width: 100vw;
+}
+@media only screen and (max-width: 578px){
+	.mobie-custom{
+		position: initial;
+	}
+	.custom-body-mobie{
+		height:auto !important;
+	}
+
+}
+
+
+
+

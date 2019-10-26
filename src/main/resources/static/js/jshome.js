@@ -18,7 +18,7 @@
 						var trHTML = '';
 						var showLessHTML = '<tr id="'
 								+ name
-								+ 'showless"><td colspan="4"><p onclick="hidelist(this)" attr-name="'
+								+ 'showless"><td colspan="4" class="frame-showlist"><p onclick="hidelist(this)" attr-name="'
 								+ name
 								+ '" class="showmorestyle">Show Less</p></td></tr>';
 						
@@ -82,7 +82,7 @@
 		$(".hideshowless" + name).remove();
 		$("#" + name + "showless").remove();
 		var tdHTML = '<td colspan="4" id="' + name
-				+ 'showmoretd"><p onclick="showlist(this)" attr-name="' + name
+				+ 'showmoretd" class="frame-showlist"><p onclick="showlist(this)" attr-name="' + name
 				+ '" class="showmorestyle">Show More</p></td>';
 		$("#" + name + "showmore").append(tdHTML);
 	

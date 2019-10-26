@@ -2,13 +2,9 @@
 	<html lang="en" xmlns:th="http://www.thymeleaf.org">
 		<!-- header page -->
 		<th:block th:replace="layout/head :: head"></th:block>
-		<!-- <body style="height: 100vh;"> -->
-<br>
-<br>
-<br>
+		<body style="height: 100vh;">
 <div class="container">
 	<div class="row">
-		<div class="col-sm-12">
 			<div class="frame-formlogin">
 				<form class="modal-content" th:action="@{/form-login}" method="post" id="form-login">
 					
@@ -28,7 +24,9 @@
 						<div class="form-group">
 							<input type="password" class="form-control" placeholder="Password" name="password">
 						</div>
-						<button type="submit" class="btn btn-primary btnlogin">Login</button>
+						<div class="frame-btnlogin">
+							<button type="submit" class="btn btn-primary btnlogin">Login</button>
+						</div>
 						<p><a href="#">Forgot password ?</a></p>
 					</div>
 					
@@ -37,7 +35,6 @@
 					</div>
 				</form>
 			</div>
-		</div>
 		<!-- <div class="col-sm-3"></div>
 					<div class="col-sm-6 iframe-login">
 					Form Login
@@ -97,10 +94,11 @@
 			<div class="col-sm-3"></div>
  -->
 	</div>
-	<hr>
 </div>
 <!-- Footer -->
-	<th:block th:replace="layout/footer :: footer"></th:block>
+	<div class="footer-login">
+		<th:block th:replace="layout/footer :: footer"></th:block>
+	</div>
 	<script th:src="@{/js/jquery.validate.min.js}" type="text/javascript"></script>
 	<script type="text/javascript" th:src="@{/js/jslogin.js}"></script>
 	</body>
