@@ -12,12 +12,13 @@
 			<div class="row ">
 				
 				<div class="col-sm-12">
-					<form th:action="@{/update-profile}" method="post" th:object="${userDTO}" id="form-profile">
+					<form th:action="@{/update-profile}" method="post" th:object="${userDTO}" id="form-profile" enctype="multipart/form-data">
 						<div class="row">
 							<div class="col-sm-4">
-								<div class="bg-fff">
-									<label for="customFile"><img src="https://www.w3schools.com/bootstrap4/img_avatar3.png" alt="Avatar" class="avatar"></label>
-									<input type="file" class="custom-file-input" id="customFile" name="filename">
+								<div class="bg-fff imgUp">
+									<div class="imagePreview"></div>
+									<label for="customFile"><img th:src="'../img/upload/'+*{imageAvatar}" alt="Avatar" class="avatar uploadFile img"></label>
+									<input type="file" class="custom-file-input" id="customFile" th:field="*{avatar}">
 									<br>
 									<p>Chose image to update</p>
 								</div>
@@ -81,5 +82,26 @@
 	
 	<script th:src="@{/js/jquery.validate.min.js}" type="text/javascript"></script>
 	<script type = "text/javascript" th:src = "@{/js/jsprofile.js}"></script>
+	<script type="text/javascript">
+	$(function() {
+	    $(document).on("change",".uploadFile", function()
+	    {
+	    		var uploadFile = $(this);
+	        var files = !!this.files ? this.files : [];
+	        if (!files.length || !window.FileReader) return; // no file selected, or no FileReader support
+	 
+	        if (/^image/.test( files[0].type)){ // only image file
+	            var reader = new FileReader(); // instance of the FileReader
+	            reader.readAsDataURL(files[0]); // read the local file
+	 
+	            reader.onloadend = function(){ // set image data as background of div
+	                //alert(uploadFile.closest(".upimage").find('.imagePreview').length);
+	uploadFile.closest(".imgUp").find('.imagePreview').css("background-image", "url("+this.result+")");
+	            }
+	        }
+	      
+	    });
+	});
+	</script>
 	</body>
 </html>

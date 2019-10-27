@@ -200,7 +200,7 @@ tr {
 
 .iframe-login {
 	background-color: #1e27312e;
-	max-width: 360px;
+	max-width: 450px;
 	margin: auto;
 }
 
@@ -324,7 +324,7 @@ button:hover {
 	margin: 5% auto 15% auto;
 	/* 5% from the top, 15% from the bottom and centered */
 	border: 1px solid #888;
-	width: 100%; /* Could be more or less, depending on screen size */
+	width: 360px; /* Could be more or less, depending on screen size */
 }
 
 /* Add Zoom Animation */
@@ -350,7 +350,7 @@ p {
 
 img.avatar {
   width: 30%;
-  border-radius: 50%;
+  border-radius: 10%;
 }
 .btn-nav{
 	width: 15%;
@@ -371,7 +371,7 @@ img.avatar {
     margin-top: 20px;]
 }
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 5px;
 }
 
 /* Track */
@@ -406,7 +406,8 @@ img.avatar {
 	margin-bottom:0px;
 }
 .bg-fff label img{
-	width:150px ;
+	width:150px;
+	height: 270px;
 }
 .custom-update-submit{
 	margin-bottom:0px;
@@ -428,6 +429,35 @@ img.avatar {
 
 }
 
+.frame-forecast{
+	max-width: 80%;
+	margin: auto;
+}
 
+.frame-register{
+	width: 90%;
+}
 
+.animate {
+  -webkit-animation: animatezoom 0.6s;
+  animation: animatezoom 0.6s
+}
 
+@-webkit-keyframes animatezoom {
+  from {-webkit-transform: scale(0)} 
+  to {-webkit-transform: scale(1)}
+}
+  
+@keyframes animatezoom {
+  from {transform: scale(0)} 
+  to {transform: scale(1)}
+}
+
+.btn-reset{
+	width: 100%;
+}
+
+/* The Modal (background) */
+.modal {
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}

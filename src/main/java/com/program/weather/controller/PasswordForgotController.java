@@ -30,36 +30,25 @@ public class PasswordForgotController {
 	@Autowired 
 	private EmailService emailService;
 
-	/*
-	 * @ModelAttribute("forgotPasswordForm") public PasswordForgotDTO
-	 * forgotPasswordDto() { return new PasswordForgotDTO(); }
-	 */
-
-	/*
-	 * @GetMapping public String displayForgotPasswordPage() { return
-	 * "email/forgot-password"; }
-	 */
 	@PostMapping("/forgot-password")
 	@ResponseBody
-	public Boolean processForgotPasswordForm(@RequestParam String form,
-											HttpServletRequest request) {
-
-		UserEntity user = userService.findByEmail(form);
+	public Boolean processForgotPasswordForm(@RequestParam String email, HttpServletRequest request) {
+		UserEntity user = userService.findByEmail(email);
 		if (user == null){
 			return false;
 		}
-
+		
 		PasswordResetToken token = new PasswordResetToken();
 		token.setToken(UUID.randomUUID().toString());
 		token.setUser(user);
 		token.setExpiryDate(30);
 		tokenRepository.save(token);
-
+		
 		MailDTO mail = new MailDTO();
 		mail.setFrom("no-reply@weatherapp.com");
 		mail.setTo(user.getEmail());
 		mail.setSubject("Password reset request");
-
+		
 		Map<String, Object> model = new HashMap<>();
 		model.put("token", token);
 		model.put("user", user);
@@ -68,9 +57,7 @@ public class PasswordForgotController {
 		model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
 		mail.setModel(model);
 		emailService.sendEmail(mail);
-
-		//return "redirect:/forgot-password?success";
+		
 		return true;
-
 	}
 }

@@ -29,15 +29,8 @@ public class PasswordResetController {
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
-	@ModelAttribute("passwordResetForm")
-	public PasswordResetDTO passwordReset() {
-		return new PasswordResetDTO();
-	}
-
 	@GetMapping
-	public String displayResetPasswordPage(@RequestParam(required = false) String token,
-											Model model) {
-
+	public String displayResetPasswordPage(@RequestParam String token, Model model) {
 		PasswordResetToken resetToken = tokenRepository.findByToken(token);
 		if (resetToken == null){
 			model.addAttribute("error", "Could not find password reset token.");

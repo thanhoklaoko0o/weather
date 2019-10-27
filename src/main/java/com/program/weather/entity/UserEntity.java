@@ -63,12 +63,16 @@ public class UserEntity {
 	@Column(name = "modified_date")
 	private Timestamp modifiedDate;
 
-	public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName) {
+	@Column(name = "avatar")
+	private String avatar;
+
+	public UserEntity (String userName, String email, String encrytedPassword, String firstName, String lastName, String avatar) {
 		this.userName = userName;
 		this.email = email;
 		this.encrytedPassword = encrytedPassword;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.avatar = avatar;
 	}
 
 	@ManyToMany(fetch = FetchType.EAGER)

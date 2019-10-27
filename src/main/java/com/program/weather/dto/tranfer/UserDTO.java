@@ -7,6 +7,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import com.program.weather.validator.PasswordMatches;
 
 import lombok.Getter;
@@ -47,7 +49,11 @@ public class UserDTO {
 
 	private Set<Long> roles;
 
-	public UserDTO(Long userId, String userName, String email, String encrytedPassword, String firstName, String lastName, boolean enabled) {
+	private MultipartFile avatar;
+
+	private String imageAvatar;
+
+	public UserDTO(Long userId, String userName, String email, String encrytedPassword, String firstName, String lastName, boolean enabled, String imageAvatar) {
 		super();
 		this.userId = userId;
 		this.userName = userName;
@@ -56,5 +62,6 @@ public class UserDTO {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.enabled = enabled;
+		this.imageAvatar = imageAvatar;
 	}
 }

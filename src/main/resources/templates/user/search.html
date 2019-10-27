@@ -43,20 +43,20 @@
 			</tr>
 			
 		</th:block>
-		<!--  Message when weatherforecast not found -->
-		
-			<tr>
+			<!--  Message when weatherforecast not found -->
+			
+			<tr th:if="${(param.message_forecast != null)}">
 				<td colspan="4">
-					<label th:if="${(param.message_forecast != null)}" style="color: black;">Now, Weather forecast is not found .</label>
+					<label style="color: black;">Now, Weather forecast is not found .</label>
 				</td>
 			</tr>
-		
-		<!--  Message when Weather city is not found  -->
+			
+			<!--  Message when Weather city is not found  -->
 			<tr th:if="${msgSearch != null}">
 				<td colspan="4"><b><span th:text="${msgSearch}"></span></b></td>
 			</tr>
-		
-		<!-- Message when weather in DB is empty -->
+			
+			<!-- Message when weather in DB is empty -->
 			<tr th:if="${msgListEmpty != null}">
 				<td colspan="4"><b><span th:text="${msgListEmpty}"></span></b></td>
 			</tr>
