@@ -103,6 +103,8 @@ public class HomeController {
 		// Set list weather for model to View
 		model.addAttribute("listWeatherDest", listWeatherByDateDest);
 		model.addAttribute("listWeatherAsc",  listWeatherByDateAsc);
+		// Title page
+		model.addAttribute("pageTitle", "Home");
 		return "user/pageHome";
 	}
 
@@ -204,6 +206,8 @@ public class HomeController {
 									+ "<br> You do not have permission to access this page.";
 			model.addAttribute("message", message);
 		}
+		// Title page
+		model.addAttribute("pageTitle", "Access Denied");
 		return "error/403Page";
 	}
 

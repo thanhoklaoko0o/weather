@@ -45,8 +45,11 @@ public class AccountController {
 	 */
 	@GetMapping("/registerAccount")
 	public String pageRegister(Model model) {
+		
 		UserDTO userDTO = new UserDTO();
 		model.addAttribute("userDTO", userDTO );
+		// Title page
+		model.addAttribute("pageTitle", "Register");
 		return "user/register";
 	}
 
@@ -86,6 +89,8 @@ public class AccountController {
 		// Get USER when User login sucessful
 		UserDTO userDTO = userConverter.convertUserToDTO(userService.findByUserName(principal.getName()));
 		model.addAttribute("userDTO", userDTO);
+		// Title page
+		model.addAttribute("pageTitle", "Profile");
 		return "user/profile";
 	}
 

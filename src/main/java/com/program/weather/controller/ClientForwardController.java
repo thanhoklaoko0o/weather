@@ -2,6 +2,7 @@ package com.program.weather.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,7 +27,9 @@ public class ClientForwardController {
 	 * @return
 	 */
 	@GetMapping(value = { "/", "/login"})
-	public String login() {
+	public String login(Model model) {
+		// Title page
+		model.addAttribute("pageTitle", "Login");
 		return "user/pageLogin";
 	}
 
@@ -55,7 +58,7 @@ public class ClientForwardController {
 			// Check status User, If Status = Unactive 
 			if (userEntity.isEnabled() == Constants.UN_ACTIVE)
 				// Return page 401 , announcement User is block
-				return "redirect:error/401";
+				return "redirect:block/401";
 			else
 				// Return page login and message login failed
 				return "redirect:login?error=true";
@@ -76,6 +79,9 @@ public class ClientForwardController {
 	 * 
 	 * @return page 401 , User is blocked
 	 */
-	@GetMapping("/error/401")
-	public String page404() {return "error/401";}
+	@GetMapping("/block/401")
+	public String page404(Model model) {
+		// Title page
+		model.addAttribute("pageTitle", "Block");
+		return "error/401";}
 }

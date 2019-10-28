@@ -57,6 +57,8 @@ public class AdminController {
 		//Tranfer data from list to view admin
 		model.addAttribute("lstUser", lstUser);
 		model.addAttribute("lstRole", lstRole);
+		// Title page
+		model.addAttribute("pageTitle", "Management");
 		return "admin/pageAdmin";
 	}
 

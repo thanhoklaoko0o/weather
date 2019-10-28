@@ -39,7 +39,8 @@ public class PasswordResetController {
 		} else {
 			model.addAttribute("token", resetToken.getToken());
 		}
-
+		// Title page
+		model.addAttribute("pageTitle", "Reset password");
 		return "email/resetPassword";
 	}
 

@@ -48,7 +48,7 @@
 													+ item.weatherId
 													+ '" >Delete</a></td></tr>';
 										});
-	
+							
 						$('.' + name).append(trHTML).append(showLessHTML);
 			}
 		})

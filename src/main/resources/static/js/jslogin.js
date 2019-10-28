@@ -26,13 +26,13 @@
 		});
 
 		//Reset password
-		$(".btn-block").click(function(){
-			var form =  $('#txt_email').val();
+		$(".btn-reset").click(function(){
+			var email =  $('#txt_email').val();
 			$.ajax({
 				url : "/forgot-password",
 				type : "POST",
 				data : {
-					form : form
+					email : email
 				},
 
 				success : function(value) {

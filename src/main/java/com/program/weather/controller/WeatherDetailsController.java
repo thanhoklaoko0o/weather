@@ -44,6 +44,8 @@ public class WeatherDetailsController {
 				model.addAttribute("lstForeCast", lstForecast);
 				model.addAttribute("nameCity", name.toUpperCase());
 				model.addAttribute("timeToday", Instant.now());
+				// Title page
+				model.addAttribute("pageTitle", "Weather Forecast");
 				return "user/foreCast";
 			}
 		} catch (Exception e) {
