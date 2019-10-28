@@ -30,7 +30,7 @@ public class UserConverter {
 	public UserDTO convertUserToDTO(UserEntity userEntity) {
 		UserDTO user = new UserDTO(userEntity.getUserId(), userEntity.getUserName(), 
 							userEntity.getEmail(),userEntity.getEncrytedPassword(), userEntity.getFirstName(),
-							userEntity.getLastName(), userEntity.isEnabled(),userEntity.getAvatar());
+							userEntity.getLastName(), userEntity.isEnabled());
 		Set<Long> roles = new HashSet<Long>();
 		userEntity.getRoles().stream().forEach(i -> {
 			roles.add(i.getRoleId());
@@ -47,7 +47,7 @@ public class UserConverter {
 	public UserEntity convertUserEntity(UserDTO userDTO) {
 		UserEntity userEntity = new UserEntity(userDTO.getUserName(), userDTO.getEmail(), 
 												userDTO.getEncrytedPassword(), userDTO.getFirstName(),
-												userDTO.getLastName(),userDTO.getAvatar().getOriginalFilename());
+												userDTO.getLastName());
 		return userEntity;
 	}
 }

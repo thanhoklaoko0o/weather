@@ -1,6 +1,7 @@
 package com.program.weather.dto.tranfer;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 import com.program.weather.validator.FieldMatch;
 
@@ -11,10 +12,9 @@ import lombok.Setter;
 @FieldMatch(first = "password", second = "confirmPassword", message = "{user.password.confirm.msg}")
 public class PasswordResetDTO {
 
-	@NotEmpty
+	@Size(min = 8, max = 32, message = "{user.password.msg}")
 	private String password;
 
-	@NotEmpty
 	private String confirmPassword;
 
 	@NotEmpty

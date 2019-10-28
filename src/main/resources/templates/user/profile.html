@@ -12,20 +12,11 @@
 			<div class="row ">
 				
 				<div class="col-sm-12">
-					<form th:action="@{/update-profile}" method="post" th:object="${userDTO}" id="form-profile" enctype="multipart/form-data">
+					<form th:action="@{/update-profile}" method="post" th:object="${userDTO}" id="form-profile">
 						<div class="row">
-							<div class="col-sm-4">
-								<div class="bg-fff imgUp">
-									<div class="imagePreview"></div>
-									<label for="customFile"><img th:src="'../img/upload/'+*{imageAvatar}" alt="Avatar" class="avatar uploadFile img"></label>
-									<input type="file" class="custom-file-input" id="customFile" th:field="*{avatar}">
-									<br>
-									<p>Chose image to update</p>
-								</div>
-							</div>
-							<div class="col-sm-8">
+							<div class="col-sm-12">
 								<div class="bg-fff">
-									<div class="row">
+									<div class="row profile-user">
 										<div class="col-sm-6">
 											<div class="form-group frame-update text-left">
 												<label for="name">First Name:</label>
@@ -42,7 +33,7 @@
 										</div>
 									</div>
 									
-									<div class="row">
+									<div class="row profile-user">
 										<div class="col-sm-6">
 											<div class="form-group frame-update text-left">
 												<label for="pwd">Password:</label>
@@ -59,7 +50,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="form-group frame-update text-left">
+									<div class="form-group frame-update text-left profile-user">
 										<label for="email">Email address:</label>
 										<input type="text" class="form-control" th:field="*{email}" th:value="*{email}" placeholder="Enter email">
 										<label th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:red" ></label>

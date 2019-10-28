@@ -7,8 +7,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.program.weather.dto.tranfer.PasswordResetDTO;
 import com.program.weather.entity.PasswordResetToken;
@@ -39,6 +42,7 @@ public class PasswordResetController {
 		} else {
 			model.addAttribute("token", resetToken.getToken());
 		}
+		model.addAttribute("passwordResetDTO", new PasswordResetDTO());
 		// Title page
 		model.addAttribute("pageTitle", "Reset password");
 		return "email/resetPassword";
@@ -46,22 +50,18 @@ public class PasswordResetController {
 
 	@PostMapping
 	@Transactional
-	public String handlePasswordReset(@ModelAttribute("passwordResetForm") @Valid PasswordResetDTO form,
-										BindingResult result,
-										RedirectAttributes redirectAttributes) {
-
+	public String handlePasswordReset(@ModelAttribute("passwordResetDTO") @Valid PasswordResetDTO passwordResetDTO, BindingResult result) {
+		// If result has error
 		if (result.hasErrors()){
-			redirectAttributes.addFlashAttribute(BindingResult.class.getName() + ".passwordResetForm", result);
-			redirectAttributes.addFlashAttribute("passwordResetForm", form);
-			return "redirect:/reset-password?token=" + form.getToken();
+			return "redirect:/reset-password?token=" + passwordResetDTO.getToken();
 		}
-
-		PasswordResetToken token = tokenRepository.findByToken(form.getToken());
+		// Update password for USER
+		PasswordResetToken token = tokenRepository.findByToken(passwordResetDTO.getToken());
 		UserEntity user = token.getUser();
-		String updatedPassword = passwordEncoder.encode(form.getPassword());
+		String updatedPassword = passwordEncoder.encode(passwordResetDTO.getPassword());
 		userService.updatePassword(updatedPassword, user.getUserId());
 		tokenRepository.delete(token);
 
-		return "redirect:/login?resetSuccess";
+		return "redirect:/login?resetpassword=true";
 	}
 }

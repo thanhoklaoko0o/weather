@@ -1,9 +1,5 @@
 package com.program.weather.controller;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.security.Principal;
 
 import javax.validation.Valid;
@@ -107,18 +103,7 @@ public class AccountController {
 		if (result.hasErrors()) {
 			return "user/profile";
 		}
-		try {
-			// Save file image
-			File uploadAvatar = new File("D:\\RekkeiSoft\\WeatherOnetoMany\\weather\\src\\main\\resources\\static\\img\\upload\\"+userDTO.getAvatar().getOriginalFilename());
-			FileOutputStream fileOutputStream;
-			fileOutputStream = new FileOutputStream(uploadAvatar);
-			fileOutputStream.write(userDTO.getAvatar().getBytes());
-			fileOutputStream.close();
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		
 		UserEntity userEntity = userService.findByUserName(principal.getName());
 		//update info USER
 		userService.updateProfileUser(userEntity, userDTO);

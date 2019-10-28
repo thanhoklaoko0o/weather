@@ -14,7 +14,7 @@
 							<h2 class="text-center">Register Account</h2>
 							<div class="form-group frame-register">
 								<input type="text" class="form-control username" placeholder="Username" th:field="*{userName}">
-								<label for="userName" id="kqCheckName" style="color:red"></label>
+								<label id="kqCheckName" style="color:red"></label>
 								<label th:if="${#fields.hasErrors('userName')}" th:errors="*{userName}" style="color:red" ></label>
 								<label  th:if="${(param.msgUserName != null)}" style="color: red;">UserName have been registered !</label>
 							</div>

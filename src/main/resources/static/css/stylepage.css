@@ -1,463 +1,513 @@
-body {
-	background: #f4f4f4;
-	background-image:
-		url(https://www.accuweather.com/images/hero/6/1440x450.jpg);
-	background-repeat: no-repeat;
-	background-position: center;
-	background-size: cover;
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	font-family: Arial, Helvetica, sans-serif;
-}
-
-/* Add a gray background color and some padding to the footer */
-footer {
-	background-color: #000000b8;
-	padding: 25px;
-}
-
-.carousel-inner img {
-	width: 100%; /* Set width to 100% */
-	min-height: 200px;
-}
-
-/* Hide the carousel text when the screen is less than 600 pixels wide */
-@media ( max-width : 600px) {
-	.carousel-caption {
+	body {
+		background: #f4f4f4;
+		background-image:
+			url(https://www.accuweather.com/images/hero/6/1440x450.jpg);
+		background-repeat: no-repeat;
+		background-position: center;
+		background-size: cover;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		font-family: Arial, Helvetica, sans-serif;
+	}
+	
+	/* Add a gray background color and some padding to the footer */
+	footer {
+		background-color: #000000b8;
+		padding: 25px;
+	}
+	
+	.carousel-inner img {
+		width: 100%; /* Set width to 100% */
+		min-height: 200px;
+	}
+	
+	/* Hide the carousel text when the screen is less than 600 pixels wide */
+	@media ( max-width : 600px) {
+		.carousel-caption {
+			display: none;
+		}
+	}
+	
+	.w-50 {
+		width: 86% !important;
+	}
+	
+	.tbl {
+		background-color: #d2bbbb7d;
+		overflow: auto;
+		height: 400px;
+	}
+	
+	.navbar-inverse {
+		background-color: #033f8a69;
+		border-color: #0a0a0a1a;
+	}
+	
+	.navbar-inverse .navbar-nav>li>a {
+		color: #000000bd;
+		font-weight: bold;
+	}
+	
+	/* Css weather current location */
+	.weather-widget {
+		min-width: 250px;
+		font: 400 14px/1.4 Roboto, Arial, sans-serif;
+		margin-bottom: 30px;
+	}
+	
+	.weather-widget__city-name {
+		font: 600 24px/1.4 Oswald, Arial, sans-serif;
+		margin-top: 0;
+	}
+	
+	.weather-widget__temperature {
+		font: 600 30px/1.4 Oswald, Arial, sans-serif;
+	}
+	
+	.weather-widget__items {
+		font: 400 14px/1.4 Roboto, Arial, sans-serif;
+		border: 1px solid #ddd;
+		width: 100%;
+	}
+	
+	table {
+		max-width: 100%;
+		background-color: transparent;
+	}
+	
+	tbody {
+		display: table-row-group;
+		vertical-align: middle;
+		border-color: inherit;
+	}
+	
+	tr {
+		display: table-row;
+		vertical-align: inherit;
+		border-color: inherit;
+	}
+	
+	.weather-widget__item td {
+		text-align: left;
+		padding: 5px;
+		border: 1px solid #ddd;
+	}
+	
+	.weather-widget__item td {
+		text-align: left;
+		padding: 5px;
+		border: 1px solid #ddd;
+	}
+	
+	.tempmax {
+		background-color: #d6581ccc;
+	}
+	
+	.tempmin {
+		background-color: #000000a6;
+	}
+	
+	.showmorestyle {
+		color: black;
+		font-weight: 700;
+		width: 90px;
+		margin: auto;
+	}
+	
+	.trshowmore {
+		background-color: #d9edf76e;
+	}
+	
+	.trshowmore1 {
+		background-color: #d9edf76e;
+	}
+	
+	.showmorestyle {
+		cursor: pointer;
+	}
+	
+	#hideshowless {
 		display: none;
 	}
-}
-
-.w-50 {
-	width: 86% !important;
-}
-
-.tbl {
-	background-color: #d2bbbb7d;
-	overflow: auto;
-	height: 400px;
-}
-
-.navbar-inverse {
-	background-color: #033f8a69;
-	border-color: #0a0a0a1a;
-}
-
-.navbar-inverse .navbar-nav>li>a {
-	color: #000000bd;
-	font-weight: bold;
-}
-
-/* Css weather current location */
-.weather-widget {
-	min-width: 250px;
-	font: 400 14px/1.4 Roboto, Arial, sans-serif;
-	margin-bottom: 30px;
-}
-
-.weather-widget__city-name {
-	font: 600 24px/1.4 Oswald, Arial, sans-serif;
-	margin-top: 0;
-}
-
-.weather-widget__temperature {
-	font: 600 30px/1.4 Oswald, Arial, sans-serif;
-}
-
-.weather-widget__items {
-	font: 400 14px/1.4 Roboto, Arial, sans-serif;
-	border: 1px solid #ddd;
-	width: 100%;
-}
-
-table {
-	max-width: 100%;
-	background-color: transparent;
-}
-
-tbody {
-	display: table-row-group;
-	vertical-align: middle;
-	border-color: inherit;
-}
-
-tr {
-	display: table-row;
-	vertical-align: inherit;
-	border-color: inherit;
-}
-
-.weather-widget__item td {
-	text-align: left;
-	padding: 5px;
-	border: 1px solid #ddd;
-}
-
-.weather-widget__item td {
-	text-align: left;
-	padding: 5px;
-	border: 1px solid #ddd;
-}
-
-.tempmax {
-	background-color: #d6581ccc;
-}
-
-.tempmin {
-	background-color: #000000a6;
-}
-
-.showmorestyle {
-	color: black;
-	font-weight: 700;
-	width: 90px;
-	margin: auto;
-}
-
-.trshowmore {
-	background-color: #d9edf76e;
-}
-
-.trshowmore1 {
-	background-color: #d9edf76e;
-}
-
-.showmorestyle {
-	cursor: pointer;
-}
-
-#hideshowless {
-	display: none;
-}
-
-#showless {
-	display: none;
-}
-
-/* forecast weather */
-.panel {
-	background-color: #ffffff4d;
-}
-
-.table-striped>tbody>tr:nth-of-type(odd) {
-	background-color: #f9f9f961;
-}
-
-.panel-default>.panel-heading {
-	color: #333;
-	background-color: #f5f5f56b;
-	border-color: #ddd;
-}
-
-#tr-today0 {
-	background-color: #867e7e99;
-}
-
-.login-form form .textpass {
-	margin: 0px 65px 10px;
-}
-
-.login-form form .C_signup {
-	color: white;
-	font-size: 21px;
-	text-align: center;
-	padding-top: 12px;
-	background-color: #337ab7;
-	height: 55px;
-	width: 302px;
-}
-
-/* form reset */
-.login-form-reset {
-	width: 340px;
-	margin: 50px auto;
-	position: relative;
-}
-
-.login-form-reset form {
-	margin-bottom: 15px;
-	background: #f7f7f7;
-	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-	padding: 30px;
-}
-
-.title-reset {
-	background-color: #337ab7;
-	position: absolute;
-	top: 0px;
-	left: 0px;
-	width: 340px;
-}
-
-.title-reset p {
-	color: white;
-}
-
-.iframe-admin {
-	background-color: #b9b5b096;
-}
-
-.iframe-login {
-	background-color: #1e27312e;
-	max-width: 450px;
-	margin: auto;
-}
-
-.form-group {
-	height: 50px;
-	width: 100%;
-	margin: auto;
-	margin-bottom: 32px
-}
-
-.form-search {
-	width: 100%;
-}
-
-.error {
-	color: red;
-}
-
-.form-control {
-	color: #000000ad;
-	height: 42px;
-}
-
-.group-message {
-	height: 15px;
-	margin: auto;
-}
-
-.btn-signin {
-	width: 50%;
-	margin: auto;
-}
-
-.btn-register {
-	width: 80%;
-	margin: auto;
-}
-
-.btn-search {
-	height: 42px;
-	width: 100%;
-}
-
-.frame-reset {
-	background-color: #f5f5f5;
-}
-
-.form-reset {
-	height: 20px;
-}
-
-h4 {
-	text-align: center;
-	font-weight: bold;
-}
-
-.frame-update {
-	margin-bottom: 40px;
-}
-
-/* Profile */
-/* Logo */
-.navbar-brand {
-	padding: 0px; /* firefox bug fix */
-}
-
-.navbar-brand>img {
-	height: 100%;
-	padding: 15px; /* firefox bug fix */
-	width: auto;
-}
-
-.navbar-brand {
-	background: url(../img/icon.png) center/contain no-repeat;
-	width: 80px;
-	height: 50px;
-}
-
-
-/* form login */
-/* Full-width input fields */
-input[type=text], input[type=password] {
-	width: 100%;
-	padding: 12px 20px;
-	margin: 8px 0;
-	display: inline-block;
-	border: 1px solid #ccc;
-	box-sizing: border-box;
-}
-
-/* Set a style for all buttons */
-button {
-	background-color: #4c86aff5;
-	color: white;
-	padding: 14px 20px;
-	margin: 8px 0;
-	margin-bottom: 10px;
-	border: none;
-	cursor: pointer;
-	/* width: 100%; */
-}
-
-button:hover {
-	opacity: 0.8;
-}
-
-.frame-btnlogin {
-	width: 50%;
-	margin: auto;
-}
-
-.btnlogin {
-	margin-bottom: 10px;
-	width: 100%;
-}
-/* Center the image and position the close button */
-
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe47;
-	margin: 5% auto 15% auto;
-	/* 5% from the top, 15% from the bottom and centered */
-	border: 1px solid #888;
-	width: 360px; /* Could be more or less, depending on screen size */
-}
-
-/* Add Zoom Animation */
-.container-form {
-	margin: 20px
-}
-
-.frame-formlogin {
-	max-width:360px;
-	margin: auto;
-}
-
-p {
-	text-align: center;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.avatar {
-  width: 30%;
-  border-radius: 10%;
-}
-.btn-nav{
-	width: 15%;
-	border-color: #33333375;
-}
- .btn-nav:focus, .btn-nav:hover {
-    background-color: #33333373;
-}
-
-/* backgroud showmore show less */
-.frame-showlist{
-	background-color: #77777773;
-}
-.footer-login{
-	position: absolute;
-    bottom: 0;
-    width: 100vw;
-    margin-top: 20px;]
-}
-::-webkit-scrollbar {
-  width: 5px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-  background: #f1f1f1; 
-}
- 
-/* Handle */
-::-webkit-scrollbar-thumb {
-  background: #888; 
-}
-
-/* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
-  background: #555; 
-}
-.avatar{
-	cursor: pointer;
-}
-#customFile{
-	overflow: hidden;
-    width: 0px;
-    height:0px
-}
-.bg-fff{
-	background: #ffffff6b;
-    border: 1px solid #0095ff36;
-    text-align: center;
-    padding:30px;
-}
-.bg-fff label{
-	margin-bottom:0px;
-}
-.bg-fff label img{
-	width:150px;
-	height: 270px;
-}
-.custom-update-submit{
-	margin-bottom:0px;
-	margin-top:40px;
-}
-
-.nav-profile{
-	position: absolute;
-    top: 0;
-    width: 100vw;
-}
-@media only screen and (max-width: 578px){
-	.mobie-custom{
-		position: initial;
+	
+	#showless {
+		display: none;
 	}
-	.custom-body-mobie{
-		height:auto !important;
+	
+	/* forecast weather */
+	.panel {
+		background-color: #ffffff4d;
 	}
-
-}
-
-.frame-forecast{
-	max-width: 80%;
-	margin: auto;
-}
-
-.frame-register{
-	width: 90%;
-}
-
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
-
-.btn-reset{
-	width: 100%;
-}
-
-/* The Modal (background) */
-.modal {
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-}
+	
+	.table-striped>tbody>tr:nth-of-type(odd) {
+		background-color: #f9f9f961;
+	}
+	
+	.panel-default>.panel-heading {
+		color: #333;
+		background-color: #f5f5f56b;
+		border-color: #ddd;
+	}
+	
+	#tr-today0 {
+		background-color: #867e7e99;
+	}
+	
+	.login-form form .textpass {
+		margin: 0px 65px 10px;
+	}
+	
+	.login-form form .C_signup {
+		color: white;
+		font-size: 21px;
+		text-align: center;
+		padding-top: 12px;
+		background-color: #337ab7;
+		height: 55px;
+		width: 302px;
+	}
+	
+	/* form reset */
+	.login-form-reset {
+		width: 340px;
+		margin: 50px auto;
+		position: relative;
+	}
+	
+	.login-form-reset form {
+		margin-bottom: 15px;
+		background: #f7f7f7;
+		box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+		padding: 30px;
+	}
+	
+	.title-reset {
+		background-color: #337ab7;
+		position: absolute;
+		top: 0px;
+		left: 0px;
+		width: 340px;
+	}
+	
+	.title-reset p {
+		color: white;
+	}
+	
+	.iframe-admin {
+		background-color: #b9b5b096;
+		height: 400px;
+		overflow: auto;
+	}
+	
+	.iframe-login {
+		background-color: #1e27312e;
+		max-width: 450px;
+		margin: auto;
+	}
+	
+	.form-group {
+		height: 50px;
+		width: 100%;
+		margin: auto;
+		margin-bottom: 32px
+	}
+	
+	.form-search {
+		width: 100%;
+	}
+	
+	.error {
+		color: red;
+	}
+	
+	.form-control {
+		color: #000000ad;
+		height: 42px;
+	}
+	
+	.group-message {
+		height: 15px;
+		margin: auto;
+	}
+	
+	.btn-signin {
+		width: 50%;
+		margin: auto;
+	}
+	
+	.btn-register {
+		width: 80%;
+		margin: auto;
+	}
+	
+	.btn-search {
+		height: 42px;
+		width: 100%;
+	}
+	
+	.frame-reset {
+		background-color: #f5f5f5;
+	}
+	
+	.form-reset {
+		height: 20px;
+	}
+	
+	h4 {
+		text-align: center;
+		font-weight: bold;
+	}
+	
+	.frame-update {
+		margin-bottom: 40px;
+	}
+	
+	/* Profile */
+	/* Logo */
+	.navbar-brand {
+		padding: 0px; /* firefox bug fix */
+	}
+	
+	.navbar-brand>img {
+		height: 100%;
+		padding: 15px; /* firefox bug fix */
+		width: auto;
+	}
+	
+	.navbar-brand {
+		background: url(../img/icon.png) center/contain no-repeat;
+		width: 80px;
+		height: 50px;
+	}
+	
+	/* form login */
+	/* Full-width input fields */
+	input[type=text], input[type=password] {
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		display: inline-block;
+		border: 1px solid #ccc;
+		box-sizing: border-box;
+	}
+	
+	/* Set a style for all buttons */
+	button {
+		background-color: #4c86aff5;
+		color: white;
+		padding: 14px 20px;
+		margin: 8px 0;
+		margin-bottom: 10px;
+		border: none;
+		cursor: pointer;
+		/* width: 100%; */
+	}
+	
+	button:hover {
+		opacity: 0.8;
+	}
+	
+	.frame-btnlogin {
+		width: 50%;
+		margin: auto;
+	}
+	
+	.btnlogin {
+		margin-bottom: 10px;
+		width: 100%;
+	}
+	/* Center the image and position the close button */
+	
+	/* Modal Content/Box */
+	.modal-content {
+		background-color: #fefefe47;
+		margin: 5% auto 15% auto;
+		/* 5% from the top, 15% from the bottom and centered */
+		border: 1px solid #888;
+		width: 360px; /* Could be more or less, depending on screen size */
+	}
+	
+	/* Add Zoom Animation */
+	.container-form {
+		margin: 20px
+	}
+	
+	.frame-formlogin {
+		max-width: 360px;
+		margin: auto;
+	}
+	
+	p {
+		text-align: center;
+	}
+	
+	/* Center the image and position the close button */
+	.imgcontainer {
+		text-align: center;
+		margin: 24px 0 12px 0;
+		position: relative;
+	}
+	
+	img.avatar {
+		width: 30%;
+		border-radius: 10%;
+	}
+	
+	.btn-nav {
+		width: 15%;
+		border-color: #33333375;
+	}
+	
+	.btn-nav:focus, .btn-nav:hover {
+		background-color: #33333373;
+	}
+	
+	/* backgroud showmore show less */
+	.frame-showlist {
+		background-color: #77777773;
+	}
+	
+	.footer-login {
+		position: absolute;
+		bottom: 0;
+		width: 100vw;
+		margin-top: 20px;
+		]
+	}
+	
+	::-webkit-scrollbar {
+		width: 5px;
+	}
+	
+	/* Track */
+	::-webkit-scrollbar-track {
+		background: #f1f1f1;
+	}
+	
+	/* Handle */
+	::-webkit-scrollbar-thumb {
+		background: #888;
+	}
+	
+	/* Handle on hover */
+	::-webkit-scrollbar-thumb:hover {
+		background: #555;
+	}
+	
+	.avatar {
+		cursor: pointer;
+	}
+	
+	#customFile {
+		overflow: hidden;
+		width: 0px;
+		height: 0px
+	}
+	
+	.bg-fff {
+		background: #ffffff6b;
+		border: 1px solid #0095ff36;
+		text-align: center;
+		padding: 30px;
+	}
+	
+	.bg-fff label {
+		margin-bottom: 0px;
+	}
+	
+	.bg-fff label img {
+		width: 150px;
+		height: 270px;
+	}
+	
+	.custom-update-submit {
+		margin-bottom: 0px;
+		margin-top: 40px;
+	}
+	
+	.nav-profile {
+		position: absolute;
+		top: 0;
+		width: 100vw;
+	}
+	
+	@media only screen and (max-width: 578px) {
+		.mobie-custom {
+			position: initial;
+		}
+		.custom-body-mobie {
+			height: auto !important;
+		}
+	}
+	
+	.frame-forecast {
+		max-width: 80%;
+		margin: auto;
+	}
+	
+	.frame-register {
+		width: 90%;
+	}
+	
+	.animate {
+		-webkit-animation: animatezoom 0.6s;
+		animation: animatezoom 0.6s
+	}
+	
+	@
+	-webkit-keyframes animatezoom {
+		from {-webkit-transform: scale(0)
+	}
+	
+	to {
+		-webkit-transform: scale(1)
+	}
+	
+	}
+	@
+	keyframes animatezoom {
+		from {transform: scale(0)
+	}
+	
+	to {
+		transform: scale(1)
+	}
+	
+	}
+	.btn-reset {
+		width: 100%;
+	}
+	
+	/* The Modal (background) */
+	.modal {
+		background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+	}
+/* css loading */
+	#loading {
+		background-color: white;
+		position: fixed;
+		display: block;
+		top: 0;
+		bottom: 0;
+		z-index: 1000000;
+		opacity: 0.8;
+		width: 100%;
+		height: 100%;
+		text-align: center;
+	}
+	
+	#loading img {
+		margin: auto;
+		display: block;
+		top: calc(50% - 100px);
+		left: calc(50% - 10px);
+		/* position: absolute; */
+		z-index: 999999;
+	}
+	.input-search{
+	height: 35px;
+	}
+	.profile-user{
+		margin-bottom: 10px;
+	}

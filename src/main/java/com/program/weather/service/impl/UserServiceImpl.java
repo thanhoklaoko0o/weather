@@ -161,7 +161,6 @@ public class UserServiceImpl implements UserService {
 		userEntity.setLastName(userDTO.getLastName());
 		userEntity.setEmail(userDTO.getEmail());
 		userEntity.setEncrytedPassword(passwordEncoder.encode(userDTO.getEncrytedPassword()));
-		userEntity.setAvatar(userDTO.getAvatar().getOriginalFilename());
 		userEntity.setModifiedDate(new Timestamp(System.currentTimeMillis()));
 		// Update User
 		userRepository.save(userEntity);

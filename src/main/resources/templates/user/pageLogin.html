@@ -3,54 +3,60 @@
 		<!-- header page -->
 		<th:block th:replace="layout/head :: head"></th:block>
 		<body style="height: 100vh;">
-<div class="container">
-	<div class="row">
-			<div class="frame-formlogin">
-				<form class="modal-content" th:action="@{/form-login}" method="post" id="form-login">
-					
-					<h3 style="text-align: center;"><b>Login</b></h3>
-					
-					<div class="container-form">
-						<div class="group-message">
-							<label th:if="${(param.message != null)}" style="color: green;">You registered account successfully</label>
-							<label th:if="${(param.error != null)}" style="color: red;">Account is not existed in system !</label>
-						</div>
-					</div>
-					
-					<div class="container-form">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Username" name="username">
-						</div>
-						<div class="form-group">
-							<input type="password" class="form-control" placeholder="Password" name="password">
-						</div>
-						<div class="frame-btnlogin">
-							<button type="submit" class="btn btn-primary btnlogin">Login</button>
-						</div>
-						<p><a href="#" class="form-reset">Forgot password ?</a></p>
-					</div>
-					
-					<div class="container-form" style="background-color: #f1f1f1">
-						<p>Don't have an account ? <a th:href="@{/registerAccount}">Sign up here !</a></p>
-					</div>
-				</form>
+			<div id="loading" style="display: none">
+				<img src="../img/waiting.gif" alt="Loading..." />
 			</div>
-	</div>
-	
-	<div id="id01" class="modal">
-		<form class="modal-content animate" style="background-color: white">
-			<div class="container-form">
-				<div class="form-group">
-					<input type="text" class="form-control" placeholder="Enter your email" id="txt_email" name="txt_email">
-				</div>
-				<div class="form-group">
-					<button class="btn btn-primary btn-reset">Reset Password</button>
+			<div class="container">
+				<div class="row">
+						<div class="frame-formlogin">
+							<form class="modal-content" th:action="@{/form-login}" method="post" id="form-login">
+								
+								<h3 style="text-align: center;"><b>Login</b></h3>
+								
+								<div class="container-form">
+									<div class="group-message">
+										<label th:if="${(param.message != null)}" style="color: green;">You registered account successfully</label>
+										<label th:if="${(param.error != null)}" style="color: red;">Account is not existed in system !</label>
+										<label th:if="${(param.resetpassword != null)}" style="color: green;">Reset password successfully !</label>
+									</div>
+								</div>
+								
+								<div class="container-form">
+									<div class="form-group">
+										<input type="text" class="form-control" placeholder="Username" name="username">
+									</div>
+									<div class="form-group">
+										<input type="password" class="form-control" placeholder="Password" name="password">
+									</div>
+									<div class="frame-btnlogin">
+										<button type="submit" class="btn btn-primary btnlogin">Login</button>
+									</div>
+									<p><a href="#" class="form-reset">Forgot password ?</a></p>
+								</div>
+								
+								<div class="container-form" style="background-color: #f1f1f1">
+									<p>Don't have an account ? <a th:href="@{/registerAccount}">Sign up here !</a></p>
+								</div>
+							</form>
+						</div>
 				</div>
 				
+				<div id="id01" class="modal">
+					<div class="modal-content animate" style="background-color: white">
+						<div class="container-form">
+							<div class="form-group">
+								<input type="text" class="form-control" placeholder="Enter your email" id="txt_email" name="txt_email">
+								<label id="kqFailed" style="color:red"></label>
+								<label id="kqSucessful" style="color:green;"></label>
+							</div>
+							<div class="form-group">
+								<button class="btn btn-primary btn-reset">Reset Password</button>
+							</div>
+							
+						</div>
+					</div>
+				</div>
 			</div>
-		</form>
-	</div>
-</div>
 <!-- Footer -->
 	<div class="footer-login">
 		<th:block th:replace="layout/footer :: footer"></th:block>
