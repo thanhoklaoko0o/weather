@@ -13,6 +13,11 @@ import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
+/**
+ * Class handle process when Login sucessfull
+ * @author Ngoc Hung
+ *
+ */
 @Component
 public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 
@@ -21,22 +26,27 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 	@Override
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-
+		
 		boolean hasUserRole = false;
 		boolean hasAdminRole = false;
+		// Get role when has User login sucessfull
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+		// Check roleName in list Role of USER
 		for (GrantedAuthority grantedAuthority : authorities) {
+			// Set hasUserRole = True, If in list has ROLE_USER
 			if (grantedAuthority.getAuthority().equals("ROLE_USER")) {
 				hasUserRole = true;
 				break;
+			// Set hasAdminRole = True, If in list has ROLE_ADMIN
 			} else if (grantedAuthority.getAuthority().equals("ROLE_ADMIN")) {
 				hasAdminRole = true;
 				break;
 			}
 		}
-
+		//Redirect page with role name is USER
 		if (hasUserRole) {
 			redirectStrategy.sendRedirect(request, response, "/home-weather");
+		//Redirect page with role name is ADMIN
 		} else if (hasAdminRole) {
 			redirectStrategy.sendRedirect(request, response, "/home-admin");
 		} else {

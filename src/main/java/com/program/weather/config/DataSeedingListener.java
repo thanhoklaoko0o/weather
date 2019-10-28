@@ -14,6 +14,11 @@ import com.program.weather.entity.UserEntity;
 import com.program.weather.repository.RoleRepository;
 import com.program.weather.repository.UserRepository;
 import com.program.weather.utils.Constants;
+/**
+ * Create Data Role and Account Admin
+ * @author Ngoc Hung
+ *
+ */
 @Component
 public class DataSeedingListener implements ApplicationListener<ContextRefreshedEvent> {
 
