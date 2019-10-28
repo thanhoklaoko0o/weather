@@ -17,7 +17,7 @@
 									<div class="group-message">
 										<label th:if="${(param.message != null)}" style="color: green;">You registered account successfully</label>
 										<label th:if="${(param.error != null)}" style="color: red;">Account is not existed in system !</label>
-										<label th:if="${(param.resetpassword != null)}" style="color: green;">Reset password successfully !</label>
+										<label th:if="${(param.resetpassword != null)}" style="color: green;">Account is not existed in system !</label>
 									</div>
 								</div>
 								
@@ -31,7 +31,7 @@
 									<div class="frame-btnlogin">
 										<button type="submit" class="btn btn-primary btnlogin">Login</button>
 									</div>
-									<p><a href="#" class="form-reset">Forgot password ?</a></p>
+									<p style="text-align: center;"><a href="#" class="form-reset">Forgot password ?</a></p>
 								</div>
 								
 								<div class="container-form" style="background-color: #f1f1f1">
