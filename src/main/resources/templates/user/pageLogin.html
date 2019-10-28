@@ -8,6 +8,7 @@
 			</div>
 			<div class="container">
 				<div class="row">
+					<div class="col-sm-12">
 						<div class="frame-formlogin">
 							<form class="modal-content" th:action="@{/form-login}" method="post" id="form-login">
 								
@@ -16,7 +17,7 @@
 								<div class="container-form">
 									<div class="group-message">
 										<label th:if="${(param.message != null)}" style="color: green;">You registered account successfully</label>
-										<label th:if="${(param.error != null)}" style="color: red;">Account is not existed in system !</label>
+										<label th:if="${(param.error != null)}" style="color: red;">Invalid Username Or Password !</label>
 										<label th:if="${(param.resetpassword != null)}" style="color: green;">Account is not existed in system !</label>
 									</div>
 								</div>
@@ -34,11 +35,12 @@
 									<p style="text-align: center;"><a href="#" class="form-reset">Forgot password ?</a></p>
 								</div>
 								
-								<div class="container-form" style="background-color: #f1f1f1">
+								<div class="container-form" style="background-color: #f1f1f166">
 									<p>Don't have an account ? <a th:href="@{/registerAccount}">Sign up here !</a></p>
 								</div>
 							</form>
 						</div>
+					</div>	
 				</div>
 				
 				<div id="id01" class="modal">
@@ -58,7 +60,7 @@
 				</div>
 			</div>
 <!-- Footer -->
-	<div class="footer-login">
+	<div class="footer-login custom-mobile">
 		<th:block th:replace="layout/footer :: footer"></th:block>
 	</div>
 	<script th:src="@{/js/jquery.validate.min.js}" type="text/javascript"></script>

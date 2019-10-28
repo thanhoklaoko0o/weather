@@ -196,7 +196,7 @@
 	
 	.iframe-admin {
 		background-color: #b9b5b096;
-		height: 400px;
+		height: 350px;
 		overflow: auto;
 	}
 	
@@ -435,6 +435,13 @@
 		.custom-body-mobie {
 			height: auto !important;
 		}
+		.admin-mobile{
+			max-width: 285px;
+			overflow-x:auto;
+		}
+		.modal-content{
+			max-width: 292px;
+		}
 	}
 	
 	.frame-forecast {
@@ -507,3 +514,4 @@
 	.profile-user{
 		margin-bottom: 10px;
 	}
+	

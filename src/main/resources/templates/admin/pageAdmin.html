@@ -6,57 +6,62 @@
 		<th:block th:replace="layout/header :: header"></th:block>
 		<div class="container" style="height: 500px;">
 			<div class="row ">
-				<div class="col-sm-12">
+				<div class="col-sm-12" style="width: 70%;">
 					<input type="text" id="myInput" class="form-control input-search" placeholder="Search for names.." title="Type in a name">
 				</div>
-				<div class="col-sm-12 iframe-admin">
-					<table class="table" id="myTable">
-						
+				<div class="col-sm-12">
+					<table class="table">
 						<thead>
-							
-							<tr>
-								<th>USER</th>
-								<th>EMAIL</th>
-								<th>ACTIVE</th>
-								<th>ROLE</th>
-								<th></th>
-							</tr>
-							
-						</thead>
-						<tbody>
-							<th:block th:each="user : ${lstUser}">
 								
-								<tr th:object="${user}" th:data-id="${user.userId}">
-									
-									<td>
-									<p th:text="*{lastName}+' '+*{firstName}">Last Name+ First Name</p>
-									</td>
-									
-									<td>
-										<p th:text="*{email}">Email</p>
-									</td>
-									
-									<td>
-										<input class="activeUser" type="checkbox" th:checked="*{enabled}"/>
-									</td>
-									
-									<td>
-									<select class="form-control">
-										<option th:each="role : ${lstRole}" th:value="${role.roleId}"
-											th:text="${role.role}"
-											th:selected="${#lists.contains(user.roles, role.roleId)}">
-										</option>
-									</select>
-									</td>
-									
-									<td>
-									<button type="button" class="xoa-user btn btn-danger">Delete</button>
-									</td>
+								<tr>
+									<th>USER</th>
+									<th>EMAIL</th>
+									<th>ACTIVE</th>
+									<th>ROLE</th>
+									<th></th>
 								</tr>
 								
-							</th:block>
-					</tbody>
-				</table>
+							</thead>
+					</table>
+				</div>
+				<div class="col-sm-12">
+					<div class="admin-mobile iframe-admin">
+						<table class="table" id="myTable">
+							<tbody>
+								<th:block th:each="user : ${lstUser}">
+									
+									<tr th:object="${user}" th:data-id="${user.userId}">
+										
+										<td>
+										<p th:text="*{lastName}+' '+*{firstName}">Last Name+ First Name</p>
+										</td>
+										
+										<td>
+											<p th:text="*{email}">Email</p>
+										</td>
+										
+										<td>
+											<input class="activeUser" type="checkbox" th:checked="*{enabled}"/>
+										</td>
+										
+										<td>
+										<select class="form-control">
+											<option th:each="role : ${lstRole}" th:value="${role.roleId}"
+												th:text="${role.role}"
+												th:selected="${#lists.contains(user.roles, role.roleId)}">
+											</option>
+										</select>
+										</td>
+										
+										<td>
+										<button type="button" class="xoa-user btn btn-danger">Delete</button>
+										</td>
+									</tr>
+									
+								</th:block>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		<hr>
