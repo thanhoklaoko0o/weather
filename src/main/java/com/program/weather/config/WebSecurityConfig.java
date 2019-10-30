@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -71,17 +72,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				// Provide username from login
 				.usernameParameter("username")
 				// Provide password from login
-				.passwordParameter("password")
-				// Config logout
-				.and().logout().logoutUrl("/logout").logoutSuccessUrl("/logoutSuccessful");
+				.passwordParameter("password");
 	}
 
-	/*
-	 * @Override public void configure(WebSecurity web) throws Exception {
-	 * web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**",
-	 * "/js/**"); }
-	 */
-	
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/img/**");
+	}
+
 	/*
 	 * @Bean public DaoAuthenticationProvider authenticationProvider() { final
 	 * DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();

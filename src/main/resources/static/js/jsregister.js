@@ -85,60 +85,61 @@
 
 		//
 		$.validator.addMethod("validateUserName", function(value, element) {
-			return this.optional(element)|| /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{1,}$/i.test(value);
-		}, "At least 1 uppercase, 1 lowercase and 1 number .");
+			return this.optional(element)|| /^[a-zA-Z0-9]{8,32}$/i.test(value);
+		}, "a-z, A-Z, 0-9 and No special character .");
 
 		//Validate Form
 		$("#form-signup").validate({
 			rules: {
-				"userName" : {
+				userName : {
 					required: true,
 					validateUserName : true,
 					minlength : 8,
 					maxlength : 32
 				},
-				"email" : {
+				email : {
 					required : true,
 					email : true
 				},
-				"encrytedPassword" : {
+				encrytedPassword : {
 					required : true,
 					minlength : 8,
 					maxlength : 32
 				},
-				"confirmPassword" : {
+				confirmPassword : {
 					equalTo: "#password",
 					minlength : 8
 				},
-				"firstName" : {
+				firstName : {
 					required : true
 				},
-				"lastName" : {
+				lastName : {
 					required : true
 				}
 			},
 			 messages : {
-					"userName" : {
+					userName : {
 						required : "UserName is required .",
 						minlength : "Please enter at least 8 characters .",
 						maxlength : "Please enter up to 32 characters ."
 					},
-					"email" : {
-						required : "Email is required ."
+					email : {
+						required : "Email is required .",
+						email : "Enter email valid ."
 					},
-					"encrytedPassword" : {
+					encrytedPassword : {
 						required : "Password is required .",
 						minlength : "Please enter at least 8 characters .",
 						maxlength : "Please enter up to 32 characters ."
 					},
-					"confirmPassword" : {
+					confirmPassword : {
 						equalTo: "The two passwords must be the same .",
 						minlength : "Please enter at least 8 characters .",
 					},
-					"firstName" : {
+					firstName : {
 						required : "FirstName is required ."
 					},
-					"lastName" : {
+					lastName : {
 						required : "LastName is required ."
 					}
 			}

@@ -34,16 +34,6 @@ public class ClientForwardController {
 	}
 
 	/**
-	 * Logout account on APP
-	 * 
-	 * @return
-	 */
-	@GetMapping("/logoutSuccessful")
-	public String logout() {
-		return "redirect:login?logoutTC";
-	}
-
-	/**
 	 * Process default URL login failed
 	 * @param username
 	 * @param password

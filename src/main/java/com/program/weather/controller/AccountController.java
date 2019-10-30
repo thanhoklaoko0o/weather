@@ -82,7 +82,7 @@ public class AccountController {
 	 */
 	@GetMapping("/profile-user")
 	public String getProfileUser(Model model, Principal principal) {
-		// Get USER when User login sucessful
+		// Get USER when User login successful
 		UserDTO userDTO = userConverter.convertUserToDTO(userService.findByUserName(principal.getName()));
 		model.addAttribute("userDTO", userDTO);
 		// Title page
@@ -91,11 +91,11 @@ public class AccountController {
 	}
 
 	/**
-	 * Update infomation User
+	 * Update information User
 	 * @param userDTO
 	 * @param result
 	 * @param principal
-	 * @return page profile if sucessfull
+	 * @return page profile if successful
 	 */
 	@PostMapping("/update-profile")
 	public String processUpdateUser(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result, Principal principal) {
@@ -111,7 +111,7 @@ public class AccountController {
 	}
 
 	/**
-	 * Check exists username in DB
+	 * Check exists user name in DB
 	 * 
 	 * @param userName
 	 * @return true if exists, else false
