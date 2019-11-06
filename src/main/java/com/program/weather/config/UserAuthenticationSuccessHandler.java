@@ -14,8 +14,8 @@ import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 /**
- * Class handle process when Login sucessfull
- * @author Ngoc Hung
+ * Class handle process when Login successfully
+ * @author NgocHung
  *
  */
 @Component
@@ -29,7 +29,7 @@ public class UserAuthenticationSuccessHandler implements AuthenticationSuccessHa
 		
 		boolean hasUserRole = false;
 		boolean hasAdminRole = false;
-		// Get role when has User login sucessfull
+		// Get role when has User login successfully
 		Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 		// Check roleName in list Role of USER
 		for (GrantedAuthority grantedAuthority : authorities) {

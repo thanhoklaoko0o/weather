@@ -14,7 +14,7 @@
 	/* Add a gray background color and some padding to the footer */
 	footer {
 		background-color: #000000b8;
-		padding: 25px;
+		padding: 6px;
 	}
 	
 	.carousel-inner img {
@@ -196,7 +196,7 @@
 	
 	.iframe-admin {
 		background-color: #b9b5b096;
-		height: 350px;
+		height: 409px;
 		overflow: auto;
 	}
 	
@@ -442,6 +442,9 @@
 		.modal-content{
 			max-width: 292px;
 		}
+		.home-mobile{
+			max-width: 340px;
+		}
 	}
 	
 	.frame-forecast {
@@ -514,4 +517,12 @@
 	.profile-user{
 		margin-bottom: 10px;
 	}
-	
+	.td-admin {
+		text-align: center;
+		font-weight: bold;
+		color: red;
+		font-size: 20px;
+	}
+	.td-msg-home{
+		text-align: center;
+	}

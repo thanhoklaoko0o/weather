@@ -16,7 +16,7 @@ import com.program.weather.repository.UserRepository;
 import com.program.weather.utils.Constants;
 /**
  * Create Data Role and Account Admin
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Component

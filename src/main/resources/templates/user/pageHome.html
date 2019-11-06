@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 	<html lang="en" xmlns:th="http://www.thymeleaf.org">
 	<th:block th:replace="layout/head :: head"></th:block>
-	<th:block th:replace="layout/header :: header"></th:block>
+	<div class="nav-profile mobie-custom">
+		<th:block th:replace="layout/header :: header"></th:block>
+	</div>
+	<body style="height: 100vh;" class="custom-body-mobie">
 		<div class="container home-mobile">
 			<div class="row ">
 				<div class="col-sm-8 ">
@@ -31,7 +34,9 @@
 			</div>
 			<hr>
 		</div>
-	<th:block th:replace="layout/footer :: footer"></th:block>
+	<div class="footer-login mobie-custom">
+		<th:block th:replace="layout/footer :: footer"></th:block>
+	</div>
 	<script th:src="@{/js/jslocation.js}" type="text/javascript"></script>
 	<script type="text/javascript" th:src="@{/js/jshome.js}"></script>
 	</body>

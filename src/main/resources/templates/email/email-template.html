@@ -24,8 +24,9 @@
 	<tr>
 		<td bgcolor="#eaeaea" style="padding: 40px 30px 40px 30px;">
 			<p th:text="${'Dear ' + user.firstName + ' ' + user.lastName}"></p>
-			<!-- <form th:action="" method="post">
-				<button type="submit" value="reset"></button>
+			<!-- <form th:action="${resetUrl}+'/reset-password/form'" method="post">
+				<input type="hidden" name="${token.token}"/>
+				<button type="submit" >aaaaaaa</button>
 			</form> -->
 			<p>
 				You've requested a password reset.

@@ -12,7 +12,7 @@ import com.program.weather.service.RoleService;
 /**
  * Business Logic Layer Role Service
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Service

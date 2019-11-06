@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import com.program.weather.entity.RoleEntity;
 /**
  *  Data Access Layer Role with DB
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Repository

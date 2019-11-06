@@ -8,7 +8,7 @@ import com.program.weather.dto.tranfer.DetailsWeatherDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer Weather Service
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 public interface WeatherService {

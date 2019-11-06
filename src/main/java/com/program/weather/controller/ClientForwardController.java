@@ -45,7 +45,7 @@ public class ClientForwardController {
 		if (checkUserExist(username)) {
 			// Find UserEntity by userName, Then check status of User
 			UserEntity userEntity = userService.findByUserName(username);
-			// Check status User, If Status = Unactive 
+			// Check status User, If Status = Inactive 
 			if (userEntity.isEnabled() == Constants.UN_ACTIVE)
 				// Return page 401 , announcement User is block
 				return "redirect:block/401";

@@ -17,7 +17,7 @@ import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Component

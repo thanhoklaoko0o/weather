@@ -21,7 +21,7 @@ import com.program.weather.service.UserService;
 
 /**
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Controller
@@ -54,11 +54,11 @@ public class AccountController {
 	 * 
 	 * @param userEntity
 	 * @param result
-	 * @return view login if register sucessfully, else view register
+	 * @return view login if register successfully, else view register
 	 */
 	@PostMapping("/registerAccount")
 	public String processRegister(@Valid @ModelAttribute("userDTO") UserDTO userDTO, BindingResult result) {
-		// Check error when username exist
+		// Check error when user name exist
 		if (userService.checkExistsByUserName(userDTO.getUserName())) {
 			return "redirect:registerAccount?msgUserName=Register_Failed";
 		}

@@ -26,11 +26,9 @@
 			
 			<th:block th:each="item : ${listWeatherAsc}">
 				<tr th:id="${we.nameCity}+'showmore'" th:if="${item.nameCity == we.nameCity && item.date != we.date}">
-					<!-- <td colspan="1"></td> -->
 					<td colspan="4" th:id="${we.nameCity}+'showmoretd'" class="frame-showlist">
 						<p onclick="showlist(this)" th:attr-name="${we.nameCity}" class="showmorestyle">Show More</p>
 					</td>
-					<!-- <td colspan="1"></td> -->
 				</tr>
 			</th:block>
 		</tbody>

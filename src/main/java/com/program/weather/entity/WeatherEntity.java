@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.Setter;
 /**
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Entity

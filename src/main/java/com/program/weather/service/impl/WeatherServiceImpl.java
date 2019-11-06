@@ -94,7 +94,7 @@ public class WeatherServiceImpl implements WeatherService {
 	/**
 	 * URL get current weather by API
 	 * @param nameCity
-	 * @return Url api weather by namecity
+	 * @return Url api weather by name city
 	 */
 	private StringBuilder urlApiGetWeather(String nameCity) {
 		return urlApiWeather().append(weatherURL+weatherVersion+weatherCurrent+"q="+nameCity+"&APPID="+appID+"&units=metric");

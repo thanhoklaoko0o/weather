@@ -12,7 +12,7 @@ import com.program.weather.entity.WeatherEntity;
 /**
  * Data Access Layer Weather with DB
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Repository

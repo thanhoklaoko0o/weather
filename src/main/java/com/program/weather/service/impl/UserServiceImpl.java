@@ -20,7 +20,7 @@ import com.program.weather.utils.Constants;
 /**
  * Business Logic Layer User Service
  * Process logic and call method from userrepository
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Service

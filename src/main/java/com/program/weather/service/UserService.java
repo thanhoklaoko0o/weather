@@ -6,7 +6,7 @@ import com.program.weather.dto.tranfer.UserDTO;
 import com.program.weather.entity.UserEntity;
 /**
  * Define method for Business Logic Layer User Service
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 public interface UserService {

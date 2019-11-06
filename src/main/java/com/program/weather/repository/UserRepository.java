@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.program.weather.entity.UserEntity;
 /**
  *  Data Access Layer USER with DB
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Repository

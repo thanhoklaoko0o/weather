@@ -55,7 +55,7 @@ $( document ).ready(function() {
 							+'<td>Geo coords</td>'
 							+'<td>'+value.geocoords+' </td></tr></tbody></table>'
 							+'</div>'
-							+'<p class="text-muted widget__text-description">The weather forecast is displayed in accordance with your local time. Please pay attention to it when you will watch the weather in another time zone.</p>'
+							+'<p class="widget__text-description">The weather forecast is displayed in accordance with your local time.</p>'
 							+'</div>'
 							$('.col-sm-4').append(weHTML);
 			}

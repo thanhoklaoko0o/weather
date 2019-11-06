@@ -54,7 +54,7 @@ public class AdminController {
 								.collect(Collectors.toList());
 		// Get list Role in DB
 		List<RoleEntity> lstRole = roleService.findAllRole();
-		//Tranfer data from list to view admin
+		//Transfer data from list to view admin
 		model.addAttribute("lstUser", lstUser);
 		model.addAttribute("lstRole", lstRole);
 		// Title page

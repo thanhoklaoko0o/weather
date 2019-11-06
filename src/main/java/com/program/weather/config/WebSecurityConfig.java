@@ -53,15 +53,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		http.csrf().disable();
 		http.addFilterAt(customFilter, UsernamePasswordAuthenticationFilter.class);
-		// Config page user can access
+		// Configure page user can access
 		http.authorizeRequests().antMatchers("/", "/login", "/logout","/forgot-password**","/reset-password**").permitAll();
-		// Config page user can access by role is USER or ADMIN
+		// Configure page user can access by role is USER or ADMIN
 		http.authorizeRequests().antMatchers("/profile-user", "/profile-user/**", "/home-weather", "/home-weather/**").access("hasAnyRole('USER', 'ADMIN')");
-		// Config page user can access by role is ADMIN
+		// Configure page user can access by role is ADMIN
 		http.authorizeRequests().antMatchers("/home-admin", "/home-admin/**").access("hasRole('ADMIN')");
-		// Config page user can't access 
+		// Configure page user can't access 
 		http.authorizeRequests().and().exceptionHandling().accessDeniedPage("/home-weather/403");
-		// Config form login
+		// Configure form login
 		http.authorizeRequests().and().formLogin()//
 				.loginPage("/login")//
 				.loginProcessingUrl("/form-login")

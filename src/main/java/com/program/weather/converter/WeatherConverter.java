@@ -11,7 +11,7 @@ import com.program.weather.entity.WeatherEntity;
 import com.program.weather.utils.CommonUtil;
 /**
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Component
@@ -56,6 +56,7 @@ public class WeatherConverter {
 			result.setSunrise(CommonUtil.fomatHHmmss(Integer.parseInt(weatherDTO.getSys().getSunrise())));
 			result.setSunset(CommonUtil.fomatHHmmss(Integer.parseInt(weatherDTO.getSys().getSunset())));
 			result.setGeocoords("[" + weatherDTO.getCoord().getLat() + ", " + weatherDTO.getCoord().getLon() + "]");
+			
 		return result;
 	}
 }

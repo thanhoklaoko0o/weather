@@ -55,6 +55,7 @@ public class PasswordForgotController {
 		model.put("signature", "WeatherApp.com");
 		String url = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort();
 		model.put("resetUrl", url + "/reset-password?token=" + token.getToken());
+//		model.put("resetUrl", url );
 		mail.setModel(model);
 		emailService.sendEmail(mail);
 		

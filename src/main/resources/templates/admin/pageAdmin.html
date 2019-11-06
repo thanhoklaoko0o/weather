@@ -4,7 +4,7 @@
 		<th:block th:replace="layout/head :: head"></th:block>
 		<!-- nav page -->
 		<th:block th:replace="layout/header :: header"></th:block>
-		<div class="container" style="height: 500px;">
+		<div class="container">
 			<div class="row ">
 				<div class="col-sm-12" style="width: 70%;">
 					<input type="text" id="searchUser" class="form-control input-search" placeholder="Search for names.." title="Type in a name">
@@ -12,7 +12,8 @@
 				
 				<div class="col-sm-12">
 					<div class="admin-mobile iframe-admin">
-						<table class="table" id="tableUser">
+						<!-- List User In Database -->
+						<table class="table db-user" id="tableUser">
 						<thead>
 							<tr>
 								<th>USER</th>
@@ -23,6 +24,7 @@
 							</tr>
 						</thead>
 							<tbody>
+								
 								<th:block th:each="user : ${lstUser}">
 									
 									<tr th:object="${user}" th:data-id="${user.userId}">

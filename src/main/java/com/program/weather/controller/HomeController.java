@@ -20,7 +20,7 @@ import com.program.weather.service.WeatherService;
 /**
  * 
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Controller
@@ -57,7 +57,7 @@ public class HomeController {
 	 * Get list weather by nameCity
 	 * 
 	 * @param name
-	 * @return list wearther by User by Name city
+	 * @return list weather by User by Name city
 	 */
 	@GetMapping("/show-more")
 	@ResponseBody
@@ -88,7 +88,7 @@ public class HomeController {
 	}
 
 	/**
-	 * Process Data when tranfer to View
+	 * Process Data when transfer to View
 	 * @param model
 	 * @param principal
 	 * @return url page Home and Data weather by User 
@@ -138,14 +138,14 @@ public class HomeController {
 	}
 
 	/**
-	 * Delete weather by idweather
+	 * Delete weather by id weather
 	 * 
 	 * @param id
 	 */
 	@GetMapping("/deleteWeather")
 	public String deleteWeatherUser(@RequestParam Long id) {
 		weatherService.deleteWeatherById(id);
-		return "redirect:?Delete_Successful_WeatherId=" + id;
+		return "redirect:";
 	}
 
 	/**
@@ -252,6 +252,6 @@ public class HomeController {
 		//Add weather in DB
 		weatherService.saveWeather(result);
 		//forward url page Home
-		return "redirect:?Action_Successfull_Name=" + nameCity;
+		return "redirect:";
 	}
 }

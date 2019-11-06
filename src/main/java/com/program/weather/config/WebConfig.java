@@ -12,14 +12,14 @@ import org.springframework.web.servlet.LocaleResolver;
 import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 /**
  * Configuration bean
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Configuration
 public class WebConfig {
 
 	/**
-	 * Set locale for App is US
+	 * Set locale for Application is US
 	 * @return sessionLocaleResolver
 	 */
 	@Bean

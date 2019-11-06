@@ -120,7 +120,7 @@
 			success : function(value) {
 				Swal.fire('Done !', 'You click OK to continue !', 'success')
 			}
-		})   
+		})
 	})
 
 	/**
@@ -137,7 +137,7 @@
 			for (i = 0; i < tr.length; i++) {
 				td = tr[i].getElementsByTagName("td")[0];
 				if (td) {
-					txtValue = td.textContent || td.innerText;
+					txtValue = td.textContent;
 					if (txtValue.toUpperCase().indexOf(filter) > -1) {
 						tr[i].style.display = "";
 					} else {

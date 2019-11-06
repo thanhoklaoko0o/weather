@@ -18,7 +18,7 @@ import com.program.weather.service.WeatherService;
 
 /**
  * 
- * @author Ngoc Hung
+ * @author NgocHung
  *
  */
 @Controller
